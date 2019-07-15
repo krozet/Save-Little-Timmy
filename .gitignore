@@ -36,4 +36,4 @@ sysinfo.txt
 *.unitypackage
 
 # Ignore Imported Assets
-Save Little Timmy/Imported Assets/*
+Save Little Timmy/Assets/Imported Assets/*
