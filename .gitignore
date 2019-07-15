@@ -36,5 +36,5 @@ sysinfo.txt
 *.unitypackage
 
 # Ignore Imported Assets
-!Save Little Timmy/Assets/Imported Assets/.gitignore
 Save Little Timmy/Assets/Imported Assets/*
+!Save Little Timmy/Assets/Imported Assets/.gitignore
