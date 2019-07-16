@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveInput;
     private Vector3 moveVelocity;
-
+    private Vector3 direction;
     private Camera mainCamera;
 
     // Start is called before the first frame update
@@ -28,17 +28,26 @@ public class PlayerController : MonoBehaviour
         transform.position += moveVelocity * Time.deltaTime;
 
         //Player rotation towards mouse
+        SetRotationTowardsMouse();
+    }
+
+    private void SetRotationTowardsMouse() {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayLength;
 
-        if(groundPlane.Raycast(cameraRay, out rayLength)) {
+        if (groundPlane.Raycast(cameraRay, out rayLength)) {
             Vector3 pointToLookAt = cameraRay.GetPoint(rayLength);
-            transform.LookAt(new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z));
+            direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
+            transform.LookAt(direction);
 
-            if(debug) {
+            if (debug) {
                 Debug.DrawLine(cameraRay.origin, pointToLookAt, Color.red);
             }
         }
+    }
+
+    public Vector3 GetLookAtDirection() {
+        return direction;
     }
 }
