@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveVelocity;
     private Vector3 direction;
     private Camera mainCamera;
+    private CrazyJoe crazyJoe;
 
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = FindObjectOfType<Camera>();
+        crazyJoe = GetComponent<CrazyJoe>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,15 @@ public class PlayerController : MonoBehaviour
 
         //Player rotation towards mouse
         SetRotationTowardsMouse();
+
+        // Left Click to piss
+        if (Input.GetMouseButton(0)) {
+            crazyJoe.Piss();
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            crazyJoe.StopPiss();
+        }
     }
 
     private void SetRotationTowardsMouse() {
