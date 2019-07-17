@@ -6,31 +6,38 @@ public class Fire : MonoBehaviour
 {
     float scale = 1f;
     public Transform fire;
+    private ParticleSystem fireParticleSystem;
     bool setToDestroy = false;
+    float initialSizeMultiplier;
     // Start is called before the first frame update
     void Start()
     {
-        
+        fireParticleSystem = fire.GetComponent<ParticleSystem>();
+        initialSizeMultiplier = fireParticleSystem.main.startSizeMultiplier;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (scale <= 0f) {
+            // Particle Effect has been reduced to a size of 0
+            // So destroy it
             DestroyFireParticleEffect();
         } else {
-            scale -= 0.01f;
-            
-            fire.localScale = Vector3.one * scale;
-            Debug.Log("scale: " + scale);
+            // Decrease particle effect size
+            scale -= 0.001f;
+            var fpsm = fireParticleSystem.main;
+            fpsm.startSizeMultiplier = initialSizeMultiplier * scale;
         }
     }
 
+    // Stops the fire particle emission and destroys the object once it's duration is finished
     void DestroyFireParticleEffect() {
         if (!setToDestroy) {
-            ParticleSystem.EmissionModule fireParticle = fire.GetComponent<ParticleSystem>().emission;
+            ParticleSystem.EmissionModule fireParticle = fireParticleSystem.emission;
             fireParticle.enabled = false;
-            Destroy(gameObject, fire.GetComponent<ParticleSystem>().main.duration + fire.GetComponent<ParticleSystem>().main.startLifetimeMultiplier);
+            float timeToWaitBeforeDestroy = fireParticleSystem.main.duration + fireParticleSystem.main.startLifetimeMultiplier;
+            Destroy(gameObject, timeToWaitBeforeDestroy);
             setToDestroy = true;
         }
     }
