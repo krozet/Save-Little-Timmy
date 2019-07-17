@@ -8,6 +8,7 @@ public class WaterBottle : MonoBehaviour {
 
     void OnTriggerEnter (Collider other)
     {
+        Debug.Log("on trigger entered");
         if (other.CompareTag("CrazyJoe"))
         {
             Pickup();
@@ -17,8 +18,9 @@ public class WaterBottle : MonoBehaviour {
     void Pickup()
     {
         // Spawn an effect
-        Instantiate(pickupEffect, transform.position, transform.rotation);
-
+        Quaternion rotationOffset = Quaternion.Euler(transform.rotation.x - 90, transform.rotation.y, transform.rotation.z);
+        Instantiate(pickupEffect, transform.position, rotationOffset);
+        
         // Fill up water Gauge
 
         // Remove WaterBottle
