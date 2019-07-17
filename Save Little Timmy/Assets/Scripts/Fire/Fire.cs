@@ -4,16 +4,52 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
-    float scale = 1f;
     public Transform fire;
-    private ParticleSystem fireParticleSystem;
+
+    float scale = 1f;
+    ParticleSystem fireParticleSystem;
+    ParticleSystem smokeParticleSystem;
+    ParticleSystem.EmissionModule smokeParticle;
+    Transform[] particleEffects;
     bool setToDestroy = false;
     float initialSizeMultiplier;
+
     // Start is called before the first frame update
     void Start()
     {
-        fireParticleSystem = fire.GetComponent<ParticleSystem>();
+        particleEffects = GetComponentsInChildren<Transform>();
+        Debug.Log("Length: " + particleEffects.Length);
+        foreach (Transform particle in particleEffects) {
+            Debug.Log("name of particle: " + particle.name);
+            if (particle.name.Equals("FX_Fire")) {
+                Debug.Log("Found fire: " + particle.name);
+                fireParticleSystem = particle.GetComponent<ParticleSystem>();
+            }
+
+            if (particle.name.Equals("FX_Smoke")) {
+                Debug.Log("Found smoke: " + particle.name);
+                smokeParticleSystem = particle.GetComponent<ParticleSystem>();
+            }
+        }
+        smokeParticle = smokeParticleSystem.emission;
+        smokeParticleSystem.Stop();
+
         initialSizeMultiplier = fireParticleSystem.main.startSizeMultiplier;
+    }
+
+    void OnTriggerEnter(Collider other) {
+        Debug.Log("on trigger entered by piss onto fire");
+        if (other.CompareTag("Piss")) {
+            //PissOnFire();
+        }
+    }
+
+    void OnParticleTrigger() {
+        Debug.Log("trigger by particle");
+    }
+
+    void OnParticleCollision(GameObject other) {
+        Debug.Log("piss on me");
     }
 
     // Update is called once per frame

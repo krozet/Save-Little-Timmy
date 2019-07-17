@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4102108984755891062}
   - component: {fileID: 4102108984755891049}
   - component: {fileID: 4102108984755891048}
+  - component: {fileID: -1567717963265605934}
   m_Layer: 0
   m_Name: Piss
-  m_TagString: Untagged
+  m_TagString: Piss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -734,7 +735,7 @@ ParticleSystem:
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
-    alignToDirection: 1
+    alignToDirection: 0
     m_Texture: {fileID: 0}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
@@ -3614,7 +3615,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 1
     serializedVersion: 3
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -3682,7 +3683,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3794,8 +3795,8 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
-    collidesWithDynamic: 1
+    collisionMessages: 1
+    collidesWithDynamic: 0
     interiorCollisions: 0
   TriggerModule:
     enabled: 1
@@ -3806,9 +3807,9 @@ ParticleSystem:
     collisionShape4: {fileID: 0}
     collisionShape5: {fileID: 0}
     inside: 1
-    outside: 0
-    enter: 0
-    exit: 0
+    outside: 2
+    enter: 2
+    exit: 2
     radiusScale: 1
   SubModule:
     serializedVersion: 2
@@ -4810,3 +4811,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-1567717963265605934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102108984755891051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abb44ae648afd4408376cf57078cade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
