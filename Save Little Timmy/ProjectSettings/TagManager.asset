@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CrazyJoe
+  - Fire
+  - WaterBottle
   layers:
   - Default
   - TransparentFX
