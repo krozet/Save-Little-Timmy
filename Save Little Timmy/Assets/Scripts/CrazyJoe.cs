@@ -20,7 +20,7 @@ public class CrazyJoe : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         Transform penis = transform.Find("Penis");
         spawnPiss = new SpawnPiss();
-        spawnPiss.init(playerController, penis);
+        spawnPiss.init(playerController);
     }
 
     // Update is called once per frame

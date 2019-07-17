@@ -6,11 +6,7 @@ public class SpawnPiss
 {
     // Point where piss will spawn from
     public GameObject penis;
-    // List holding (potentially) mulitple piss effects
-    public List<GameObject> pissEffects = new List<GameObject>();
-
     private PlayerController playerController;
-    private GameObject effectToSpawn;
     private List<GameObject> instantiatedPiss;
 
     // Start is called before the first frame update
@@ -33,7 +29,6 @@ public class SpawnPiss
 
     public void init(PlayerController _playerController) {
         // For now, grab the first piss effect at position 0 in the List
-        effectToSpawn = pissEffects[0];
         instantiatedPiss = new List<GameObject>();
         // Get a reference to the PlayerController script
         playerController = _playerController;
@@ -47,9 +42,9 @@ public class SpawnPiss
             if (playerController != null) {
                 penis.transform.LookAt(playerController.GetLookAtDirection());
             }
-            //piss = Object.Instantiate(penis.GetPissEffect(), penis.transform.position, penis.transform.rotation);
+            piss = Object.Instantiate(penis.GetComponent<PissEffects>().GetPissEffect(), penis.transform.position, penis.transform.rotation);
         } else {
-            Debug.Log("Can't find penis head");
+            Debug.Log("Can't find penis...");
         }
     }
 }
