@@ -13,21 +13,18 @@ public class Fire : MonoBehaviour
     Transform[] particleEffects;
     bool setToDestroy = false;
     float initialSizeMultiplier;
+    Vector3 initialLocalScale;
 
     // Start is called before the first frame update
     void Start()
     {
         particleEffects = GetComponentsInChildren<Transform>();
-        Debug.Log("Length: " + particleEffects.Length);
         foreach (Transform particle in particleEffects) {
-            Debug.Log("name of particle: " + particle.name);
             if (particle.name.Equals("FX_Fire")) {
-                Debug.Log("Found fire: " + particle.name);
                 fireParticleSystem = particle.GetComponent<ParticleSystem>();
             }
 
             if (particle.name.Equals("FX_Smoke")) {
-                Debug.Log("Found smoke: " + particle.name);
                 smokeParticleSystem = particle.GetComponent<ParticleSystem>();
             }
         }
@@ -35,35 +32,53 @@ public class Fire : MonoBehaviour
         smokeParticleSystem.Stop();
 
         initialSizeMultiplier = fireParticleSystem.main.startSizeMultiplier;
+        initialLocalScale = transform.localScale;
     }
 
     void OnTriggerEnter(Collider other) {
-        Debug.Log("on trigger entered by piss onto fire");
-        if (other.CompareTag("Piss")) {
-            //PissOnFire();
-        }
+        Debug.Log("Fire: OnTriggerEnter");
     }
 
     void OnParticleTrigger() {
-        Debug.Log("trigger by particle");
+        Debug.Log("Fire: OnParticleTrigger");
     }
 
     void OnParticleCollision(GameObject other) {
-        Debug.Log("piss on me");
+        if (other.CompareTag("Piss")) {
+            Debug.Log("piss on me");
+            PissOnFire();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //PissOnFire();
+    }
+
+    void PissOnFire() {
+        Debug.Log("psssssss");
         if (scale <= 0f) {
             // Particle Effect has been reduced to a size of 0
             // So destroy it
             DestroyFireParticleEffect();
         } else {
             // Decrease particle effect size
-            scale -= 0.001f;
-            var fpsm = fireParticleSystem.main;
-            fpsm.startSizeMultiplier = initialSizeMultiplier * scale;
+            scale -= 0.01f;
+            AdjustSizeOfFire();
+        }
+    }
+
+    void AdjustSizeOfFire() {
+        // Adjusts the size of the particle effect
+        var fpsm = fireParticleSystem.main;
+        fpsm.startSizeMultiplier = initialSizeMultiplier * scale;
+
+        // Adjusts the size of the Fire object and the sphere collider
+        Vector3 newSize = initialLocalScale * scale;
+        // Don't let the collider shrink to less than 60% the original size
+        if (newSize.magnitude/initialLocalScale.magnitude >= 0.6) {
+            transform.localScale = initialLocalScale * scale;
         }
     }
 
@@ -72,7 +87,12 @@ public class Fire : MonoBehaviour
         if (!setToDestroy) {
             ParticleSystem.EmissionModule fireParticle = fireParticleSystem.emission;
             fireParticle.enabled = false;
-            float timeToWaitBeforeDestroy = fireParticleSystem.main.duration + fireParticleSystem.main.startLifetimeMultiplier;
+            //float timeToWaitBeforeDestroy = fireParticleSystem.main.duration + fireParticleSystem.main.startLifetimeMultiplier;
+            float timeToWaitBeforeDestroy = fireParticleSystem.main.startLifetimeMultiplier;
+
+            // Reduce the Fire object and sphere collider size to 0 while particle effect still lingers
+            transform.localScale = Vector3.zero;
+
             Destroy(gameObject, timeToWaitBeforeDestroy);
             setToDestroy = true;
         }
