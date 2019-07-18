@@ -43,9 +43,18 @@ public class Piss : MonoBehaviour
         
     }
 
+    // Adjusts the size of the smoke particle effect
+    void AdjustSizeOfSmoke(ParticleSystem smokeParticleSystem) {
+        float scale = 0.1f;
+        var spsm = smokeParticleSystem.main;
+        spsm.startSizeMultiplier *= scale;
+    }
+
     void CreateSmokeParticleEffect(Vector3 collisionLocation) {
         GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
-        float timeToWaitBeforeDestroy = smoke.GetComponent<ParticleSystem>().main.startLifetimeMultiplier;
+        ParticleSystem smokeParticleSystem = instanciatedSmoke.GetComponent<ParticleSystem>();
+        float timeToWaitBeforeDestroy = smokeParticleSystem.main.startLifetimeMultiplier;
+        AdjustSizeOfSmoke(smokeParticleSystem);
         Destroy(instanciatedSmoke, timeToWaitBeforeDestroy);
     }
 
