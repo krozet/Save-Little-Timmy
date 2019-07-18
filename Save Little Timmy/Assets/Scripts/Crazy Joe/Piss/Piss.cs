@@ -45,9 +45,14 @@ public class Piss : MonoBehaviour
 
     // Adjusts the size of the smoke particle effect
     void AdjustSizeOfSmoke(ParticleSystem smokeParticleSystem) {
-        float scale = 0.1f;
+        smokeParticleSystem.Stop();
+        float sizeScale = 0.3f;
+        float durationScale = 0.2f;
         var spsm = smokeParticleSystem.main;
-        spsm.startSizeMultiplier *= scale;
+        spsm.startSizeMultiplier *= sizeScale;
+        spsm.duration *= durationScale;
+
+        smokeParticleSystem.Play();
     }
 
     void CreateSmokeParticleEffect(Vector3 collisionLocation) {
