@@ -46,6 +46,7 @@ public class CrazyJoe : MonoBehaviour
 
             // If you are stuck, look at line 85. It's a clue to half of the answer, but SpawnPissEffect() is a void method...
 
+            // float fuelAmount = ...
             // RefillPissMeter(fuelAmount);
         }
     }
