@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class WaterBottle : MonoBehaviour {
 
+    CrazyJoe crazyJoe;
     public GameObject pickupEffect;
 
     void OnTriggerEnter (Collider other)
     {
         Debug.Log("on trigger entered");
-        if (other.CompareTag("CrazyJoe"))
-        {
-            Pickup();
+        if (other.CompareTag("CrazyJoe")) {
+
+               // Pickup();
         }   
     }
 
-    void Pickup()
+    public void Pickup()
     {
         // Spawn an effect
         Quaternion rotationOffset = Quaternion.Euler(transform.rotation.x - 90, transform.rotation.y, transform.rotation.z);
@@ -32,7 +33,7 @@ public class WaterBottle : MonoBehaviour {
     public float GetPissFuelAmount() {
         // Change this number to a more appropriate value 
         // (maybe 200f or 400f, just keep it lower than 1000f)
-        float fuelAmount = 0f;
+        float fuelAmount = 250f;
 
         return fuelAmount;
     }

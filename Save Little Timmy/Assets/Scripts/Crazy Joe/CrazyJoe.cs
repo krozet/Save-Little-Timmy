@@ -44,11 +44,23 @@ public class CrazyJoe : MonoBehaviour
             // Then store that value in a variable here (float fuelAmount = ...)
             // Pass that variable to the RefillPissMeter method that I already created
 
-            // If you are stuck, look at line 85. It's a clue to half of the answer, but SpawnPissEffect() is a void method...
 
+            // If you are stuck, look at line 85. It's a clue to half of the answer, but SpawnPissEffect() is a void method...
+            
             // float fuelAmount = ...
             // RefillPissMeter(fuelAmount);
+
+
+            //prevents user from picking up bottles if full
+            if (currentPissMeter < maxPissMeter) {
+                waterBottle.Pickup();
+
+                float fuelAmount = waterBottle.GetPissFuelAmount();
+                RefillPissMeter(fuelAmount);
+            }
+
         }
+        
     }
 
     public float GetPissDamage() {
@@ -91,4 +103,5 @@ public class CrazyJoe : MonoBehaviour
         }
 
     }
+   
 }
