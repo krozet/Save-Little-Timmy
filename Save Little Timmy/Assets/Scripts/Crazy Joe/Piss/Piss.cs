@@ -5,10 +5,15 @@ using UnityEngine;
 public class Piss : MonoBehaviour
 {
     private ParticleSystem pissParticleSystem;
+    private List<ParticleCollisionEvent> collisionEvents;
     bool setToDestroy = false;
+
+    public GameObject smoke;
+
     // Start is called before the first frame update
     void Start() {
         pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
         DestroyAfterEffectHasEnded();
     }
 
@@ -20,8 +25,15 @@ public class Piss : MonoBehaviour
     }
 
     void OnParticleCollision(GameObject other) {
-        if (other.name != "Some Shit") {
-            Debug.Log("Collided with: " + other.name);
+        if (other.CompareTag("Fire")) {
+            int numCollisionEvents = pissParticleSystem.GetCollisionEvents(other, collisionEvents);
+            Debug.Log("numCollisionEvents = " + numCollisionEvents);
+            int i = 0;
+            while (i < numCollisionEvents) {
+                Vector3 collisionHitLoc = collisionEvents[i].intersection;
+                CreateSmokeParticleEffect(collisionHitLoc);
+                i++;
+            }
         }
     }
 
@@ -29,6 +41,12 @@ public class Piss : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void CreateSmokeParticleEffect(Vector3 collisionLocation) {
+        GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
+        float timeToWaitBeforeDestroy = smoke.GetComponent<ParticleSystem>().main.startLifetimeMultiplier;
+        Destroy(instanciatedSmoke, timeToWaitBeforeDestroy);
     }
 
     void PissOnFire() {

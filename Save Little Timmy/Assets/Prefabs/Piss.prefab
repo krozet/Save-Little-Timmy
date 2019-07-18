@@ -4823,3 +4823,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abb44ae648afd4408376cf57078cade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoke: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}

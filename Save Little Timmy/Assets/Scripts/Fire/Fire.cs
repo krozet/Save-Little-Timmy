@@ -8,8 +8,6 @@ public class Fire : MonoBehaviour
 
     float scale = 1f;
     ParticleSystem fireParticleSystem;
-    ParticleSystem smokeParticleSystem;
-    ParticleSystem.EmissionModule smokeParticle;
     Transform[] particleEffects;
     bool setToDestroy = false;
     float initialSizeMultiplier;
@@ -23,16 +21,11 @@ public class Fire : MonoBehaviour
             if (particle.name.Equals("FX_Fire")) {
                 fireParticleSystem = particle.GetComponent<ParticleSystem>();
             }
-
-            if (particle.name.Equals("FX_Smoke")) {
-                smokeParticleSystem = particle.GetComponent<ParticleSystem>();
-            }
         }
-        smokeParticle = smokeParticleSystem.emission;
-        smokeParticleSystem.Stop();
 
         initialSizeMultiplier = fireParticleSystem.main.startSizeMultiplier;
         initialLocalScale = transform.localScale;
+
     }
 
     void OnTriggerEnter(Collider other) {
@@ -43,9 +36,12 @@ public class Fire : MonoBehaviour
         Debug.Log("Fire: OnParticleTrigger");
     }
 
+    void OnCollisionEnter(Collision collision) {
+        Debug.Log("OnCollisionEnter");
+    }
+
     void OnParticleCollision(GameObject other) {
         if (other.CompareTag("Piss")) {
-            Debug.Log("piss on me");
             PissOnFire();
         }
     }
