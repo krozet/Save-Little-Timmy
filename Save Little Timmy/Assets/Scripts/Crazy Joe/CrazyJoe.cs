@@ -39,18 +39,6 @@ public class CrazyJoe : MonoBehaviour
 
             WaterBottle waterBottle = other.gameObject.GetComponent<WaterBottle>();
 
-            // You now have a reference to the water bottle script on the object you collided with (waterBottle)
-            // Figure out how to call the public method on waterBottle that will give you the fuelAmount
-            // Then store that value in a variable here (float fuelAmount = ...)
-            // Pass that variable to the RefillPissMeter method that I already created
-
-
-            // If you are stuck, look at line 85. It's a clue to half of the answer, but SpawnPissEffect() is a void method...
-            
-            // float fuelAmount = ...
-            // RefillPissMeter(fuelAmount);
-
-
             //prevents user from picking up bottles if full
             if (currentPissMeter < maxPissMeter) {
                 waterBottle.Pickup();

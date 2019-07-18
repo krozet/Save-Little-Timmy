@@ -9,6 +9,7 @@ public class Piss : MonoBehaviour
     bool setToDestroy = false;
 
     public GameObject smoke;
+    public GameObject blood;
 
     // Start is called before the first frame update
     void Start() {
@@ -34,12 +35,31 @@ public class Piss : MonoBehaviour
                 i++;
             }
         }
+
+        if (other.CompareTag("Little Timmy")) {
+            int numCollisionEvents = pissParticleSystem.GetCollisionEvents(other, collisionEvents);
+            int i = 0;
+            while (i < numCollisionEvents) {
+                Vector3 collisionHitLoc = collisionEvents[i].intersection;
+                CreateBloodParticleEffect(collisionHitLoc);
+                i++;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    // Creates the smoke effect when piss collides with Fire
+    void CreateSmokeParticleEffect(Vector3 collisionLocation) {
+        GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
+        ParticleSystem smokeParticleSystem = instanciatedSmoke.GetComponent<ParticleSystem>();
+        float timeToWaitBeforeDestroy = smokeParticleSystem.main.startLifetimeMultiplier;
+        AdjustSizeOfSmoke(smokeParticleSystem);
+        Destroy(instanciatedSmoke, timeToWaitBeforeDestroy);
     }
 
     // Adjusts the size of the smoke particle effect
@@ -54,13 +74,25 @@ public class Piss : MonoBehaviour
         smokeParticleSystem.Play();
     }
 
-    // Creates the smoke effect when piss collides with Fire
-    void CreateSmokeParticleEffect(Vector3 collisionLocation) {
-        GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
-        ParticleSystem smokeParticleSystem = instanciatedSmoke.GetComponent<ParticleSystem>();
-        float timeToWaitBeforeDestroy = smokeParticleSystem.main.startLifetimeMultiplier;
-        AdjustSizeOfSmoke(smokeParticleSystem);
-        Destroy(instanciatedSmoke, timeToWaitBeforeDestroy);
+    // Creates the blood effect when piss collides with Little Timmy
+    void CreateBloodParticleEffect(Vector3 collisionLocation) {
+        GameObject instanciatedBlood = Instantiate(blood, collisionLocation, Quaternion.identity);
+        ParticleSystem bloodParticleSystem = instanciatedBlood.GetComponent<ParticleSystem>();
+        float timeToWaitBeforeDestroy = bloodParticleSystem.main.startLifetimeMultiplier;
+        AdjustSizeOfBlood(bloodParticleSystem);
+        Destroy(instanciatedBlood, timeToWaitBeforeDestroy);
+    }
+
+    // Adjusts the size of the explosion particle effect
+    void AdjustSizeOfBlood(ParticleSystem bloodParticleSystem) {
+        bloodParticleSystem.Stop();
+        float sizeScale = 1f;
+        float durationScale = 0.2f;
+        var bpsm = bloodParticleSystem.main;
+        bpsm.startSizeMultiplier *= sizeScale;
+        bpsm.duration *= durationScale;
+
+        bloodParticleSystem.Play();
     }
 
     void PissOnFire() {

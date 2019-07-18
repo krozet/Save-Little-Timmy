@@ -22,19 +22,12 @@ public class WaterBottle : MonoBehaviour {
         Quaternion rotationOffset = Quaternion.Euler(transform.rotation.x - 90, transform.rotation.y, transform.rotation.z);
         Instantiate(pickupEffect, transform.position, rotationOffset);
         
-        // This is NOT where we are going to update CrazyJoe's piss meter
-
         // Remove WaterBottle
         Destroy(gameObject);
     }
 
-    // This method is called by the CrazyJoe script to see how
-    // much Piss Fuel this waterBottle will give him
+    // amount of Piss Fuel this waterBottle will give
     public float GetPissFuelAmount() {
-        // Change this number to a more appropriate value 
-        // (maybe 200f or 400f, just keep it lower than 1000f)
-        float fuelAmount = 250f;
-
-        return fuelAmount;
+        return 250f;
     }
 }
