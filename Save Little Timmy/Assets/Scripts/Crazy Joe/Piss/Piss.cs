@@ -27,7 +27,6 @@ public class Piss : MonoBehaviour
     void OnParticleCollision(GameObject other) {
         if (other.CompareTag("Fire")) {
             int numCollisionEvents = pissParticleSystem.GetCollisionEvents(other, collisionEvents);
-            Debug.Log("numCollisionEvents = " + numCollisionEvents);
             int i = 0;
             while (i < numCollisionEvents) {
                 Vector3 collisionHitLoc = collisionEvents[i].intersection;
@@ -64,7 +63,6 @@ public class Piss : MonoBehaviour
     }
 
     void PissOnFire() {
-        Debug.Log("Pissed on the fire");
         Destroy(gameObject);
     }
 

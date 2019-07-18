@@ -34,11 +34,18 @@ public class PlayerController : MonoBehaviour
 
         // Left Click to piss
         if (Input.GetMouseButton(0)) {
-            crazyJoe.Piss();
+            crazyJoe.IsPissing(true);
         }
 
+        // Release Left Click to stop pissing
         if (Input.GetMouseButtonUp(0)) {
-            crazyJoe.StopPiss();
+            crazyJoe.IsPissing(false);
+        }
+
+        // For testing purposes
+        // Refil Piss Meter by 1000
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            crazyJoe.RefillPissMeter(1000);
         }
     }
 

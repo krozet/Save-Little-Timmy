@@ -53,7 +53,6 @@ public class Fire : MonoBehaviour
     }
 
     void PissOnFire() {
-        Debug.Log("psssssss");
         if (scale <= 0f) {
             // Particle Effect has been reduced to a size of 0
             // So destroy it
