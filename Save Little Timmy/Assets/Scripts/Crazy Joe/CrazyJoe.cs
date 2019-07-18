@@ -46,9 +46,7 @@ public class CrazyJoe : MonoBehaviour
                 float fuelAmount = waterBottle.GetPissFuelAmount();
                 RefillPissMeter(fuelAmount);
             }
-
         }
-        
     }
 
     public float GetPissDamage() {

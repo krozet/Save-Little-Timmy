@@ -91,6 +91,7 @@ public class Piss : MonoBehaviour
         var bpsm = bloodParticleSystem.main;
         bpsm.startSizeMultiplier *= sizeScale;
         bpsm.duration *= durationScale;
+        bpsm.startDelay = 0;
 
         bloodParticleSystem.Play();
     }
