@@ -54,6 +54,7 @@ public class Piss : MonoBehaviour
         smokeParticleSystem.Play();
     }
 
+    // Creates the smoke effect when piss collides with Fire
     void CreateSmokeParticleEffect(Vector3 collisionLocation) {
         GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
         ParticleSystem smokeParticleSystem = instanciatedSmoke.GetComponent<ParticleSystem>();

@@ -82,7 +82,6 @@ public class Fire : MonoBehaviour
         if (!setToDestroy) {
             ParticleSystem.EmissionModule fireParticle = fireParticleSystem.emission;
             fireParticle.enabled = false;
-            //float timeToWaitBeforeDestroy = fireParticleSystem.main.duration + fireParticleSystem.main.startLifetimeMultiplier;
             float timeToWaitBeforeDestroy = fireParticleSystem.main.startLifetimeMultiplier;
 
             // Reduce the Fire object and sphere collider size to 0 while particle effect still lingers

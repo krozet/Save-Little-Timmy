@@ -6,26 +6,9 @@ public class SpawnPiss
 {
     // Point where piss will spawn from
     public GameObject penis;
+
     private PlayerController playerController;
     private List<GameObject> instantiatedPiss;
-
-    // Start is called before the first frame update
-    //void Start()
-    //{
-    //    // For now, grab the first piss effect at position 0 in the List
-    //    effectToSpawn = pissEffects[0];
-    //    instantiatedPiss = new List<GameObject>();
-    //    // Get a reference to the PlayerController script
-    //    playerController = GetComponent<PlayerController>();
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    //if(Input.GetMouseButton(0)) {
-    //    //    SpawnPissEffect();
-    //    //}
-    //}
 
     public void init(PlayerController _playerController) {
         // For now, grab the first piss effect at position 0 in the List
