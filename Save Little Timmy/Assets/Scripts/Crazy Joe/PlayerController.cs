@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space)) {
             crazyJoe.RefillPissMeter(1000);
         }
+
+        // For testing purposes
+        // Refil Health by 100
+        if (Input.GetKeyUp(KeyCode.H)) {
+            crazyJoe.HealHP(100);
+        }
     }
 
     private void SetRotationTowardsMouse() {

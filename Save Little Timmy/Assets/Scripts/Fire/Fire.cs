@@ -37,7 +37,6 @@ public class Fire : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        Debug.Log("OnCollisionEnter");
     }
 
     void OnParticleCollision(GameObject other) {
@@ -50,6 +49,10 @@ public class Fire : MonoBehaviour
     void Update()
     {
         //PissOnFire();
+    }
+
+    public float GetFireDamage() {
+        return 1f;
     }
 
     void PissOnFire() {

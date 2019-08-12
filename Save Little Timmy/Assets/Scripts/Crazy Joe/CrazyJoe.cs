@@ -7,12 +7,14 @@ public class CrazyJoe : MonoBehaviour
     SpawnPiss spawnPiss;
     PlayerController playerController;
     float currentPissMeter;
-    float maxPissMeter = 1000;
+    float maxPissMeter = 100f;
     // This will be converted to damage per second
-    float pissDamage = 0.1f;
+    float pissDamage = 1f;
 
     bool isPissing = false;
 
+    float health = 100f;
+    float maxHealth = 100f;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,8 +51,47 @@ public class CrazyJoe : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision) {
+        // Checks if collision was with fire
+        if (collision.gameObject.tag == "Fire") {
+            Debug.Log("Crazy Joe is on FIRE");
+            Fire fire = collision.gameObject.GetComponent<Fire>();
+            TakeDamage(fire.GetFireDamage());
+        }
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        // Checks if collision was with fire
+        if (collision.gameObject.tag == "Fire") {
+
+            TakeDamage(1);
+            Debug.Log("Crazy Joe health: " + health);
+
+        }
+    }
+
+    public void TakeDamage(float damage) {
+        if (health > 0) {
+            health -= damage;
+            if (health <= 0) {
+                // You have died
+                Debug.Log("YOU ARE DEAD");
+            }
+        } else {
+            // You are still dead
+            Debug.Log("YOU ARE STILL DEAD - Click 'H' to refill HP");
+        }
+    }
+
+    public void HealHP(float amount) {
+        health += amount;
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
+    }
+
     public float GetPissDamage() {
-        return pissDamage / Time.deltaTime;
+        return pissDamage;
     }
 
     // This method takes in a piss fuel amount and updates CrazyJoe's current piss meter
@@ -85,7 +126,7 @@ public class CrazyJoe : MonoBehaviour
 
             Debug.Log("Current Piss Meter = " + currentPissMeter + " / " + maxPissMeter);
         } else {
-            Debug.Log("You pissed away all your piss");
+            Debug.Log("You pissed away all your piss - Press 'Space' to refill piss");
         }
 
     }
