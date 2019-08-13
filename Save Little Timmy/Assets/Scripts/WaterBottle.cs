@@ -11,7 +11,6 @@ public class WaterBottle : MonoBehaviour {
     {
         Debug.Log("on trigger entered");
         if (other.CompareTag("CrazyJoe")) {
-
                // Pickup();
         }   
     }

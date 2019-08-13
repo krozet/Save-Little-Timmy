@@ -18,7 +18,7 @@ public class SpawnPiss
         penis = GameObject.FindGameObjectWithTag("Penis");
     }
 
-    public void SpawnPissEffect() {
+    public void SpawnPissEffect(float pissDamage) {
         GameObject piss;
 
         if (penis != null) {
@@ -26,6 +26,7 @@ public class SpawnPiss
                 penis.transform.LookAt(playerController.GetLookAtDirection());
             }
             piss = Object.Instantiate(penis.GetComponent<PissEffects>().GetPissEffect(), penis.transform.position, penis.transform.rotation);
+            piss.GetComponent<Piss>().SetPissDamage(pissDamage);
         } else {
             Debug.Log("Can't find penis...");
         }

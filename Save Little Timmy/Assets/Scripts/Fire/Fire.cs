@@ -11,6 +11,8 @@ public class Fire : MonoBehaviour
     Transform[] particleEffects;
     bool setToDestroy = false;
     float initialSizeMultiplier;
+    float health;
+    float maxHealth = 50f;
     Vector3 initialLocalScale;
 
     // Start is called before the first frame update
@@ -26,6 +28,7 @@ public class Fire : MonoBehaviour
         initialSizeMultiplier = fireParticleSystem.main.startSizeMultiplier;
         initialLocalScale = transform.localScale;
 
+        health = maxHealth;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -41,28 +44,28 @@ public class Fire : MonoBehaviour
 
     void OnParticleCollision(GameObject other) {
         if (other.CompareTag("Piss")) {
-            PissOnFire();
+            PissOnFire(other.GetComponent<Piss>().GetPissDamage());
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //PissOnFire();
     }
 
     public float GetFireDamage() {
         return 1f;
     }
 
-    void PissOnFire() {
-        if (scale <= 0f) {
+    void PissOnFire(float pissDamage) {
+        if (health <= 0f) {
             // Particle Effect has been reduced to a size of 0
             // So destroy it
             DestroyFireParticleEffect();
         } else {
             // Decrease particle effect size
-            scale -= 0.01f;
+            health -= pissDamage;
+            scale = health/maxHealth;
             AdjustSizeOfFire();
         }
     }

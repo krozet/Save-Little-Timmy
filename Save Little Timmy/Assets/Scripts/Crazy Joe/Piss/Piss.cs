@@ -11,11 +11,14 @@ public class Piss : MonoBehaviour
     public GameObject smoke;
     public GameObject blood;
 
+    float pissDamage;
+
     // Start is called before the first frame update
     void Start() {
         pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
         DestroyAfterEffectHasEnded();
+        pissDamage = 1f;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -51,6 +54,14 @@ public class Piss : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetPissDamage(float _pissDamage) {
+        pissDamage = _pissDamage;
+    }
+
+    public float GetPissDamage() {
+        return pissDamage;
     }
 
     // Creates the smoke effect when piss collides with Fire
