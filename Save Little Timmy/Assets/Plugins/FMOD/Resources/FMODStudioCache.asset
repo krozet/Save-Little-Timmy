@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: event:/Gey
   guid: 91d6bda20e0492489cd12fc841dbf1f0
   Banks:
-  - {fileID: -6305386625016248830}
+  - {fileID: -790510553131421237}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   Path: event:/Dub1
   guid: 7d47bff4336e3a4f8f428aa45c7fbb56
   Banks:
-  - {fileID: -6305386625016248830}
+  - {fileID: -790510553131421237}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -108,6 +108,27 @@ MonoBehaviour:
   MinDistance: 0.49999997
   MaxDistance: 800
   Length: 315400
+--- !u!114 &-790510553131421237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
+    Little Timmy/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637121323794010958
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 4662880
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,15 +142,36 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -3886692944996672118}
-  - {fileID: -6305386625016248830}
+  - {fileID: 2082586658953489940}
+  - {fileID: -790510553131421237}
   EditorEvents:
   - {fileID: -8917299662856207490}
   - {fileID: -1608110479750352565}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -6305386625016248830}
+  - {fileID: -790510553131421237}
   StringsBanks:
-  - {fileID: -3886692944996672118}
-  stringsBankWriteTime: 637102141115587253
+  - {fileID: 2082586658953489940}
+  stringsBankWriteTime: 637121323794070973
   cacheVersion: 3
+--- !u!114 &2082586658953489940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
+    Little Timmy/Build/Desktop/Master.strings.bank
+  SubDir: 
+  lastModified: 637121323794070973
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 776
+  Exists: 1
