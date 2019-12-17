@@ -15,10 +15,10 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: C:/Users/Derek/Documents/FMOD Studio/Unity/Save Little Timmy/Save
-    Little Timmy.fspro
-  SourceBankPathUnformatted: C:/Users/Derek/Documents/FMOD Studio/Unity/Save Little
-    Timmy/Build
+  sourceProjectPath: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project
+    Files/Save Little Timmy/Save Little Timmy.fspro
+  SourceBankPathUnformatted: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD
+    Project Files/Save Little Timmy/Build
   AutomaticEventLoading: 1
   BankLoadType: 0
   AutomaticSampleLoading: 0
