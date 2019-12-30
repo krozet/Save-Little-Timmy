@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fire : MonoBehaviour, PissOnable
 {
     public Transform fire;
+    public GameObject smoke;
 
     float scale = 1f;
     ParticleSystem fireParticleSystem;
@@ -101,5 +102,9 @@ public class Fire : MonoBehaviour, PissOnable
     public void HandlePiss()
     {
         
+    }
+
+    public GameObject GetPissedOnParticleEffect() {
+        return smoke;
     }
 }

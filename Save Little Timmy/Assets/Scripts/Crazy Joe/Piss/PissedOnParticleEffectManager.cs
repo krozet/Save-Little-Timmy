@@ -1,0 +1,67 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PissedOnParticleEffectManager : MonoBehaviour
+{
+    // TODO: Accept object from piss, check if it has collided with fire, then send smoke effect to createsmokeparticleefftect
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    // Creates the smoke effect when piss collides with Fire
+    void CreateSmokeParticleEffect(Vector3 collisionLocation, GameObject smoke) {
+        GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
+        ParticleSystem smokeParticleSystem = instanciatedSmoke.GetComponent<ParticleSystem>();
+        float timeToWaitBeforeDestroy = smokeParticleSystem.main.startLifetimeMultiplier;
+        AdjustSizeOfSmoke(smokeParticleSystem);
+        Destroy(instanciatedSmoke, timeToWaitBeforeDestroy);
+    }
+
+    // Adjusts the size of the smoke particle effect
+    void AdjustSizeOfSmoke(ParticleSystem smokeParticleSystem) {
+        smokeParticleSystem.Stop();
+        float sizeScale = 0.3f;
+        float durationScale = 0.2f;
+        var spsm = smokeParticleSystem.main;
+        spsm.startSizeMultiplier *= sizeScale;
+        spsm.duration *= durationScale;
+
+        smokeParticleSystem.Play();
+    }
+
+    //TODO: Do this for little timmy, add blood effect to little timmy prefab
+    // Creates the blood effect when piss collides with Little Timmy
+    void CreateBloodParticleEffect(Vector3 collisionLocation, GameObject blood) {
+        GameObject instanciatedBlood = Instantiate(blood, collisionLocation, Quaternion.identity);
+        ParticleSystem bloodParticleSystem = instanciatedBlood.GetComponent<ParticleSystem>();
+        float timeToWaitBeforeDestroy = bloodParticleSystem.main.startLifetimeMultiplier;
+        AdjustSizeOfBlood(bloodParticleSystem);
+        Destroy(instanciatedBlood, timeToWaitBeforeDestroy);
+    }
+
+    // Adjusts the size of the explosion particle effect
+    void AdjustSizeOfBlood(ParticleSystem bloodParticleSystem) {
+        bloodParticleSystem.Stop();
+        float sizeScale = 1f;
+        float durationScale = 0.2f;
+        var bpsm = bloodParticleSystem.main;
+        bpsm.startSizeMultiplier *= sizeScale;
+        bpsm.duration *= durationScale;
+        bpsm.startDelay = 0;
+
+        bloodParticleSystem.Play();
+    }
+
+    void PissOnFire() {
+        Destroy(gameObject);
+    }
+}

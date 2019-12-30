@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fire: {fileID: 4758244838607215385}
+  smoke: {fileID: 100000, guid: 5b6c2f68addb63847b151f0d41a9d3b1, type: 3}
 --- !u!135 &4758244837217731417
 SphereCollider:
   m_ObjectHideFlags: 0

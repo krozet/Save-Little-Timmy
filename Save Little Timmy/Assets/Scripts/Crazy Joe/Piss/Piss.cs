@@ -7,6 +7,7 @@ public class Piss : MonoBehaviour
 {
     private ParticleSystem pissParticleSystem;
     private List<ParticleCollisionEvent> collisionEvents;
+    private PissedOnParticleEffectManager pissedOnParticleEffectManager;
     bool setToDestroy = false;
 
     public ObiEmitter obiEmitter;
@@ -17,23 +18,20 @@ public class Piss : MonoBehaviour
 
     ObiSolver solver;
 
-    void Awake()
-    {
+    void Awake() {
         solver = GetComponent<Obi.ObiSolver>();
     }
 
-    void OnEnable()
-    {
+    void OnEnable() {
         solver.OnCollision += Solver_OnCollision;
     }
 
-    void OnDisable()
-    {
+    void OnDisable() {
         solver.OnCollision -= Solver_OnCollision;
     }
 
-    void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
-    {
+    // Detects when obi particle collides with obi collider
+    void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e) {
         // if suffering from performance issues, try using a hashset?
         for (int i = 0; i < e.contacts.Count; ++i)
         {
@@ -42,34 +40,30 @@ public class Piss : MonoBehaviour
                 Component collider;
                 if (ObiCollider.idToCollider.TryGetValue(e.contacts.Data[i].other, out collider))
                 {
-                    //int k = e.contacts.Data[i].particle;
-                    //Vector4 userData = solver.userData[k];
-
+                    // handle if particle collides with an object that is PissOnable
                     if (collider.GetComponent(typeof(PissOnable)) is PissOnable)
                     {
-                        //destroy particle
+                        // destroy particle
                         ObiSolver.ParticleInActor pa = solver.particleToActor[e.contacts[i].particle];
                         ObiEmitter emitter = pa.actor as ObiEmitter;
 
-                        if (emitter != null)
-                        {
+                        if (emitter != null) {
                             emitter.life[pa.indexInActor] = 0;
                         }
-                    } else {
+                        /*e.contacts[i].point*/
                     }
-                    //solver.userData[k] = userData;
                 }
             }
         }
 
     }
 
-// Start is called before the first frame update
-void Start() {
-        /*pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
+    // Start is called before the first frame update
+    void Start() {
+        pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
         DestroyAfterEffectHasEnded();
-        pissDamage = 1f;*/
+        pissDamage = 1f;
     }
 
     void OnTriggerEnter(Collider other) {

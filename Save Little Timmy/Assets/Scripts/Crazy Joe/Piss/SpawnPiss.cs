@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Used by Crazy Joe to determine where to spawn the Piss and what piss effect to use
 public class SpawnPiss
 {
     // Point where piss will spawn from
