@@ -7,8 +7,6 @@ public class Piss : MonoBehaviour
 {
     private ParticleSystem pissParticleSystem;
     private List<ParticleCollisionEvent> collisionEvents;
-    private HashSet<int> previousCollisions;
-    private bool isEmitting = false;
     bool setToDestroy = false;
 
     public ObiEmitter obiEmitter;
@@ -22,25 +20,6 @@ public class Piss : MonoBehaviour
     void Awake()
     {
         solver = GetComponent<Obi.ObiSolver>();
-        Debug.Log("Solver is awake");
-        previousCollisions = new HashSet<int>();
-
-    }
-    private void LateUpdate()
-    {
-        if (!isEmitting)
-        {
-            if (obiEmitter.isEmitting)
-            {
-                Debug.Log("Reset Hashset");
-                // reset hashset incase of particle id reuse
-                previousCollisions = new HashSet<int>();
-                isEmitting = true;
-            }
-        } else if (!obiEmitter.isEmitting)
-        {
-            isEmitting = false;
-        }
     }
 
     void OnEnable()
