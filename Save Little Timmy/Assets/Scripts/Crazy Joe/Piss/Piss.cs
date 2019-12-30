@@ -7,8 +7,11 @@ public class Piss : MonoBehaviour
 {
     private ParticleSystem pissParticleSystem;
     private List<ParticleCollisionEvent> collisionEvents;
+    private HashSet<int> previousCollisions;
+    private bool isEmitting = false;
     bool setToDestroy = false;
 
+    public ObiEmitter obiEmitter;
     public GameObject smoke;
     public GameObject blood;
 
@@ -19,6 +22,25 @@ public class Piss : MonoBehaviour
     void Awake()
     {
         solver = GetComponent<Obi.ObiSolver>();
+        Debug.Log("Solver is awake");
+        previousCollisions = new HashSet<int>();
+
+    }
+    private void LateUpdate()
+    {
+        if (!isEmitting)
+        {
+            if (obiEmitter.isEmitting)
+            {
+                Debug.Log("Reset Hashset");
+                // reset hashset incase of particle id reuse
+                previousCollisions = new HashSet<int>();
+                isEmitting = true;
+            }
+        } else if (!obiEmitter.isEmitting)
+        {
+            isEmitting = false;
+        }
     }
 
     void OnEnable()
@@ -33,22 +55,29 @@ public class Piss : MonoBehaviour
 
     void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
     {
-        
+
         for (int i = 0; i < e.contacts.Count; ++i)
         {
+            if (previousCollisions.Contains(e.contacts.Data[i].particle))
+            {
+/*                Debug.Log("Found one");*/
+                break;
+            }
+/*
+            Debug.Log("Collision");*/
             if (e.contacts.Data[i].distance < 0.001f)
             {
-
                 Component collider;
                 if (ObiCollider.idToCollider.TryGetValue(e.contacts.Data[i].other, out collider))
                 {
+/*                    Debug.Log("idToCollider");*/
                     int k = e.contacts.Data[i].particle;
 
                     Vector4 userData = solver.userData[k];
 
-                    if (collider.GetComponent(typeof(PissOnable)) != null)
+                    if (collider.GetComponent(typeof(PissOnable)) is PissOnable)
                     {
-                        Debug.Log("HEY2");
+                        Debug.Log("It's PissOnable");
                         //destroy particle
                         ObiSolver.ParticleInActor pa = solver.particleToActor[e.contacts[i].particle];
                         ObiEmitter emitter = pa.actor as ObiEmitter;
@@ -58,6 +87,9 @@ public class Piss : MonoBehaviour
                             Debug.Log("DIE PARTICLE DIE");
                             emitter.life[pa.indexInActor] = 0;
                         }
+                    } else
+                    {
+                        previousCollisions.Add(e.contacts.Data[i].particle);
                     }
                     solver.userData[k] = userData;
                 }

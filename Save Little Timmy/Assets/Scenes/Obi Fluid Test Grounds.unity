@@ -221,8 +221,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1081544923}
   - component: {fileID: 1081544922}
-  - component: {fileID: 1081544921}
   - component: {fileID: 1081544924}
+  - component: {fileID: 1081544925}
   m_Layer: 0
   m_Name: Obi Solver
   m_TagString: Untagged
@@ -230,22 +230,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1081544921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081544920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d9704d540ac448439a425526f6b2986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  solvers:
-  - {fileID: 1081544922}
-  substepUnityPhysics: 0
-  substeps: 1
 --- !u!114 &1081544922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1403,6 +1387,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoke: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}
   blood: {fileID: 194062, guid: 8c27aeead6d968e4ba986702d6b84335, type: 3}
+--- !u!114 &1081544925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081544920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434d88f9b3534406382ff56c0e74bd9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solvers:
+  - {fileID: 1081544922}
+  deltaSmoothing: 0.95
 --- !u!1 &1204378461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,106 +1554,106 @@ MonoBehaviour:
   emitterShapes:
   - {fileID: 1204378464}
   life:
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.560437
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.6547055
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.768587
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.8625197
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
+  - 5.964449
   - 6
   - 6
   - 6
