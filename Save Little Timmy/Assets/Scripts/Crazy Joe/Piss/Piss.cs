@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Obi;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,12 +14,64 @@ public class Piss : MonoBehaviour
 
     float pissDamage;
 
-    // Start is called before the first frame update
-    void Start() {
-        pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
+    ObiSolver solver;
+
+    void Awake()
+    {
+        solver = GetComponent<Obi.ObiSolver>();
+    }
+
+    void OnEnable()
+    {
+        solver.OnCollision += Solver_OnCollision;
+    }
+
+    void OnDisable()
+    {
+        solver.OnCollision -= Solver_OnCollision;
+    }
+
+    void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
+    {
+        
+        for (int i = 0; i < e.contacts.Count; ++i)
+        {
+            if (e.contacts.Data[i].distance < 0.001f)
+            {
+
+                Component collider;
+                if (ObiCollider.idToCollider.TryGetValue(e.contacts.Data[i].other, out collider))
+                {
+                    int k = e.contacts.Data[i].particle;
+
+                    Vector4 userData = solver.userData[k];
+
+                    if (collider.GetComponent(typeof(PissOnable)) != null)
+                    {
+                        Debug.Log("HEY2");
+                        //destroy particle
+                        ObiSolver.ParticleInActor pa = solver.particleToActor[e.contacts[i].particle];
+                        ObiEmitter emitter = pa.actor as ObiEmitter;
+
+                        if (emitter != null)
+                        {
+                            Debug.Log("DIE PARTICLE DIE");
+                            emitter.life[pa.indexInActor] = 0;
+                        }
+                    }
+                    solver.userData[k] = userData;
+                }
+            }
+        }
+
+    }
+
+// Start is called before the first frame update
+void Start() {
+        /*pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
         DestroyAfterEffectHasEnded();
-        pissDamage = 1f;
+        pissDamage = 1f;*/
     }
 
     void OnTriggerEnter(Collider other) {
