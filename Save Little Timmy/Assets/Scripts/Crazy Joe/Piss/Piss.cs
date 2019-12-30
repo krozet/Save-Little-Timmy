@@ -62,7 +62,7 @@ public class Piss : MonoBehaviour
     void Start() {
         pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
-        DestroyAfterEffectHasEnded();
+        //DestroyAfterEffectHasEnded();
         pissDamage = 1f;
     }
 
