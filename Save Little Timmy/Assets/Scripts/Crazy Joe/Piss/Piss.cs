@@ -55,43 +55,30 @@ public class Piss : MonoBehaviour
 
     void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
     {
-
+        // if suffering from performance issues, try using a hashset?
         for (int i = 0; i < e.contacts.Count; ++i)
         {
-            if (previousCollisions.Contains(e.contacts.Data[i].particle))
-            {
-/*                Debug.Log("Found one");*/
-                break;
-            }
-/*
-            Debug.Log("Collision");*/
-            if (e.contacts.Data[i].distance < 0.001f)
+            if (e.contacts.Data[i].distance < 0.06f)
             {
                 Component collider;
                 if (ObiCollider.idToCollider.TryGetValue(e.contacts.Data[i].other, out collider))
                 {
-/*                    Debug.Log("idToCollider");*/
-                    int k = e.contacts.Data[i].particle;
-
-                    Vector4 userData = solver.userData[k];
+                    //int k = e.contacts.Data[i].particle;
+                    //Vector4 userData = solver.userData[k];
 
                     if (collider.GetComponent(typeof(PissOnable)) is PissOnable)
                     {
-                        Debug.Log("It's PissOnable");
                         //destroy particle
                         ObiSolver.ParticleInActor pa = solver.particleToActor[e.contacts[i].particle];
                         ObiEmitter emitter = pa.actor as ObiEmitter;
 
                         if (emitter != null)
                         {
-                            Debug.Log("DIE PARTICLE DIE");
                             emitter.life[pa.indexInActor] = 0;
                         }
-                    } else
-                    {
-                        previousCollisions.Add(e.contacts.Data[i].particle);
+                    } else {
                     }
-                    solver.userData[k] = userData;
+                    //solver.userData[k] = userData;
                 }
             }
         }
