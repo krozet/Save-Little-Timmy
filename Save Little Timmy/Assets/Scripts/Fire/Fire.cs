@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class Fire : MonoBehaviour, PissOnable
 {
     public Transform fire;
 
@@ -96,5 +96,10 @@ public class Fire : MonoBehaviour
             Destroy(gameObject, timeToWaitBeforeDestroy);
             setToDestroy = true;
         }
+    }
+
+    public void HandlePiss()
+    {
+        
     }
 }
