@@ -22,48 +22,37 @@ public class Piss : MonoBehaviour
         solver = GetComponent<Obi.ObiSolver>();
     }
 
-    void OnEnable() {
-        solver.OnCollision += Solver_OnCollision;
-    }
+    // Start is called before the first frame update
+    void Start() {
+        pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
+        pissedOnParticleEffectManager = new PissedOnParticleEffectManager();
 
-    void OnDisable() {
-        solver.OnCollision -= Solver_OnCollision;
+        pissDamage = 1f;
     }
 
     // Detects when obi particle collides with obi collider
     void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e) {
         // if suffering from performance issues, try using a hashset?
-        for (int i = 0; i < e.contacts.Count; ++i)
-        {
-            if (e.contacts.Data[i].distance < 0.06f)
-            {
+        for (int i = 0; i < e.contacts.Count; ++i) {
+            if (e.contacts.Data[i].distance < 0.06f) {
                 Component collider;
-                if (ObiCollider.idToCollider.TryGetValue(e.contacts.Data[i].other, out collider))
-                {
+                if (ObiCollider.idToCollider.TryGetValue(e.contacts.Data[i].other, out collider)) {
                     // handle if particle collides with an object that is PissOnable
-                    if (collider.GetComponent(typeof(PissOnable)) is PissOnable)
-                    {
+                    if (collider.GetComponent(typeof(PissOnable)) is PissOnable) {
                         // destroy particle
                         ObiSolver.ParticleInActor pa = solver.particleToActor[e.contacts[i].particle];
                         ObiEmitter emitter = pa.actor as ObiEmitter;
-
+                        
                         if (emitter != null) {
                             emitter.life[pa.indexInActor] = 0;
                         }
-                        /*e.contacts[i].point*/
+
+                        pissedOnParticleEffectManager.SpawnPissedOnParticleEffect(collider, pa.actor.GetParticlePosition(e.contacts[i].particle));
                     }
                 }
             }
         }
-
-    }
-
-    // Start is called before the first frame update
-    void Start() {
-        pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
-        collisionEvents = new List<ParticleCollisionEvent>();
-        //DestroyAfterEffectHasEnded();
-        pissDamage = 1f;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -96,9 +85,16 @@ public class Piss : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         
+    }
+
+    void OnEnable() {
+        solver.OnCollision += Solver_OnCollision;
+    }
+
+    void OnDisable() {
+        solver.OnCollision -= Solver_OnCollision;
     }
 
     public void SetPissDamage(float _pissDamage) {

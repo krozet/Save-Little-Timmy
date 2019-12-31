@@ -5,16 +5,22 @@ using UnityEngine;
 public class PissedOnParticleEffectManager : MonoBehaviour
 {
     // TODO: Accept object from piss, check if it has collided with fire, then send smoke effect to createsmokeparticleefftect
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SpawnPissedOnParticleEffect(Component collider, Vector3 point) {
+        if (collider.gameObject.CompareTag("Fire")) {
+            Fire fire = collider.gameObject.GetComponent<Fire>();
+            if (fire != null) {
+                CreateSmokeParticleEffect(point, fire.GetPissedOnParticleEffect());
+            }
+        }
+
+        if (collider.gameObject.CompareTag("Little Timmy")) {
+            Vector3 collisionHitLoc = new Vector3(point.x, point.y, point.z);
+            //LittleTimmy littleTimmy = collider.gameObject.GetComponent<Fire>();
+            //if (fire != null) {
+            //    CreateBloodParticleEffect(collisionHitLoc, fire.GetPissedOnParticleEffect());
+            //}
+        }
     }
 
     // Creates the smoke effect when piss collides with Fire
