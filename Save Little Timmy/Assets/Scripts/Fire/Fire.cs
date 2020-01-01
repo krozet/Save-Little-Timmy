@@ -54,10 +54,6 @@ public class Fire : MonoBehaviour, PissOnable
     {
     }
 
-    public float GetFireDamage() {
-        return 1f;
-    }
-
     void PissOnFire(float pissDamage) {
         if (health <= 0f) {
             // Particle Effect has been reduced to a size of 0
@@ -97,6 +93,9 @@ public class Fire : MonoBehaviour, PissOnable
             Destroy(gameObject, timeToWaitBeforeDestroy);
             setToDestroy = true;
         }
+    }
+    public float GetFireDamage() {
+        return 1f;
     }
 
     public void HandlePiss()

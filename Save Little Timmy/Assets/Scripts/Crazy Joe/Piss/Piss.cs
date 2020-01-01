@@ -5,18 +5,13 @@ using UnityEngine;
 
 public class Piss : MonoBehaviour
 {
-    private ParticleSystem pissParticleSystem;
-    private List<ParticleCollisionEvent> collisionEvents;
-    private PissedOnParticleEffectManager pissedOnParticleEffectManager;
-    bool setToDestroy = false;
-
+    // Point where piss will spawn from
+    public GameObject penis;
     public ObiEmitter obiEmitter;
-    public GameObject smoke;
-    public GameObject blood;
 
-    float pissDamage;
-
+    PissedOnParticleEffectManager pissedOnParticleEffectManager;
     ObiSolver solver;
+    float pissDamage;
 
     void Awake() {
         solver = GetComponent<Obi.ObiSolver>();
@@ -24,8 +19,6 @@ public class Piss : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        pissParticleSystem = gameObject.GetComponent<ParticleSystem>();
-        collisionEvents = new List<ParticleCollisionEvent>();
         pissedOnParticleEffectManager = new PissedOnParticleEffectManager();
 
         pissDamage = 1f;

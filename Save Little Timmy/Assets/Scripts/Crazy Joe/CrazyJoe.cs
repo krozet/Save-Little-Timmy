@@ -24,6 +24,8 @@ public class CrazyJoe : MonoBehaviour
         spawnPiss = new SpawnPiss();
         spawnPiss.init(playerController);
         health = maxHealth;
+
+        //Instantiate piss? or create penis object and instantiate piss from there?
     }
 
     // Update is called once per frame

@@ -66,8 +66,4 @@ public class PissedOnParticleEffectManager : MonoBehaviour
 
         bloodParticleSystem.Play();
     }
-
-    void PissOnFire() {
-        Destroy(gameObject);
-    }
 }
