@@ -6,6 +6,7 @@ public class CrazyJoe : MonoBehaviour
 {
     SpawnPiss spawnPiss;
     PlayerController playerController;
+    Penis penis;
     float currentPissMeter;
     float maxPissMeter = 100f;
     // This will be converted to damage per second
@@ -21,8 +22,8 @@ public class CrazyJoe : MonoBehaviour
         currentPissMeter = maxPissMeter;
         playerController = GetComponent<PlayerController>();
         // maybe?
-        GameObject penisGameObject = transform.Find("Penis").gameObject;
-        Penis penis = penisGameObject.GetComponent<Penis>();
+        /*GameObject penisGameObject = transform.Find("Penis").gameObject;*/
+        penis = GetComponentInChildren<Penis>();
 
         spawnPiss = new SpawnPiss();
         spawnPiss.init(playerController);
@@ -36,6 +37,8 @@ public class CrazyJoe : MonoBehaviour
     {
         if (isPissing) {
             Piss();
+        } else {
+            penis.IsPissing(false, GetPissDamage());
         }
     }
 
@@ -128,7 +131,16 @@ public class CrazyJoe : MonoBehaviour
                 currentPissMeter = 0;
             }
 
-            spawnPiss.SpawnPissEffect(GetPissDamage());
+            // do something with your penis here
+            // Tell penis to piss
+                // make Piss piss
+            if(penis != null) {
+                penis.IsPissing(true, GetPissDamage());
+            } else {
+                Debug.Log("Can't find your penis...");
+            }
+
+            //spawnPiss.SpawnPissEffect(GetPissDamage());
 
             Debug.Log("Current Piss Meter = " + currentPissMeter + " / " + maxPissMeter);
         } else {

@@ -3,18 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 
+    Handles individual piss particles.
+     */
 public class Piss : MonoBehaviour
 {
-    // Point where piss will spawn from
-    public GameObject penis;
-    public ObiEmitter obiEmitter;
+    public ObiSolver solver;
 
     PissedOnParticleEffectManager pissedOnParticleEffectManager;
-    ObiSolver solver;
     float pissDamage;
 
     void Awake() {
-        solver = GetComponent<Obi.ObiSolver>();
     }
 
     // Start is called before the first frame update
