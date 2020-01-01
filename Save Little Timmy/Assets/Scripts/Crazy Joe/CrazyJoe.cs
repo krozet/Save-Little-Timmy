@@ -20,7 +20,10 @@ public class CrazyJoe : MonoBehaviour
     {
         currentPissMeter = maxPissMeter;
         playerController = GetComponent<PlayerController>();
-        Transform penis = transform.Find("Penis");
+        // maybe?
+        GameObject penisGameObject = transform.Find("Penis").gameObject;
+        Penis penis = penisGameObject.GetComponent<Penis>();
+
         spawnPiss = new SpawnPiss();
         spawnPiss.init(playerController);
         health = maxHealth;
