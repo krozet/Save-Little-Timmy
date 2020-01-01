@@ -4,32 +4,20 @@ using UnityEngine;
 
 public class CrazyJoe : MonoBehaviour
 {
-    SpawnPiss spawnPiss;
-    PlayerController playerController;
     Penis penis;
-    float currentPissMeter;
-    float maxPissMeter = 100f;
-    // This will be converted to damage per second
-    float pissDamage = 1f;
-
     bool isPissing = false;
 
+    float currentPissMeter;
+    float maxPissMeter = 100f;
+    float pissDamage = 1f;
     float health;
     float maxHealth = 100f;
-    // Start is called before the first frame update
+
     void Start()
     {
         currentPissMeter = maxPissMeter;
-        playerController = GetComponent<PlayerController>();
-        // maybe?
-        /*GameObject penisGameObject = transform.Find("Penis").gameObject;*/
         penis = GetComponentInChildren<Penis>();
-
-        spawnPiss = new SpawnPiss();
-        spawnPiss.init(playerController);
         health = maxHealth;
-
-        //Instantiate piss? or create penis object and instantiate piss from there?
     }
 
     // Update is called once per frame
@@ -131,19 +119,15 @@ public class CrazyJoe : MonoBehaviour
                 currentPissMeter = 0;
             }
 
-            // do something with your penis here
-            // Tell penis to piss
-                // make Piss piss
             if(penis != null) {
                 penis.IsPissing(true, GetPissDamage());
             } else {
                 Debug.Log("Can't find your penis...");
             }
 
-            //spawnPiss.SpawnPissEffect(GetPissDamage());
-
             Debug.Log("Current Piss Meter = " + currentPissMeter + " / " + maxPissMeter);
         } else {
+            penis.IsPissing(false, GetPissDamage());
             Debug.Log("You pissed away all your piss - Press 'Space' to refill piss");
         }
 
