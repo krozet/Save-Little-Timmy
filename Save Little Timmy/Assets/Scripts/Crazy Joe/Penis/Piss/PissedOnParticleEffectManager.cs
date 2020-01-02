@@ -5,6 +5,15 @@ using UnityEngine;
 public class PissedOnParticleEffectManager : MonoBehaviour
 {
     // TODO: Accept object from piss, check if it has collided with fire, then send smoke effect to createsmokeparticleefftect
+    List<GameObject> activeParticles;
+
+    private void Awake() {
+        activeParticles = new List<GameObject>();
+    }
+
+    private void Update() {
+        Debug.Log("Size of active particles: " + activeParticles.Count);
+    }
 
     public void SpawnPissedOnParticleEffect(Component collider, Vector3 point) {
         if (collider.gameObject.CompareTag("Fire")) {
@@ -65,5 +74,12 @@ public class PissedOnParticleEffectManager : MonoBehaviour
         bpsm.startDelay = 0;
 
         bloodParticleSystem.Play();
+    }
+    // Use this to call executeAfterTime
+    // StartCoroutine(ExecuteAfterTime(10));
+    IEnumerator ExecuteAfterTime(float time) {
+        yield return new WaitForSeconds(time);
+
+        // Code to execute after the delay
     }
 }
