@@ -113,7 +113,7 @@ public class CrazyJoe : MonoBehaviour
     // then decrease the meter and spawn piss particle effects
     private void Piss() {
         if (currentPissMeter > 0) {
-            currentPissMeter -= GetPissDamage();
+            //currentPissMeter -= GetPissDamage();
 
             if (currentPissMeter < 0) {
                 currentPissMeter = 0;

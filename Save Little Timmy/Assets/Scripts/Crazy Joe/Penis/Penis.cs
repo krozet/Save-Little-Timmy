@@ -23,15 +23,16 @@ public class Penis : MonoBehaviour
     {
         // Set emitter to penis position
         if (pissEmitter != null) {
-            pissEmitter.transform.position = this.transform.position;
+            pissEmitter.transform.position = transform.position;
+            pissEmitter.transform.localEulerAngles = transform.localEulerAngles;
         } else {
             Debug.Log("Emitter = null");
         }
 
         if(isPissing) {
-            emitter.speed = 1.7f;
+            emitter.speed = 10f;
         } else {
-            emitter.speed = 0f;
+            //emitter.speed = 0f;
         }
     }
 

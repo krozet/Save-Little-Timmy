@@ -19,7 +19,6 @@ public class Piss : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         pissedOnParticleEffectManager = new PissedOnParticleEffectManager();
-
         pissDamage = 1f;
     }
 
@@ -30,6 +29,9 @@ public class Piss : MonoBehaviour
             if (e.contacts.Data[i].distance < 0.06f) {
                 Component collider;
                 if (ObiCollider.idToCollider.TryGetValue(e.contacts.Data[i].other, out collider)) {
+                    if (collider.transform.Find("NotPissOnable") != null) {
+                        continue;
+                    }
                     // handle if particle collides with an object that is PissOnable
                     if (collider.GetComponent(typeof(PissOnable)) is PissOnable) {
                         // destroy particle
@@ -40,9 +42,11 @@ public class Piss : MonoBehaviour
                             emitter.life[pa.indexInActor] = 0;
                         }
 
+                        // Make these spawn much less frequently
+                        // maybe a max of 10?
                         pissedOnParticleEffectManager.SpawnPissedOnParticleEffect(collider, pa.actor.GetParticlePosition(e.contacts[i].particle));
-                    }
-                }
+                    } 
+                } 
             }
         }
     }

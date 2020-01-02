@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 direction;
     private Camera mainCamera;
     private CrazyJoe crazyJoe;
+    private Transform penis;
 
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = FindObjectOfType<Camera>();
         crazyJoe = GetComponent<CrazyJoe>();
+        penis = crazyJoe.GetComponentInChildren<Penis>().transform;
     }
 
     // Update is called once per frame
@@ -34,12 +36,12 @@ public class PlayerController : MonoBehaviour
 
         // Left Click to piss
         if (Input.GetMouseButton(0)) {
-            crazyJoe.IsPissing(true);
+            //crazyJoe.IsPissing(true);
         }
 
         // Release Left Click to stop pissing
         if (Input.GetMouseButtonUp(0)) {
-            crazyJoe.IsPissing(false);
+            //crazyJoe.IsPissing(false);
         }
 
         // For testing purposes
@@ -64,6 +66,7 @@ public class PlayerController : MonoBehaviour
             Vector3 pointToLookAt = cameraRay.GetPoint(rayLength);
             direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
             transform.LookAt(direction);
+            penis.localEulerAngles = transform.localEulerAngles;
 
             if (debug) {
                 Debug.DrawLine(cameraRay.origin, pointToLookAt, Color.red);
