@@ -10,15 +10,22 @@ public class Piss : MonoBehaviour
 {
     public ObiSolver solver;
 
+    [HideInInspector]
+    public static int SMOKE_PARTICLE_INDEX = 0;
+    public static int BLOOD_PARTICLE_INDEX = 1;
+
     PissedOnParticleEffectManager pissedOnParticleEffectManager;
     float pissDamage;
+    int[] activeParticles;
 
     void Awake() {
+        activeParticles = new int[2];
     }
 
     // Start is called before the first frame update
     void Start() {
         pissedOnParticleEffectManager = new PissedOnParticleEffectManager();
+        pissedOnParticleEffectManager.init(this);
         pissDamage = 1f;
     }
 
@@ -65,5 +72,25 @@ public class Piss : MonoBehaviour
 
     public float GetPissDamage() {
         return pissDamage;
+    }
+
+    public int GetParticleCount(int typeOfParticle) {
+        return activeParticles[typeOfParticle];
+    }
+
+    public void AddParticleToCounter(int typeOfParticle) {
+        activeParticles[typeOfParticle]++;
+    }
+
+    public void StartCoroutineRemoveParticleFromCounter(float timeToWaitBeforeDestroy, int typeOfParticle) {
+        StartCoroutine(RemoveParticleFromCounter(timeToWaitBeforeDestroy, typeOfParticle));
+    }
+
+    IEnumerator RemoveParticleFromCounter(float time, int typeOfParticle) {
+        yield return new WaitForSeconds(time);
+        activeParticles[typeOfParticle]--;
+        if (activeParticles[typeOfParticle] <= 0) {
+            activeParticles[typeOfParticle] = 0;
+        }
     }
 }

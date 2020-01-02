@@ -5,16 +5,11 @@ using UnityEngine;
 public class PissedOnParticleEffectManager : MonoBehaviour
 {
     // TODO: Accept object from piss, check if it has collided with fire, then send smoke effect to createsmokeparticleefftect
-    List<GameObject> activeParticles;
+    Piss piss;
 
-    private void Awake() {
-        activeParticles = new List<GameObject>();
+    public void init(Piss _piss) {
+        piss = _piss;
     }
-
-    private void Update() {
-        Debug.Log("Size of active particles: " + activeParticles.Count);
-    }
-
     public void SpawnPissedOnParticleEffect(Component collider, Vector3 point) {
         if (collider.gameObject.CompareTag("Fire")) {
             Fire fire = collider.gameObject.GetComponent<Fire>();
@@ -34,11 +29,16 @@ public class PissedOnParticleEffectManager : MonoBehaviour
 
     // Creates the smoke effect when piss collides with Fire
     void CreateSmokeParticleEffect(Vector3 collisionLocation, GameObject smoke) {
-        GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
-        ParticleSystem smokeParticleSystem = instanciatedSmoke.GetComponent<ParticleSystem>();
-        float timeToWaitBeforeDestroy = smokeParticleSystem.main.startLifetimeMultiplier;
-        AdjustSizeOfSmoke(smokeParticleSystem);
-        Destroy(instanciatedSmoke, timeToWaitBeforeDestroy);
+        if (piss.GetParticleCount(Piss.SMOKE_PARTICLE_INDEX) <= 10) {
+            GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
+            piss.AddParticleToCounter(Piss.SMOKE_PARTICLE_INDEX);
+
+            ParticleSystem smokeParticleSystem = instanciatedSmoke.GetComponent<ParticleSystem>();
+            float timeToWaitBeforeDestroy = smokeParticleSystem.main.startLifetimeMultiplier;
+            AdjustSizeOfSmoke(smokeParticleSystem);
+            Destroy(instanciatedSmoke, timeToWaitBeforeDestroy);
+            piss.StartCoroutineRemoveParticleFromCounter(timeToWaitBeforeDestroy, Piss.SMOKE_PARTICLE_INDEX);
+        }
     }
 
     // Adjusts the size of the smoke particle effect
@@ -74,12 +74,5 @@ public class PissedOnParticleEffectManager : MonoBehaviour
         bpsm.startDelay = 0;
 
         bloodParticleSystem.Play();
-    }
-    // Use this to call executeAfterTime
-    // StartCoroutine(ExecuteAfterTime(10));
-    IEnumerator ExecuteAfterTime(float time) {
-        yield return new WaitForSeconds(time);
-
-        // Code to execute after the delay
     }
 }
