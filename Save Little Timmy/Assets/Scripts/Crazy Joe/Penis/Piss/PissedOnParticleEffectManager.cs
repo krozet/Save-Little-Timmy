@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Utility;
 
 public class PissedOnParticleEffectManager : MonoBehaviour
 {
@@ -29,15 +30,16 @@ public class PissedOnParticleEffectManager : MonoBehaviour
 
     // Creates the smoke effect when piss collides with Fire
     void CreateSmokeParticleEffect(Vector3 collisionLocation, GameObject smoke) {
-        if (piss.GetParticleCount(Piss.SMOKE_PARTICLE_INDEX) <= 10) {
+        // Put a cap on how many particle effects can be present in the scene at once
+        if (piss.GetParticleCount(PissedOnParticleEffectType.SMOKE_PARTICLE_INDEX) <= PissedOnParticleEffectType.SMOKE_PARICLE_MAX) {
             GameObject instanciatedSmoke = Instantiate(smoke, collisionLocation, Quaternion.identity);
-            piss.AddParticleToCounter(Piss.SMOKE_PARTICLE_INDEX);
+            piss.AddParticleToCounter(PissedOnParticleEffectType.SMOKE_PARTICLE_INDEX);
 
             ParticleSystem smokeParticleSystem = instanciatedSmoke.GetComponent<ParticleSystem>();
             float timeToWaitBeforeDestroy = smokeParticleSystem.main.startLifetimeMultiplier;
             AdjustSizeOfSmoke(smokeParticleSystem);
             Destroy(instanciatedSmoke, timeToWaitBeforeDestroy);
-            piss.StartCoroutineRemoveParticleFromCounter(timeToWaitBeforeDestroy, Piss.SMOKE_PARTICLE_INDEX);
+            piss.StartCoroutineRemoveParticleFromCounter(timeToWaitBeforeDestroy, PissedOnParticleEffectType.SMOKE_PARTICLE_INDEX);
         }
     }
 

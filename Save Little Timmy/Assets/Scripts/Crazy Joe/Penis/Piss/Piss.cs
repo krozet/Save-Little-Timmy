@@ -10,10 +10,6 @@ public class Piss : MonoBehaviour
 {
     public ObiSolver solver;
 
-    [HideInInspector]
-    public static int SMOKE_PARTICLE_INDEX = 0;
-    public static int BLOOD_PARTICLE_INDEX = 1;
-
     PissedOnParticleEffectManager pissedOnParticleEffectManager;
     float pissDamage;
     int[] activeParticles;
@@ -82,6 +78,7 @@ public class Piss : MonoBehaviour
         activeParticles[typeOfParticle]++;
     }
 
+    // StartCoroutine can only be used on MonoBehaviour script that is attached to an object
     public void StartCoroutineRemoveParticleFromCounter(float timeToWaitBeforeDestroy, int typeOfParticle) {
         StartCoroutine(RemoveParticleFromCounter(timeToWaitBeforeDestroy, typeOfParticle));
     }
