@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 2;
-    public bool debug = false;
+    public bool debug = true;
 
     private Vector3 moveInput;
     private Vector3 moveVelocity;
@@ -57,12 +57,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Rotates Crazy Joe towards the intersection with the camera and the penis plane
     private void SetRotationTowardsMouse() {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane penisPlane = new Plane(Vector3.up, penis.transform.position);
         float rayLength;
 
-        if (groundPlane.Raycast(cameraRay, out rayLength)) {
+        if (penisPlane.Raycast(cameraRay, out rayLength)) {
             Vector3 pointToLookAt = cameraRay.GetPoint(rayLength);
             direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
             transform.LookAt(direction);
@@ -73,6 +74,35 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    // Test code to detect where the camera collides with objects in the scene
+    // could perhaps use it later?
+    /*private void TestSetRotationTowardsMouse() {
+        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        RaycastHit hit;
+        float rayLength;
+
+        if (Physics.Raycast(cameraRay, out hit)) {
+            Vector3 pointToLookAt = cameraRay.GetPoint(hit.distance);
+            direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
+            transform.LookAt(direction);
+            penis.localEulerAngles = transform.localEulerAngles;
+
+            if (debug) {
+                Debug.DrawLine(cameraRay.origin, pointToLookAt, Color.red);
+            }
+        } else if (groundPlane.Raycast(cameraRay, out rayLength)) {
+            Vector3 pointToLookAt = cameraRay.GetPoint(rayLength);
+            direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
+            transform.LookAt(direction);
+            penis.localEulerAngles = transform.localEulerAngles;
+
+            if (debug) {
+                Debug.DrawLine(cameraRay.origin, pointToLookAt, Color.red);
+            }
+        }
+    }*/
 
     public Vector3 GetLookAtDirection() {
         return direction;
