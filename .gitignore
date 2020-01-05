@@ -41,3 +41,6 @@ Save Little Timmy/Assets/Imported Assets/*
 
 #Exclude ignore for FMOD files
 !FMOD Project Files/
+FMOD Project Files/*
+!FMOD Project Files/Save Little Timmy/
+FMOD Project Files/Save Little Timmy/*
