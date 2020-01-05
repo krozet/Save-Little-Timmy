@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         // For testing purposes
         // Refil Piss Meter by 1000
         if (Input.GetKeyUp(KeyCode.Space)) {
-            crazyJoe.RefillPissMeter(1000);
+            crazyJoe.RefillPissMeter(100);
         }
 
         // For testing purposes

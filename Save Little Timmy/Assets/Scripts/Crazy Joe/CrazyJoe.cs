@@ -13,7 +13,7 @@ public class CrazyJoe : MonoBehaviour
 
     bool isPissing = false;
 
-    float health = 100f;
+    float health;
     float maxHealth = 100f;
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,7 @@ public class CrazyJoe : MonoBehaviour
         Transform penis = transform.Find("Penis");
         spawnPiss = new SpawnPiss();
         spawnPiss.init(playerController);
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -122,7 +123,7 @@ public class CrazyJoe : MonoBehaviour
                 currentPissMeter = 0;
             }
 
-            spawnPiss.SpawnPissEffect();
+            spawnPiss.SpawnPissEffect(GetPissDamage());
 
             Debug.Log("Current Piss Meter = " + currentPissMeter + " / " + maxPissMeter);
         } else {
