@@ -40,5 +40,7 @@ Save Little Timmy/Assets/Imported Assets/*
 # FMOD
 Save Little Timmy/Assets/FMODStudioCache.asset
 Save Little Timmy/Assets/FMODStudioCache.asset.meta
+Save Little Timmy/FMOD Project Files/Save Little Timmy/.cache/
+Save Little Timmy/FMOD Project Files/Save Little Timmy/.user/
 fmod.log
 fmod_editor.log
