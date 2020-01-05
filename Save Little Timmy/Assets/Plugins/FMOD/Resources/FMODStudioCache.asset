@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Gey
   guid: 91d6bda20e0492489cd12fc841dbf1f0
-  Banks:
-  - {fileID: -790510553131421237}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -77,8 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Dub1
   guid: 7d47bff4336e3a4f8f428aa45c7fbb56
-  Banks:
-  - {fileID: -790510553131421237}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -123,7 +121,7 @@ MonoBehaviour:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.bank
   SubDir: 
-  lastModified: 637121323794010958
+  lastModified: 637137713583280516
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -145,14 +143,14 @@ MonoBehaviour:
   - {fileID: 2082586658953489940}
   - {fileID: -790510553131421237}
   EditorEvents:
-  - {fileID: -8917299662856207490}
-  - {fileID: -1608110479750352565}
+  - {fileID: 7237618092162340644}
+  - {fileID: 6582680826473407562}
   EditorParameters: []
   MasterBanks:
   - {fileID: -790510553131421237}
   StringsBanks:
   - {fileID: 2082586658953489940}
-  stringsBankWriteTime: 637121323794070973
+  stringsBankWriteTime: 637137713583340532
   cacheVersion: 3
 --- !u!114 &2082586658953489940
 MonoBehaviour:
@@ -169,9 +167,55 @@ MonoBehaviour:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637121323794070973
+  lastModified: 637137713583340532
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 776
+    Value: 782
   Exists: 1
+--- !u!114 &6582680826473407562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Gey
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Gey
+  guid: 91d6bda20e0492489cd12fc841dbf1f0
+  Banks:
+  - {fileID: -790510553131421237}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 6228
+--- !u!114 &7237618092162340644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Dub1
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Dub1
+  guid: 7d47bff4336e3a4f8f428aa45c7fbb56
+  Banks:
+  - {fileID: -790510553131421237}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 315400
