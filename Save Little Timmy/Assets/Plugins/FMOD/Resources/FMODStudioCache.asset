@@ -22,6 +22,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 6228
+--- !u!114 &-8749979373910557444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Touch Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Crazy Joe Sound Effects/Crazy Joe Touch Fire
+  guid: 422a1d2e4873af478a319c537738a231
+  Banks:
+  - {fileID: -790510553131421237}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 960
 --- !u!114 &-6305386625016248830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,11 +144,11 @@ MonoBehaviour:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.bank
   SubDir: 
-  lastModified: 637137713583280516
+  lastModified: 637137815602250630
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 4662880
+    Value: 4729600
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -145,12 +168,14 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: 7237618092162340644}
   - {fileID: 6582680826473407562}
+  - {fileID: -8749979373910557444}
+  - {fileID: 2734008827028669690}
   EditorParameters: []
   MasterBanks:
   - {fileID: -790510553131421237}
   StringsBanks:
   - {fileID: 2082586658953489940}
-  stringsBankWriteTime: 637137713583340532
+  stringsBankWriteTime: 637137815602300667
   cacheVersion: 3
 --- !u!114 &2082586658953489940
 MonoBehaviour:
@@ -167,12 +192,35 @@ MonoBehaviour:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637137713583340532
+  lastModified: 637137815602300667
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 782
+    Value: 916
   Exists: 1
+--- !u!114 &2734008827028669690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Crazy Joe Sound Effects/Crazy Joe Idle
+  guid: f3f1cd258f548941ab9b8afbb9f5951b
+  Banks:
+  - {fileID: -790510553131421237}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2050
 --- !u!114 &6582680826473407562
 MonoBehaviour:
   m_ObjectHideFlags: 0
