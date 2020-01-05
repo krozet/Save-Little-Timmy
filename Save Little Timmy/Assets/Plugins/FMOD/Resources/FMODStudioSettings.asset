@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
-  sourceProjectPath: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project
-    Files/Save Little Timmy/Save Little Timmy.fspro
-  SourceBankPathUnformatted: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD
-    Project Files/Save Little Timmy/Build
+  HasSourceProject: 0
+  HasPlatforms: 0
+  sourceProjectPath: ect Files/Save Little Timmy/Save Little Timmy.fspro
+  SourceBankPathUnformatted: FMOD Project Files/Save Little Timmy/Build/Desktop
   AutomaticEventLoading: 1
   BankLoadType: 0
   AutomaticSampleLoading: 0
