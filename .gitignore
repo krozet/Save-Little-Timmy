@@ -42,5 +42,24 @@ Save Little Timmy/Assets/Imported Assets/*
 #Exclude ignore for FMOD files
 !FMOD Project Files/
 FMOD Project Files/*
+
 !FMOD Project Files/Save Little Timmy/
 FMOD Project Files/Save Little Timmy/*
+
+!FMOD Project Files/Save Little Timmy/.cache/
+FMOD Project Files/Save Little Timmy/.cache/*
+
+!FMOD Project Files/Save Little Timmy/.user/
+FMOD Project Files/Save Little Timmy/.user/*
+
+!FMOD Project Files/Save Little Timmy/Assets/
+FMOD Project Files/Save Little Timmy/Assets/*
+
+!FMOD Project Files/Save Little Timmy/Build/
+FMOD Project Files/Save Little Timmy/Build/*
+
+!FMOD Project Files/Save Little Timmy/Metadata/
+FMOD Project Files/Save Little Timmy/Metadata/*
+
+!FMOD Project Files/Save Little Timmy/Plugins/
+FMOD Project Files/Save Little Timmy/Plugins/*
