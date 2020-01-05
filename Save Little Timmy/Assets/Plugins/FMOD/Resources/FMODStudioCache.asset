@@ -244,7 +244,7 @@ MonoBehaviour:
   - {fileID: 5465013381702665635}
   StringsBanks:
   - {fileID: 6667953165292976383}
-  stringsBankWriteTime: 637137817636955603
+  stringsBankWriteTime: 637138258577955681
   cacheVersion: 3
 --- !u!114 &1915628272955537312
 MonoBehaviour:
@@ -349,11 +349,11 @@ MonoBehaviour:
   Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.bank
   SubDir: 
-  lastModified: 637137825930936051
+  lastModified: 637138258577945693
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 4729600
+    Value: 4729632
   Exists: 1
 --- !u!114 &6582680826473407562
 MonoBehaviour:
@@ -393,7 +393,7 @@ MonoBehaviour:
   Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637137817636955603
+  lastModified: 637138258577955681
   LoadResult: 0
   FileSizes:
   - Name: 

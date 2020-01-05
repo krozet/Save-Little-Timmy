@@ -368,16 +368,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5989659137927909024, guid: b06465aa13b59244fa5378c8f67d11b0,
-        type: 3}
-      propertyPath: m_ForceIntoRT
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5989659137927909030, guid: b06465aa13b59244fa5378c8f67d11b0,
         type: 3}
       propertyPath: CrazyJoe
       value: 
       objectReference: {fileID: 1699831117}
+    - target: {fileID: 5989659137927909024, guid: b06465aa13b59244fa5378c8f67d11b0,
+        type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b06465aa13b59244fa5378c8f67d11b0, type: 3}
 --- !u!1 &1060201155 stripped
@@ -95802,12 +95802,12 @@ PrefabInstance:
     - target: {fileID: 5778525960455300379, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960455300379, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.56
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960455300379, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
