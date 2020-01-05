@@ -144,7 +144,7 @@ MonoBehaviour:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.bank
   SubDir: 
-  lastModified: 637137815602250630
+  lastModified: 637137825875225658
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -175,7 +175,7 @@ MonoBehaviour:
   - {fileID: -790510553131421237}
   StringsBanks:
   - {fileID: 2082586658953489940}
-  stringsBankWriteTime: 637137815602300667
+  stringsBankWriteTime: 637137825875275669
   cacheVersion: 3
 --- !u!114 &2082586658953489940
 MonoBehaviour:
@@ -192,7 +192,7 @@ MonoBehaviour:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637137815602300667
+  lastModified: 637137825875275669
   LoadResult: 0
   FileSizes:
   - Name: Desktop
