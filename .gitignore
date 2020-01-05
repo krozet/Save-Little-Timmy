@@ -38,3 +38,6 @@ sysinfo.txt
 # Ignore Imported Assets
 Save Little Timmy/Assets/Imported Assets/*
 !Save Little Timmy/Assets/Imported Assets/.gitignore
+
+#Exclude ignore for FMOD files
+!FMOD Project Files/
