@@ -20,7 +20,7 @@ public class Piss : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        pissedOnParticleEffectManager = new PissedOnParticleEffectManager();
+        pissedOnParticleEffectManager = GetComponent<PissedOnParticleEffectManager>();
         pissedOnParticleEffectManager.init(this);
         pissDamage = 1f;
     }
@@ -33,6 +33,9 @@ public class Piss : MonoBehaviour
                 Component collider;
                 if (ObiCollider.idToCollider.TryGetValue(e.contacts.Data[i].other, out collider)) {
                     if (collider.transform.Find("NotPissOnable") != null) {
+                        //ObiSolver.ParticleInActor pa = solver.particleToActor[e.contacts[i].particle];
+                        //ObiEmitter emitter = pa.actor as ObiEmitter;
+                        //Debug.Log("Magnitude: " + (emitter.transform.position - (new Vector3(e.contacts.Data[i].point.x, e.contacts.Data[i].point.y, e.contacts.Data[i].point.z))).magnitude);
                         continue;
                     }
                     // handle if particle collides with an object that is PissOnable
