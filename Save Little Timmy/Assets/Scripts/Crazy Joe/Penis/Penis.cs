@@ -11,6 +11,7 @@ public class Penis : MonoBehaviour
     public bool debug = true;
 
     PlayerController controller;
+    Kegels kegels;
     Camera mainCamera;
     Obi.ObiEmitter emitter;
     bool isPissing = false;
@@ -19,6 +20,7 @@ public class Penis : MonoBehaviour
     void Start()
     {
         emitter = pissEmitter.GetComponent<Obi.ObiEmitter>();
+        kegels = GetComponent<Kegels>();
         mainCamera = FindObjectOfType<Camera>();
         controller = GetComponentInParent(typeof(PlayerController)) as PlayerController;
     }
@@ -37,9 +39,6 @@ public class Penis : MonoBehaviour
             Debug.Log("Emitter = null");
         }
 
-        // Set emitter.speed to a fixed rate
-        // Calculate where mouse hits a collider
-        // Caluclate angle to hit spot where mouse collides
         if(isPissing) {
             // Makes piss strength equal to the distance of mouse from the player
             float distanceBetweenPoints = (pissEmitter.transform.position - controller.GetMousePosition()).magnitude;
