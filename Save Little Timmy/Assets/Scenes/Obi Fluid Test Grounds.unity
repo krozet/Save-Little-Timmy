@@ -373,6 +373,11 @@ PrefabInstance:
       propertyPath: CrazyJoe
       value: 
       objectReference: {fileID: 1699831117}
+    - target: {fileID: 5989659137927909030, guid: b06465aa13b59244fa5378c8f67d11b0,
+        type: 3}
+      propertyPath: crazyJoe
+      value: 
+      objectReference: {fileID: 1699831117}
     - target: {fileID: 5989659137927909024, guid: b06465aa13b59244fa5378c8f67d11b0,
         type: 3}
       propertyPath: m_ForceIntoRT

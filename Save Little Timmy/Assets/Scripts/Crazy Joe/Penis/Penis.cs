@@ -44,8 +44,13 @@ public class Penis : MonoBehaviour
             // Makes piss strength equal to the distance of mouse from the player
             float distanceBetweenPoints = (pissEmitter.transform.position - controller.GetMousePosition()).magnitude;
             // using a fixed value determined by testing speed over actual distance in game units go from 2.77 to 3.18
-            emitter.speed = distanceBetweenPoints/.292f;
-            //emitter.speed = 10f;
+            float adjustedSpeed = distanceBetweenPoints/.292f;
+
+            if (adjustedSpeed > 10f) {
+                emitter.speed = 10f;
+            } else {
+                emitter.speed = adjustedSpeed;
+            }
 
             //Debug.Log("Here's the distance: " + distanceBetweenPoints);
             if (debug) {

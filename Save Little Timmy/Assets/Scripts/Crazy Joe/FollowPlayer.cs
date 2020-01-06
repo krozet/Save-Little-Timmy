@@ -5,21 +5,27 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
 
-    public Transform CrazyJoe;
+    public Transform crazyJoe;
     private Vector3 cameraOffset;
+    //private Vector3 startingCameraOffset;
 
     [Range(0.01f, 1.0f)]
     public float SmoothFactor = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
-        cameraOffset = transform.position - CrazyJoe.position;
+        //startingCameraOffset = new Vector3(4.0f, 8.6f, -5.7f);
+        //transform.position = crazyJoe.position;
+        //transform.Translate(startingCameraOffset.normalized * 1);
+        
+        cameraOffset = transform.position - crazyJoe.position;
+        //Debug.Log("OFFSET " + cameraOffset.);
     }
 
     // LateUpdate is called after Update
     void LateUpdate()
     {
-        Vector3 newPos = CrazyJoe.position + cameraOffset;
+        Vector3 newPos = crazyJoe.position + cameraOffset;
 
         transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
     }
