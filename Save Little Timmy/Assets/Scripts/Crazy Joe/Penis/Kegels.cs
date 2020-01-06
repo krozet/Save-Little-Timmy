@@ -20,6 +20,8 @@ public class Kegels : MonoBehaviour
 
     bool needsToBeReset;
 
+    float speed = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,13 +44,12 @@ public class Kegels : MonoBehaviour
 
     // Generates realistic acceleration
     void resetAccelerationValues() {
-        int[] temp = new int[50];
         for (int i = 0; i < accelerationValues.Length; i++) {
-            temp[i] = Random.Range(min, max);
+            int randomNum = Random.Range(min, max);
             if (i == 0) {
-                accelerationValues[i] = temp[i];
+                accelerationValues[i] = randomNum;
             } else {
-                accelerationValues[i] = accelerationValues[i - 1] + temp[i];
+                accelerationValues[i] = accelerationValues[i - 1] + randomNum;
             }
         }
     }
