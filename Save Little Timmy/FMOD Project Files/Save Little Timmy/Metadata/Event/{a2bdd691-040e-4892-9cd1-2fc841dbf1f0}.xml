@@ -5,7 +5,7 @@
 			<value>Gey</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{6e9d8cc8-b5ac-44f8-aad3-20f19941c2ae}</destination>
@@ -136,6 +136,7 @@
 	<object class="MixerBusEffectChain" id="{fc4de25a-4690-4558-881c-b18ddc33edcd}">
 		<relationship name="effects">
 			<destination>{ac5716e8-2226-4a9a-94fd-0e4645858e6c}</destination>
+			<destination>{1b960487-1dad-462f-8aa4-f96351a12519}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{7fb67e6a-7430-41ae-8379-fbfb1ac6c306}" />
@@ -147,5 +148,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{082da5fc-e445-46bb-85dd-c038493bf072}" />
 	<object class="MixerBusFader" id="{ac5716e8-2226-4a9a-94fd-0e4645858e6c}" />
+	<object class="SpatialiserEffect" id="{1b960487-1dad-462f-8aa4-f96351a12519}" />
 	<object class="MixerBusFader" id="{a0665358-b316-4542-86c6-cf9f428d917a}" />
 </objects>
