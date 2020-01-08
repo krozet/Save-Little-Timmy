@@ -6,14 +6,17 @@ using UnityEngine;
 public class Kegels : MonoBehaviour
 {
     // Kegel states
-    public static int NOT_PISSING = 0;
-    public static int ACCELERATING = 1;
-    public static int DECACCELERATING = 2;
-    public static int MAX_SPEED = 3;
+    public const int NOT_PISSING = -69;
+    public const int ACCELERATING = 1;
+    public const int DECACCELERATING = 2;
+    // hyperDeaccelerate is use to stop pissing completely
+    public const int HYPER_DECACCELERATING = 3;
+    public const int MAX_SPEED = 4;
 
     // Larger = faster acceleration
     // Works to take a percentage of the value of the accelerationValues
     public float rateOfAcceleration = 0.1f;
+    public float rateOfHyperDeacceleration = 0.5f;
 
     // Bounds used for accleration speeds
     int min = -5;
@@ -49,7 +52,9 @@ public class Kegels : MonoBehaviour
         } else {
             // handle deacceleration of piss
             if (state == DECACCELERATING) {
-                Deaccelerate();
+                Deaccelerate(DECACCELERATING);
+            } else if (state == HYPER_DECACCELERATING) {
+                Deaccelerate(HYPER_DECACCELERATING);
             }
             // see if piss has completely stopped
             if (speed <= 0f) {
@@ -60,7 +65,7 @@ public class Kegels : MonoBehaviour
             if (state == NOT_PISSING && needsToBeReset) {
                 resetAccelerationValues();
                 needsToBeReset = false;
-            } else {
+            } else if (state != NOT_PISSING){
                 needsToBeReset = true;
             }
         }
@@ -77,24 +82,39 @@ public class Kegels : MonoBehaviour
         speed += accelerationValues[acclerationValuesIndex++ % accelerationValues.Length] * rateOfAcceleration;
     }
 
-    void Deaccelerate() {
-        speed -= System.Math.Abs(accelerationValues[acclerationValuesIndex++ % accelerationValues.Length] * rateOfAcceleration);
+    void Deaccelerate(int deaccelerationType) {
+        switch(deaccelerationType) {
+            case DECACCELERATING:
+                speed -= System.Math.Abs(accelerationValues[acclerationValuesIndex++ % accelerationValues.Length] * rateOfAcceleration);
+                break;
+            case HYPER_DECACCELERATING:
+                speed -= System.Math.Abs(accelerationValues[acclerationValuesIndex++ % accelerationValues.Length] * rateOfHyperDeacceleration);
+                break;
+            default:
+                break;
+        }
     }
 
     public float GetPissSpeed(float maxSpeed) {
-        // accelerate to reach max speed
-        if (speed < maxSpeed) {
-            state = ACCELERATING;
-        // deaccelerate to reach max speed
-        } else if (speed > maxSpeed) {
-            state = DECACCELERATING;
+        // User isn't pissing anymore, so deaccelerate till there is no piss left
+        if (maxSpeed == NOT_PISSING) {
+            HyperDeaccelerlatePiss();
+        } else {
+            // accelerate to reach max speed
+            if (speed < maxSpeed) {
+                state = ACCELERATING;
+                // deaccelerate to reach max speed
+            } else if (speed > maxSpeed) {
+                state = DECACCELERATING;
+            }
         }
         return speed;
     }
 
-    public void DeaccelerlatePiss() {
+    // hyper deaccelerate till there is no piss left
+    public void HyperDeaccelerlatePiss() {
         if (speed > 0f && state != NOT_PISSING) {
-            state = DECACCELERATING;
+            state = HYPER_DECACCELERATING;
         }
     }
 }

@@ -55,7 +55,8 @@ public class Penis : MonoBehaviour
                 Debug.DrawLine(pissEmitter.transform.position, controller.GetMousePosition(), Color.blue, 1 / 60f);
             }
         } else {
-            emitter.speed = 0f;
+            //
+            emitter.speed = kegels.GetPissSpeed(Kegels.NOT_PISSING);
         }
     }
 
