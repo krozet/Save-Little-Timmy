@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 2;
-    public bool debug = true;
+    public bool debug = false;
 
     private Vector3 moveInput;
     private Vector3 moveVelocity;
     private Vector3 direction;
+    private Vector3 mousePosition;
     private Camera mainCamera;
     private CrazyJoe crazyJoe;
     private Transform penis;
@@ -36,12 +37,12 @@ public class PlayerController : MonoBehaviour
 
         // Left Click to piss
         if (Input.GetMouseButton(0)) {
-            //crazyJoe.IsPissing(true);
+            crazyJoe.IsPissing(true);
         }
 
         // Release Left Click to stop pissing
         if (Input.GetMouseButtonUp(0)) {
-            //crazyJoe.IsPissing(false);
+            crazyJoe.IsPissing(false);
         }
 
         // For testing purposes
@@ -57,54 +58,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Rotates Crazy Joe towards the intersection with the camera and the penis plane
     private void SetRotationTowardsMouse() {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane penisPlane = new Plane(Vector3.up, penis.transform.position);
-        float rayLength;
-
-        if (penisPlane.Raycast(cameraRay, out rayLength)) {
-            Vector3 pointToLookAt = cameraRay.GetPoint(rayLength);
-            direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
-            transform.LookAt(direction);
-            penis.localEulerAngles = transform.localEulerAngles;
-
-            if (debug) {
-                Debug.DrawLine(cameraRay.origin, pointToLookAt, Color.red);
-            }
-        }
-    }
-
-    // Test code to detect where the camera collides with objects in the scene
-    // could perhaps use it later?
-    /*private void TestSetRotationTowardsMouse() {
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane crazyJoePlace = new Plane(Vector3.up, crazyJoe.transform.position);
         RaycastHit hit;
         float rayLength;
 
-        if (Physics.Raycast(cameraRay, out hit)) {
-            Vector3 pointToLookAt = cameraRay.GetPoint(hit.distance);
-            direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
+        // Searches for an intersection with a walkable surface
+        /*if (Physics.Raycast(cameraRay, out hit)) {
+            Transform walkableSurface = hit.transform.Find("WalkOnable");
+            if (walkableSurface != null) {
+                mousePosition = cameraRay.GetPoint(hit.distance);
+                direction = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);
+                transform.LookAt(direction);
+                penis.localEulerAngles = transform.localEulerAngles;
+            } 
+        } else */
+
+        // A ray passes through a plane at Crazy Joe's feet
+        if (crazyJoePlace.Raycast(cameraRay, out rayLength)) {
+            mousePosition = cameraRay.GetPoint(rayLength);
+            direction = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);
             transform.LookAt(direction);
             penis.localEulerAngles = transform.localEulerAngles;
-
-            if (debug) {
-                Debug.DrawLine(cameraRay.origin, pointToLookAt, Color.red);
-            }
-        } else if (groundPlane.Raycast(cameraRay, out rayLength)) {
-            Vector3 pointToLookAt = cameraRay.GetPoint(rayLength);
-            direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
-            transform.LookAt(direction);
-            penis.localEulerAngles = transform.localEulerAngles;
-
-            if (debug) {
-                Debug.DrawLine(cameraRay.origin, pointToLookAt, Color.red);
-            }
         }
-    }*/
+
+        // Draw a line from the camera to the mouse
+        if (debug) {
+            Debug.DrawLine(cameraRay.origin, mousePosition, Color.red);
+        }
+    }
 
     public Vector3 GetLookAtDirection() {
         return direction;
+    }
+
+    public Vector3 GetMousePosition() {
+        return mousePosition;
     }
 }

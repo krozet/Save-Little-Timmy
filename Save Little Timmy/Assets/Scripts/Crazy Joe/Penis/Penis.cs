@@ -8,7 +8,11 @@ using UnityEngine;
 public class Penis : MonoBehaviour
 {
     public GameObject pissEmitter;
+    public bool debug = true;
+    public float maxEmitterSpeed = 10f;
 
+    PlayerController controller;
+    Kegels kegels;
     Obi.ObiEmitter emitter;
     bool isPissing = false;
     float pissDamage = 0f;
@@ -16,6 +20,8 @@ public class Penis : MonoBehaviour
     void Start()
     {
         emitter = pissEmitter.GetComponent<Obi.ObiEmitter>();
+        kegels = GetComponent<Kegels>();
+        controller = GetComponentInParent(typeof(PlayerController)) as PlayerController;
     }
 
     // Update is called once per frame
@@ -30,9 +36,23 @@ public class Penis : MonoBehaviour
         }
 
         if(isPissing) {
-            emitter.speed = 10f;
+            // Makes piss strength equal to the distance of mouse from the player
+            float distanceBetweenPoints = (pissEmitter.transform.position - controller.GetMousePosition()).magnitude;
+            // using a fixed value determined by testing speed over actual distance in game units go from 2.77 to 3.18
+            float adjustedSpeed = distanceBetweenPoints/.292f;
+
+            if (adjustedSpeed > maxEmitterSpeed) {
+                adjustedSpeed = maxEmitterSpeed;
+            }
+            emitter.speed = kegels.GetPissSpeed(adjustedSpeed);
+
+            if (debug) {
+                // Debug line from penis to mouse
+                Debug.DrawLine(pissEmitter.transform.position, controller.GetMousePosition(), Color.blue, 1 / 60f);
+            }
         } else {
-            //emitter.speed = 0f;
+            // hyper deaccelerates piss till speed = 0
+            emitter.speed = kegels.GetPissSpeed(Kegels.NOT_PISSING);
         }
     }
 

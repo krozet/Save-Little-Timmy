@@ -373,6 +373,11 @@ PrefabInstance:
       propertyPath: CrazyJoe
       value: 
       objectReference: {fileID: 1699831117}
+    - target: {fileID: 5989659137927909030, guid: b06465aa13b59244fa5378c8f67d11b0,
+        type: 3}
+      propertyPath: crazyJoe
+      value: 
+      objectReference: {fileID: 1699831117}
     - target: {fileID: 5989659137927909024, guid: b06465aa13b59244fa5378c8f67d11b0,
         type: 3}
       propertyPath: m_ForceIntoRT
@@ -592,7 +597,7 @@ PrefabInstance:
     - target: {fileID: 4758244837217731416, guid: 955c36766ce88b748bf23b9e75517e1d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.972
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4758244837217731416, guid: 955c36766ce88b748bf23b9e75517e1d,
         type: 3}

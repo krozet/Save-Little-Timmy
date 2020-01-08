@@ -11,6 +11,7 @@ public class PissedOnParticleEffectManager : MonoBehaviour
     public void init(Piss _piss) {
         piss = _piss;
     }
+
     public void SpawnPissedOnParticleEffect(Component collider, Vector3 point) {
         if (collider.gameObject.CompareTag("Fire")) {
             Fire fire = collider.gameObject.GetComponent<Fire>();

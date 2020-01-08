@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceedaa92369c32459f852039aef4bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrazyJoe: {fileID: 1003575307}
+  crazyJoe: {fileID: 1003575307}
   SmoothFactor: 0.051
 --- !u!4 &1003575307 stripped
 Transform:
@@ -1210,6 +1210,11 @@ PrefabInstance:
     - target: {fileID: 5989659137927909030, guid: b06465aa13b59244fa5378c8f67d11b0,
         type: 3}
       propertyPath: CrazyJoe
+      value: 
+      objectReference: {fileID: 1003575307}
+    - target: {fileID: 5989659137927909030, guid: b06465aa13b59244fa5378c8f67d11b0,
+        type: 3}
+      propertyPath: crazyJoe
       value: 
       objectReference: {fileID: 1003575307}
     m_RemovedComponents: []
