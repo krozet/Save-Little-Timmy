@@ -9,10 +9,10 @@ public class Penis : MonoBehaviour
 {
     public GameObject pissEmitter;
     public bool debug = true;
+    public float maxEmitterSpeed = 10f;
 
     PlayerController controller;
     Kegels kegels;
-    Camera mainCamera;
     Obi.ObiEmitter emitter;
     bool isPissing = false;
     float pissDamage = 0f;
@@ -21,7 +21,6 @@ public class Penis : MonoBehaviour
     {
         emitter = pissEmitter.GetComponent<Obi.ObiEmitter>();
         kegels = GetComponent<Kegels>();
-        mainCamera = FindObjectOfType<Camera>();
         controller = GetComponentInParent(typeof(PlayerController)) as PlayerController;
     }
 
@@ -45,11 +44,10 @@ public class Penis : MonoBehaviour
             // using a fixed value determined by testing speed over actual distance in game units go from 2.77 to 3.18
             float adjustedSpeed = distanceBetweenPoints/.292f;
 
-            if (adjustedSpeed > 10f) {
-                emitter.speed = 10f;
-            } else {
-                emitter.speed = adjustedSpeed;
+            if (adjustedSpeed > maxEmitterSpeed) {
+                adjustedSpeed = maxEmitterSpeed;
             }
+            emitter.speed = kegels.GetPissSpeed(adjustedSpeed);
 
             //Debug.Log("Here's the distance: " + distanceBetweenPoints);
             if (debug) {
