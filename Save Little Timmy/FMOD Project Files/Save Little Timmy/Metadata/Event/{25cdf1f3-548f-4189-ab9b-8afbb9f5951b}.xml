@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.00.00">
 	<object class="Event" id="{25cdf1f3-548f-4189-ab9b-8afbb9f5951b}">
 		<property name="name">
-			<value>Crazy Joe Idle</value>
+			<value>Crazy Joe.Idle</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
@@ -98,6 +98,9 @@
 		</property>
 		<property name="length">
 			<value>2.0500000000000003</value>
+		</property>
+		<property name="playlistMode">
+			<value>1</value>
 		</property>
 		<relationship name="sounds">
 			<destination>{907fc8b5-522f-41bf-a174-bf3081c18f22}</destination>

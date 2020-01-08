@@ -68,6 +68,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 960
+--- !u!114 &-8322531555874378017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Burned
+  m_EditorClassIdentifier: 
+  Path: event:/Crazy Joe Sound Effects/Crazy Joe Burned
+  guid: f45bfab1b4361e40aa6396ab6441a88d
+  Banks:
+  - {fileID: 1300508435162477126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 820
 --- !u!114 &-8092937728073023868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,12 +373,13 @@ MonoBehaviour:
   - {fileID: -9147711276230714247}
   - {fileID: 5090010753172035436}
   - {fileID: -5965999810257550384}
+  - {fileID: -8322531555874378017}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1300508435162477126}
   StringsBanks:
   - {fileID: 1978321180519413465}
-  stringsBankWriteTime: 637138461774553031
+  stringsBankWriteTime: 637140937321359029
   cacheVersion: 3
 --- !u!114 &1300508435162477126
 MonoBehaviour:
@@ -372,11 +396,11 @@ MonoBehaviour:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.bank
   SubDir: 
-  lastModified: 637138461774503021
+  lastModified: 637140937321279022
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 4729856
+    Value: 4738176
   Exists: 1
 --- !u!114 &1915628272955537312
 MonoBehaviour:
@@ -416,11 +440,11 @@ MonoBehaviour:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637138461774553031
+  lastModified: 637140937321359029
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 916
+    Value: 952
   Exists: 1
 --- !u!114 &2082586658953489940
 MonoBehaviour:
