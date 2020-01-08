@@ -12,6 +12,7 @@ public class Piss : MonoBehaviour
 
     PissedOnParticleEffectManager pissedOnParticleEffectManager;
     float pissDamage;
+    // Smoke, and Blood
     int[] activeParticles;
 
     void Awake() {

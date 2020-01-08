@@ -27,9 +27,6 @@ public class Penis : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Change!
-        //isPissing = true;
-
         // Set emitter to penis position
         if (pissEmitter != null) {
             pissEmitter.transform.position = transform.position;
@@ -49,7 +46,6 @@ public class Penis : MonoBehaviour
             }
             emitter.speed = kegels.GetPissSpeed(adjustedSpeed);
 
-            //Debug.Log("Here's the distance: " + distanceBetweenPoints);
             if (debug) {
                 // Debug line from penis to mouse
                 Debug.DrawLine(pissEmitter.transform.position, controller.GetMousePosition(), Color.blue, 1 / 60f);

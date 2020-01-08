@@ -125,10 +125,10 @@ public class CrazyJoe : MonoBehaviour
                 Debug.Log("Can't find your penis...");
             }
 
-            Debug.Log("Current Piss Meter = " + currentPissMeter + " / " + maxPissMeter);
+            //Debug.Log("Current Piss Meter = " + currentPissMeter + " / " + maxPissMeter);
         } else {
             penis.IsPissing(false, GetPissDamage());
-            Debug.Log("You pissed away all your piss - Press 'Space' to refill piss");
+            //Debug.Log("You pissed away all your piss - Press 'Space' to refill piss");
         }
 
     }
