@@ -28,7 +28,7 @@ public class Penis : MonoBehaviour
     void Update()
     {
         // Change!
-        isPissing = true;
+        //isPissing = true;
 
         // Set emitter to penis position
         if (pissEmitter != null) {
@@ -55,7 +55,7 @@ public class Penis : MonoBehaviour
                 Debug.DrawLine(pissEmitter.transform.position, controller.GetMousePosition(), Color.blue, 1 / 60f);
             }
         } else {
-            //
+            // hyper deaccelerates piss till speed = 0
             emitter.speed = kegels.GetPissSpeed(Kegels.NOT_PISSING);
         }
     }
