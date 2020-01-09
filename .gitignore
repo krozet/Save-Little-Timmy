@@ -38,8 +38,8 @@ Save Little Timmy/Assets/Imported Assets/*
 !Save Little Timmy/Assets/Imported Assets/.gitignore
 
 # FMOD
-Save Little Timmy/Assets/FMODStudioCache.asset
-Save Little Timmy/Assets/FMODStudioCache.asset.meta
+Save Little Timmy/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
+Save Little Timmy/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset.meta
 Save Little Timmy/FMOD Project Files/Save Little Timmy/.cache/
 Save Little Timmy/FMOD Project Files/Save Little Timmy/.user/
 Save Little Timmy/fmod.log
