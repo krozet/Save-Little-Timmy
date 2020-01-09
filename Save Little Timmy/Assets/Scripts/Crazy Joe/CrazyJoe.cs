@@ -5,6 +5,8 @@ using UnityEngine;
 public class CrazyJoe : MonoBehaviour
 {
     Penis penis;
+    // Create empty Audio Manager object
+    AudioManager audioManager;
     bool isPissing = false;
 
     float currentPissMeter;
@@ -15,6 +17,9 @@ public class CrazyJoe : MonoBehaviour
 
     void Start()
     {
+        // Stores the AudioManager script
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+
         currentPissMeter = maxPissMeter;
         penis = GetComponentInChildren<Penis>();
         health = maxHealth;
@@ -53,6 +58,8 @@ public class CrazyJoe : MonoBehaviour
         if (collision.gameObject.tag == "Fire") {
             Debug.Log("Crazy Joe is on FIRE");
             Fire fire = collision.gameObject.GetComponent<Fire>();
+            // Plays crazy joe fire winced at crazy joe location
+            audioManager.AMPlayOneShotAttached(AudioManager.CRAZYJOE_FIRE_WINCE_INDEX, AudioManager.CRAZYJOE_FIRE_WINCE_PATH, gameObject);
             TakeDamage(fire.GetFireDamage());
         }
     }
