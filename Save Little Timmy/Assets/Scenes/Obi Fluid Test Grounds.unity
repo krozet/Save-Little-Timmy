@@ -426,6 +426,11 @@ PrefabInstance:
       propertyPath: m_ForceIntoRT
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5989659137927909025, guid: b06465aa13b59244fa5378c8f67d11b0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b06465aa13b59244fa5378c8f67d11b0, type: 3}
 --- !u!1 &1060201155 stripped
@@ -453,6 +458,19 @@ MonoBehaviour:
   thicknessCutoff: 1.2
   colorMaterial: {fileID: 2100000, guid: 9336319734319414e85234bc91cf5254, type: 2}
   fluidMaterial: {fileID: 2100000, guid: ee4113bcaf3ab4ea889f0efde06e7cca, type: 2}
+--- !u!114 &1060201161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060201155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
 --- !u!114 &1081544922 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5778525960455300378, guid: 09cb6b53126931f4e8b790a503f3c0d5,
@@ -816,6 +834,11 @@ PrefabInstance:
         type: 3}
       propertyPath: radiusScale
       value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778525960382049951, guid: 09cb6b53126931f4e8b790a503f3c0d5,
+        type: 3}
+      propertyPath: render
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049953, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
@@ -95905,62 +95928,62 @@ PrefabInstance:
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: particleSize
-      value: 0.073680624
+      value: 0.058480356
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[1].position.x
-      value: 0.073680624
+      value: 0.058480356
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[2].position.x
-      value: 0.03684031
+      value: 0.029240176
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[2].position.y
-      value: 0.0638093
+      value: 0.050645478
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[3].position.x
-      value: -0.036840316
+      value: -0.029240182
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[3].position.y
-      value: 0.06380929
+      value: 0.050645474
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[4].position.x
-      value: -0.073680624
+      value: -0.058480356
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[4].position.y
-      value: -0.0000000064413648
+      value: -0.0000000051125153
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[5].position.x
-      value: -0.036840305
+      value: -0.029240172
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[5].position.y
-      value: -0.0638093
+      value: -0.050645478
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[6].position.x
-      value: 0.036840305
+      value: 0.029240172
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}
       propertyPath: distribution.Array.data[6].position.y
-      value: -0.0638093
+      value: -0.050645478
       objectReference: {fileID: 0}
     - target: {fileID: 5778525960382049952, guid: 09cb6b53126931f4e8b790a503f3c0d5,
         type: 3}

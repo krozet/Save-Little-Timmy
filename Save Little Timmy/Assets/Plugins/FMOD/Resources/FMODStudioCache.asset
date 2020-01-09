@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/Dub1
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Music/Dub1
   guid: 7d47bff4336e3a4f8f428aa45c7fbb56
   Banks:
@@ -34,7 +34,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Gey
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Gey
   guid: 91d6bda20e0492489cd12fc841dbf1f0
   Banks: []
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Touch Fire
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Crazy Joe Sound Effects/Crazy Joe Touch Fire
   guid: 422a1d2e4873af478a319c537738a231
   Banks:
@@ -68,6 +68,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 960
+--- !u!114 &-8322531555874378017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Burned
+  m_EditorClassIdentifier:
+  Path: event:/Crazy Joe Sound Effects/Crazy Joe Burned
+  guid: f45bfab1b4361e40aa6396ab6441a88d
+  Banks:
+  - {fileID: 1300508435162477126}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 820
 --- !u!114 &-8092937728073023868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,14 +102,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.strings.bank
-  SubDir: 
+  SubDir:
   lastModified: 637138448177497691
   LoadResult: 0
   FileSizes:
-  - Name: 
+  - Name:
     Value: 916
   Exists: 1
 --- !u!114 &-6305386625016248830
@@ -100,9 +123,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Derek/Documents/FMOD Studio/Unity/Save Little Timmy/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637102141115537248
   LoadResult: 0
   FileSizes:
@@ -120,7 +143,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Idle
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Crazy Joe Sound Effects/Crazy Joe Idle
   guid: f3f1cd258f548941ab9b8afbb9f5951b
   Banks:
@@ -143,7 +166,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Idle
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Crazy Joe Sound Effects/Crazy Joe Idle
   guid: f3f1cd258f548941ab9b8afbb9f5951b
   Banks:
@@ -166,7 +189,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/Gey
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Music/Gey
   guid: 91d6bda20e0492489cd12fc841dbf1f0
   Banks:
@@ -189,7 +212,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Touch Fire
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Crazy Joe Sound Effects/Crazy Joe Touch Fire
   guid: 422a1d2e4873af478a319c537738a231
   Banks:
@@ -212,7 +235,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Touch Fire
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Crazy Joe Sound Effects/Crazy Joe Touch Fire
   guid: 422a1d2e4873af478a319c537738a231
   Banks:
@@ -235,14 +258,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637140895316218394
   LoadResult: 0
   FileSizes:
-  - Name: 
+  - Name:
     Value: 4729856
   Exists: 1
 --- !u!114 &-3886692944996672118
@@ -256,9 +279,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Derek/Documents/FMOD Studio/Unity/Save Little Timmy/Build/Desktop/Master.strings.bank
-  SubDir: 
+  SubDir:
   lastModified: 637102141115587253
   LoadResult: 0
   FileSizes:
@@ -276,14 +299,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637138448177487686
   LoadResult: 0
   FileSizes:
-  - Name: 
+  - Name:
     Value: 4729632
   Exists: 1
 --- !u!114 &-1608110479750352565
@@ -297,7 +320,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Dub1
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Dub1
   guid: 7d47bff4336e3a4f8f428aa45c7fbb56
   Banks: []
@@ -319,7 +342,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Dub 1
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Dub 1
   guid: c7945529439bbe4899716e3b09317b86
   Banks: []
@@ -341,10 +364,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637137825875225658
   LoadResult: 0
   FileSizes:
@@ -362,7 +385,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   EditorBanks:
   - {fileID: 5992257967628667722}
   - {fileID: -4850937633717493024}
@@ -371,12 +394,13 @@ MonoBehaviour:
   - {fileID: -9147711276230714247}
   - {fileID: 5090010753172035436}
   - {fileID: -5965999810257550384}
+  - {fileID: -8322531555874378017}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4850937633717493024}
   StringsBanks:
-  - {fileID: 5992257967628667722}
-  stringsBankWriteTime: 637140895316248385
+  - {fileID: 1978321180519413465}
+  stringsBankWriteTime: 637140937321359029
   cacheVersion: 3
 --- !u!114 &1300508435162477126
 MonoBehaviour:
@@ -389,15 +413,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.bank
-  SubDir: 
-  lastModified: 637138461774503021
+  SubDir:
+  lastModified: 637140937321279022
   LoadResult: 0
   FileSizes:
-  - Name: 
-    Value: 4729856
+  - Name:
+    Value: 4738176
   Exists: 1
 --- !u!114 &1915628272955537312
 MonoBehaviour:
@@ -410,7 +434,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/Dub1
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Music/Dub1
   guid: 7d47bff4336e3a4f8f428aa45c7fbb56
   Banks:
@@ -433,15 +457,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.strings.bank
-  SubDir: 
-  lastModified: 637138461774553031
+  SubDir:
+  lastModified: 637140937321359029
   LoadResult: 0
   FileSizes:
-  - Name: 
-    Value: 916
+  - Name:
+    Value: 952
   Exists: 1
 --- !u!114 &2082586658953489940
 MonoBehaviour:
@@ -454,10 +478,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Derek/Desktop/dfraats-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.strings.bank
-  SubDir: 
+  SubDir:
   lastModified: 637137825875275669
   LoadResult: 0
   FileSizes:
@@ -475,10 +499,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637137825930936051
   LoadResult: 0
   FileSizes:
@@ -496,7 +520,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Crazy Joe Sound Effects/Crazy Joe Idle
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Crazy Joe Sound Effects/Crazy Joe Idle
   guid: f3f1cd258f548941ab9b8afbb9f5951b
   Banks:
@@ -519,7 +543,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/Gey
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Music/Gey
   guid: 91d6bda20e0492489cd12fc841dbf1f0
   Banks:
@@ -542,14 +566,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637138258577945693
   LoadResult: 0
   FileSizes:
-  - Name: 
+  - Name:
     Value: 4729632
   Exists: 1
 --- !u!114 &5992257967628667722
@@ -563,14 +587,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.strings.bank
-  SubDir: 
+  SubDir:
   lastModified: 637140895316248385
   LoadResult: 0
   FileSizes:
-  - Name: 
+  - Name:
     Value: 916
   Exists: 1
 --- !u!114 &6582680826473407562
@@ -584,7 +608,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/Gey
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Music/Gey
   guid: 91d6bda20e0492489cd12fc841dbf1f0
   Banks:
@@ -607,14 +631,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/Save Little Timmy/FMOD
     Project Files/Save Little Timmy/Build/Desktop/Master.strings.bank
-  SubDir: 
+  SubDir:
   lastModified: 637138258577955681
   LoadResult: 0
   FileSizes:
-  - Name: 
+  - Name:
     Value: 916
   Exists: 1
 --- !u!114 &7015249884559574587
@@ -628,10 +652,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/FMOD Project Files/Save
     Little Timmy/Build/Desktop/Master.strings.bank
-  SubDir: 
+  SubDir:
   lastModified: 637137817636955603
   LoadResult: 0
   FileSizes:
@@ -649,7 +673,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/Dub1
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Music/Dub1
   guid: 7d47bff4336e3a4f8f428aa45c7fbb56
   Banks:
