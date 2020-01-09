@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    // Insert audio instance variables here
+
     // Start is called before the first frame update
     void Start()
     {
