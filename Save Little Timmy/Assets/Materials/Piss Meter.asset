@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7780256b85144478aa1084fae803791, type: 3}
   m_Name: Piss Meter
   m_EditorClassIdentifier: 
-  m_Empty: 0
+  m_Empty: 1
   m_ActiveParticleCount: 0
   m_InitialActiveParticleCount: 0
   _bounds:
@@ -10053,7 +10053,7 @@ MonoBehaviour:
     batches: []
   groups: []
   capacity: 1000
-  resolution: 1
+  resolution: 2.15
   restDensity: 1000
   smoothing: 2
   viscosity: 0.05

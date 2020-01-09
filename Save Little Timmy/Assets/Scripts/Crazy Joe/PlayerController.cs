@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 2;
     public bool debug = false;
+    public bool standStill = false;
 
+    private Vector3 standStillPosition;
     private Vector3 moveInput;
     private Vector3 moveVelocity;
     private Vector3 direction;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        standStillPosition = transform.position;
         mainCamera = FindObjectOfType<Camera>();
         crazyJoe = GetComponent<CrazyJoe>();
         penis = crazyJoe.GetComponentInChildren<Penis>().transform;
@@ -28,9 +31,14 @@ public class PlayerController : MonoBehaviour
     {
         // Consider Slerping the start and stop
         //Player movement
-        moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-        moveVelocity = moveInput * moveSpeed;
-        transform.position += moveVelocity * Time.deltaTime;
+        if (standStill) {
+            transform.position = standStillPosition;
+        } else {
+            moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+            moveVelocity = moveInput * moveSpeed;
+            transform.position += moveVelocity * Time.deltaTime;
+            standStillPosition = transform.position;
+        }
 
         //Player rotation towards mouse
         SetRotationTowardsMouse();
