@@ -112,6 +112,27 @@ MonoBehaviour:
   - Name:
     Value: 916
   Exists: 1
+--- !u!114 &-7686922514361693157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier:
+  Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/Save Little Timmy/FMOD
+    Project Files/Save Little Timmy/Build/Desktop/Master.bank
+  SubDir:
+  lastModified: 637141005817444910
+  LoadResult: 0
+  FileSizes:
+  - Name:
+    Value: 4729856
+  Exists: 1
 --- !u!114 &-6305386625016248830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +423,27 @@ MonoBehaviour:
   - {fileID: 1978321180519413465}
   stringsBankWriteTime: 637140937321359029
   cacheVersion: 3
+--- !u!114 &872008057351666786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier:
+  Path: C:/Users/Overlord/Desktop/krozet-git/Save-Little-Timmy/Save Little Timmy/FMOD
+    Project Files/Save Little Timmy/Build/Desktop/Master.strings.bank
+  SubDir:
+  lastModified: 637141005817464889
+  LoadResult: 0
+  FileSizes:
+  - Name:
+    Value: 916
+  Exists: 1
 --- !u!114 &1300508435162477126
 MonoBehaviour:
   m_ObjectHideFlags: 0
