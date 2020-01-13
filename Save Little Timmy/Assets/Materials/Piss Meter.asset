@@ -10053,10 +10053,10 @@ MonoBehaviour:
     batches: []
   groups: []
   capacity: 1000
-  resolution: 3.7
+  resolution: 4
   restDensity: 1000
-  smoothing: 2
-  viscosity: 0.05
+  smoothing: 3
+  viscosity: 1
   surfaceTension: 1
   buoyancy: -1
   atmosphericDrag: 0
