@@ -28,10 +28,11 @@ public class MenuSceneGenerator : MonoBehaviour
 
     public void RandomInstanciation() {
         int randomIndex = (int)Random.Range(0, objects.Length - 1f);
-        GameObject temp = Instantiate(objects[0],
+        GameObject temp = Instantiate(objects[1],
                                             buildingSpawnPoint.transform.position,
                                             Quaternion.identity);
-        temp.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
+        //temp.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
+        temp.GetComponent<SpawnableObject>().init(buildingSpawnPoint.transform.position, speed);
         instanciatedObjects.Add(temp);
     }
 }

@@ -22,11 +22,27 @@ public class SpawnableObject : MonoBehaviour
         spawnPoint = _spawnPoint;
 
         SetForwardVelocity(_velocity);
+        SetStartPosition();
+        RotateRight();
+    }
+
+    public void SetStartPosition() {
+        Vector3 startPosition = spawnPoint;
+        startPosition.z -= size.z / 2;
+        transform.position = startPosition;
     }
 
     public void SetForwardVelocity(float _velocity) {
         velocity = _velocity;
         rb.velocity = Vector3.forward * velocity;
+    }
+
+    public void RotateRight() {
+        transform.rotation = Quaternion.LookRotation(Vector3.right, Vector3.zero);
+    }
+
+    public void RotateLeft() {
+        transform.rotation = Quaternion.LookRotation(Vector3.left, Vector3.zero);
     }
 
 }
