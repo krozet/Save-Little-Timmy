@@ -23,7 +23,7 @@ public class SpawnableObject : MonoBehaviour
 
         SetForwardVelocity(_velocity);
         SetStartPosition();
-        RotateRight();
+        RotateHouseRight();
     }
 
     public void SetStartPosition() {
@@ -37,11 +37,13 @@ public class SpawnableObject : MonoBehaviour
         rb.velocity = Vector3.forward * velocity;
     }
 
-    public void RotateRight() {
+    // House right = stage left
+    public void RotateHouseRight() {
         transform.rotation = Quaternion.LookRotation(Vector3.right, Vector3.zero);
     }
 
-    public void RotateLeft() {
+    // House left = stage right
+    public void RotateHouseLeft() {
         transform.rotation = Quaternion.LookRotation(Vector3.left, Vector3.zero);
     }
 
