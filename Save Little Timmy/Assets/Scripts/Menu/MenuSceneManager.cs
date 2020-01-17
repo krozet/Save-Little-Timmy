@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuSceneGenerator : MonoBehaviour
+public class MenuSceneManager : MonoBehaviour
 {
     public GameObject[] objects;
 

@@ -23,7 +23,7 @@ public class SpawnableObject : MonoBehaviour
 
         SetForwardVelocity(_velocity);
         SetStartPosition();
-        RotateHouseRight();
+        //RotateHouseRight();
     }
 
     public void SetStartPosition() {
