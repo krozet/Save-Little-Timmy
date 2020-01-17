@@ -7,6 +7,7 @@ public class SpawnableObject : MonoBehaviour
 {
     Vector3 size;
     Vector3 spawnPoint;
+    Collider col;
     Rigidbody rb;
     float velocity;
 
@@ -17,8 +18,17 @@ public class SpawnableObject : MonoBehaviour
     }
 
     public void init(Vector3 _spawnPoint, float _velocity) {
-        size = GetComponent<Collider>().bounds.size;
+        col = GetComponent<Collider>();
+        if (col == null) {
+            col = gameObject.AddComponent<BoxCollider>();
+        }
+
         rb = GetComponent<Rigidbody>();
+        if (rb == null) {
+            rb = gameObject.AddComponent<Rigidbody>();
+        }
+
+        size = GetComponent<Collider>().bounds.size;
         spawnPoint = _spawnPoint;
 
         SetForwardVelocity(_velocity);

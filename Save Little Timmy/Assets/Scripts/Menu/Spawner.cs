@@ -5,4 +5,5 @@ using UnityEngine;
 public interface Spawner
 {
     public void SpawnNextObject(int typeOfSpawner, int index);
+    public void StartSpawning();
 }

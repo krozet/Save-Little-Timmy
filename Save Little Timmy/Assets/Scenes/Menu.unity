@@ -1595,7 +1595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781921810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.6529427, y: -0.5816541, z: 6.991377}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1613,6 +1613,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07498ef3c345dc9458cb1815f3f04525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPointPrefab: {fileID: 1530416245809017214, guid: 8e81b5ddb51ab7c4eaa1394e776a2782,
+    type: 3}
   smallSidewalkEdge: {fileID: 389856847}
   smallSidewalkEdge2: {fileID: 861655523}
   smallSidewalkEdgeDefect: {fileID: 634698273}
@@ -1622,6 +1624,7 @@ MonoBehaviour:
   smallSidewalkCenter: {fileID: 2134021993}
   smallSidewalkCenterDefect: {fileID: 64049492}
   smallSidewalkCenterDefect2: {fileID: 174120949}
+  sideWalkLength: 4
 --- !u!114 &1781921814
 MonoBehaviour:
   m_ObjectHideFlags: 0
