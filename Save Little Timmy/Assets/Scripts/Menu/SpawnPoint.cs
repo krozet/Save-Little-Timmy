@@ -8,13 +8,15 @@ public class SpawnPoint : MonoBehaviour
     int index = 0;
     Spawner spawner;
 
-    public void init(int _typeOFSpawn, int _index, Spawner _spawner) {
-        typeOfSpawner = _typeOFSpawn;
+    public void init(int _typeOfSpawn, int _index, Spawner _spawner) {
+        typeOfSpawner = _typeOfSpawn;
         index = _index;
         spawner = _spawner;
     }
 
     private void OnTriggerExit(Collider other) {
-        spawner.SpawnNextObject(typeOfSpawner, index);
+        if (spawner != null) {
+            spawner.SpawnNextObject(typeOfSpawner, index);
+        }
     }
 }

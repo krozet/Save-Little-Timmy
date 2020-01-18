@@ -31,7 +31,10 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     private List<GameObject> smallSidewalkCenterDefects;
 
     private bool spawnFirstObjects = false;
-    private float veloicity = 10f;
+    private float veloicity = 0.02f;
+    private Vector3 sizeOfSingleSidewalk;
+    private Vector3 sizeOfTotalSidewalk;
+    private Vector3 scaleFactor = new Vector3(10, 1, 10);
 
     /*
      * Holds data for the Sidewalk segment to be spawned
@@ -46,7 +49,16 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     void Start()
     {
         AddSidewalksToLists();
+        IncreaseScaling();
+
+        // we are primarily looking for the length of the whole sidewalk, not so concerned with the width
+        sizeOfSingleSidewalk = smallSidewalkCenter.GetComponent<Renderer>().bounds.size;
+        sizeOfTotalSidewalk = sizeOfSingleSidewalk * sideWalkLength;
+
+        centerSidewalkSpawnPoints = new List<GameObject>();
+
         InitializeSpawnPoints();
+        SetSpawnPointLocations();
     }
 
     // Update is called once per frame
@@ -63,10 +75,27 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         leftSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(LEFT_SIDEWALK_SPAWN_POINT, 0, this);
         rightSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(RIGHT_SIDEWALK_SPAWN_POINT, 0, this);
         // Create center side walk spawn points
-        for (int i = 0; i <= sideWalkLength - 2; i++) {
+        for (int i = 0; i < sideWalkLength - 2; i++) {
             GameObject temp = Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity);
             temp.GetComponent<SpawnPoint>().init(CENTER_SIDEWALK_SPAWN_POINT, i, this);
             centerSidewalkSpawnPoints.Add(temp);
+        }
+    }
+
+    private void IncreaseScaling() {
+        smallSidewalkCenter.transform.localScale = scaleFactor;
+        largeSidewalkEdgeDefect.transform.localScale = scaleFactor;
+
+        foreach (GameObject obj in smallSidewalkEdges) {
+            obj.transform.localScale = scaleFactor;
+        }
+
+        foreach (GameObject obj in smallSidewalkEdgeDefects) {
+            obj.transform.localScale = scaleFactor;
+        }
+
+        foreach (GameObject obj in smallSidewalkCenterDefects) {
+            obj.transform.localScale = scaleFactor;
         }
     }
 
@@ -86,7 +115,27 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     }
 
     private void SetSpawnPointLocations() {
+        Vector3 startingPos = transform.position;
+        startingPos.x -= (sizeOfTotalSidewalk.x / 2f) + (sizeOfSingleSidewalk.x/2f);
+        startingPos.y += sizeOfSingleSidewalk.y / 2f;
+        leftSidewalkEdgeSpawnPoint.transform.position = startingPos;
+        startingPos.x += sizeOfSingleSidewalk.x;
 
+        for (int i = 0; i <= centerSidewalkSpawnPoints.Count - 1; i++) {
+            centerSidewalkSpawnPoints[i].transform.position = startingPos;
+            startingPos.x += sizeOfSingleSidewalk.x;
+        }
+
+        rightSidewalkEdgeSpawnPoint.transform.position = startingPos;
+    }
+
+    private void SpawnInitialSidewalks() {
+        SpawnNextObject(LEFT_SIDEWALK_SPAWN_POINT, 0);
+        SpawnNextObject(RIGHT_SIDEWALK_SPAWN_POINT, 0);
+
+        for (int i = 0; i <= centerSidewalkSpawnPoints.Count - 1; i++) {
+            SpawnNextObject(CENTER_SIDEWALK_SPAWN_POINT, i);
+        }
     }
 
     private void SpawnLeftSidewalk() {
@@ -159,11 +208,6 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     }
 
     public void StartSpawning() {
-        SpawnNextObject(LEFT_SIDEWALK_SPAWN_POINT, 0);
-        SpawnNextObject(RIGHT_SIDEWALK_SPAWN_POINT, 0);
-
-        for (int i = 0; i <= centerSidewalkSpawnPoints.Count - 1; i++) {
-            SpawnNextObject(CENTER_SIDEWALK_SPAWN_POINT, i);
-        }
+        SpawnInitialSidewalks();
     }
 }

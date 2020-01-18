@@ -27,16 +27,16 @@ public class SpawnableObject : MonoBehaviour
         if (rb == null) {
             rb = gameObject.AddComponent<Rigidbody>();
         }
+        rb.useGravity = false;
 
         size = GetComponent<Collider>().bounds.size;
-        spawnPoint = _spawnPoint;
 
         SetForwardVelocity(_velocity);
-        SetStartPosition();
-        //RotateHouseRight();
+        //SetStartPosition(_spawnPoint);
     }
 
-    public void SetStartPosition() {
+    public void SetStartPosition(Vector3 _spawnPoint) {
+        spawnPoint = _spawnPoint;
         Vector3 startPosition = spawnPoint;
         startPosition.z -= size.z / 2;
         transform.position = startPosition;

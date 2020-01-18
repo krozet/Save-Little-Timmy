@@ -1562,7 +1562,6 @@ GameObject:
   - component: {fileID: 1781921812}
   - component: {fileID: 1781921811}
   - component: {fileID: 1781921814}
-  - component: {fileID: 1781921813}
   m_Layer: 0
   m_Name: MenuSceneManager
   m_TagString: Untagged
@@ -1597,34 +1596,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6489845616845231274}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1781921813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781921810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07498ef3c345dc9458cb1815f3f04525, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPointPrefab: {fileID: 1530416245809017214, guid: 8e81b5ddb51ab7c4eaa1394e776a2782,
-    type: 3}
-  smallSidewalkEdge: {fileID: 389856847}
-  smallSidewalkEdge2: {fileID: 861655523}
-  smallSidewalkEdgeDefect: {fileID: 634698273}
-  smallSidewalkEdgeDefect2: {fileID: 1322569537}
-  smallSidewalkEdgeDefect3: {fileID: 1324916645}
-  largeSidewalkEdgeDefect: {fileID: 402874348}
-  smallSidewalkCenter: {fileID: 2134021993}
-  smallSidewalkCenterDefect: {fileID: 64049492}
-  smallSidewalkCenterDefect2: {fileID: 174120949}
-  sideWalkLength: 4
 --- !u!114 &1781921814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2033,3 +2009,123 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e81b5ddb51ab7c4eaa1394e776a2782, type: 3}
+--- !u!1001 &6489845616845231273
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1781921812}
+    m_Modifications:
+    - target: {fileID: 1595810091778276340, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_Name
+      value: SidewalkSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: smallSidewalkEdge
+      value: 
+      objectReference: {fileID: 389856847}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: smallSidewalkEdge2
+      value: 
+      objectReference: {fileID: 861655523}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: smallSidewalkEdgeDefect
+      value: 
+      objectReference: {fileID: 634698273}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: smallSidewalkEdgeDefect2
+      value: 
+      objectReference: {fileID: 1322569537}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: smallSidewalkEdgeDefect3
+      value: 
+      objectReference: {fileID: 1324916645}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: largeSidewalkEdgeDefect
+      value: 
+      objectReference: {fileID: 402874348}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: smallSidewalkCenter
+      value: 
+      objectReference: {fileID: 2134021993}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: smallSidewalkCenterDefect
+      value: 
+      objectReference: {fileID: 64049492}
+    - target: {fileID: 2436248131718293458, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: smallSidewalkCenterDefect2
+      value: 
+      objectReference: {fileID: 174120949}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47bd6714e515ce44a93c814f93866130, type: 3}
+--- !u!4 &6489845616845231274 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2940848353831890556, guid: 47bd6714e515ce44a93c814f93866130,
+    type: 3}
+  m_PrefabInstance: {fileID: 6489845616845231273}
+  m_PrefabAsset: {fileID: 0}
