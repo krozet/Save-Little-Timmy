@@ -31,7 +31,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     private List<GameObject> smallSidewalkCenterDefects;
 
     private bool spawnFirstObjects = false;
-    private float veloicity = 0.02f;
+    private float veloicity = 2f;
     private Vector3 sizeOfSingleSidewalk;
     private Vector3 sizeOfTotalSidewalk;
     private Vector3 scaleFactor = new Vector3(10, 1, 10);
@@ -117,7 +117,6 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     private void SetSpawnPointLocations() {
         Vector3 startingPos = transform.position;
         startingPos.x -= (sizeOfTotalSidewalk.x / 2f) + (sizeOfSingleSidewalk.x/2f);
-        startingPos.y += sizeOfSingleSidewalk.y / 2f;
         leftSidewalkEdgeSpawnPoint.transform.position = startingPos;
         startingPos.x += sizeOfSingleSidewalk.x;
 
@@ -153,8 +152,9 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
             temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         }
         // make new sidewalk a SpawnableObject
-        temp.AddComponent<SpawnableObject>();
-        temp.GetComponent<SpawnableObject>().init(leftSidewalkEdgeSpawnPoint.transform.position, veloicity);
+        SpawnableObject spawnableObject = temp.AddComponent<SpawnableObject>();
+        spawnableObject.init(leftSidewalkEdgeSpawnPoint.transform.position, veloicity);
+        leftSidewalkEdgeSpawnPoint.GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
     }
 
     private void SpawnRightSidewalk() {
@@ -172,8 +172,9 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
             temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         }
         // make new sidewalk a SpawnableObject
-        temp.AddComponent<SpawnableObject>();
-        temp.GetComponent<SpawnableObject>().init(rightSidewalkEdgeSpawnPoint.transform.position, veloicity);
+        SpawnableObject spawnableObject = temp.AddComponent<SpawnableObject>();
+        spawnableObject.init(rightSidewalkEdgeSpawnPoint.transform.position, veloicity);
+        rightSidewalkEdgeSpawnPoint.GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
     }
 
     private void SpawnCenterSidewalk(int index) {
@@ -187,8 +188,9 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
             temp = Instantiate(smallSidewalkCenter, centerSidewalkSpawnPoints[index].transform.position, Quaternion.identity);
         }
         // make new sidewalk a SpawnableObject
-        temp.AddComponent<SpawnableObject>();
-        temp.GetComponent<SpawnableObject>().init(centerSidewalkSpawnPoints[index].transform.position, veloicity);
+        SpawnableObject spawnableObject = temp.AddComponent<SpawnableObject>();
+        spawnableObject.init(centerSidewalkSpawnPoints[index].transform.position, veloicity);
+        centerSidewalkSpawnPoints[index].GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
     }
 
     public void SpawnNextObject(int typeOfSpawner, int index) {

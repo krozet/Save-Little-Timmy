@@ -7,18 +7,18 @@ public class SpawnableObject : MonoBehaviour
 {
     Vector3 size;
     Vector3 spawnPoint;
-    Collider col;
+    BoxCollider col;
     Rigidbody rb;
-    float velocity;
+    Vector3 velocity = new Vector3(0,0,0);
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        transform.localPosition += velocity * Time.deltaTime;
     }
 
     public void init(Vector3 _spawnPoint, float _velocity) {
-        col = GetComponent<Collider>();
+        col = GetComponent<BoxCollider>();
         if (col == null) {
             col = gameObject.AddComponent<BoxCollider>();
         }
@@ -28,23 +28,29 @@ public class SpawnableObject : MonoBehaviour
             rb = gameObject.AddComponent<Rigidbody>();
         }
         rb.useGravity = false;
+        rb.isKinematic = true;
 
-        size = GetComponent<Collider>().bounds.size;
+        size = col.bounds.size;
 
         SetForwardVelocity(_velocity);
-        //SetStartPosition(_spawnPoint);
+        SetStartPosition(_spawnPoint);
+    }
+
+    public Vector3 GetColliderSize() {
+        return col.size;
     }
 
     public void SetStartPosition(Vector3 _spawnPoint) {
         spawnPoint = _spawnPoint;
         Vector3 startPosition = spawnPoint;
-        startPosition.z -= size.z / 2;
+        startPosition.y += gameObject.GetComponent<Collider>().bounds.size.y;
+        //startPosition.z -= size.z / 2;
         transform.position = startPosition;
     }
 
     public void SetForwardVelocity(float _velocity) {
-        velocity = _velocity;
-        rb.velocity = Vector3.forward * velocity;
+        velocity = new Vector3(0,0,_velocity);
+        //rb.velocity = Vector3.forward * velocity;
     }
 
     // House right = stage left
