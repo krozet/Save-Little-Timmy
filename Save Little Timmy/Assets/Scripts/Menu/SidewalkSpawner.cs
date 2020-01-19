@@ -20,7 +20,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     public GameObject smallSidewalkCenterDefect;
     public GameObject smallSidewalkCenterDefect2;
 
-    public int sideWalkLength = 4;
+    private int sideWalkLength = 4;
 
     private GameObject leftSidewalkEdgeSpawnPoint;
     private GameObject rightSidewalkEdgeSpawnPoint;
@@ -67,18 +67,23 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         
     }
 
+    private void CheckCenterSidewalkInitialization() {
+        foreach (GameObject sw in centerSidewalkSpawnPoints) {
+            Debug.Log("Is init?: " + sw.GetComponent<SpawnPoint>().IsInitialized());
+        }
+    }
+
     private void InitializeSpawnPoints() {
         // Create edge side walk spawn points
         leftSidewalkEdgeSpawnPoint = Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity);
         rightSidewalkEdgeSpawnPoint = Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity);
 
-        leftSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(LEFT_SIDEWALK_SPAWN_POINT, 0, this);
-        rightSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(RIGHT_SIDEWALK_SPAWN_POINT, 0, this);
+        leftSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(LEFT_SIDEWALK_SPAWN_POINT, 0);
+        rightSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(RIGHT_SIDEWALK_SPAWN_POINT, 0);
         // Create center side walk spawn points
-        for (int i = 0; i < sideWalkLength - 2; i++) {
-            GameObject temp = Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity);
-            temp.GetComponent<SpawnPoint>().init(CENTER_SIDEWALK_SPAWN_POINT, i, this);
-            centerSidewalkSpawnPoints.Add(temp);
+        for (int i = 0; i < 6; i++) {
+            centerSidewalkSpawnPoints.Add(Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity));
+            centerSidewalkSpawnPoints[i].GetComponent<SpawnPoint>().init(CENTER_SIDEWALK_SPAWN_POINT, i);
         }
     }
 
@@ -212,10 +217,10 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     public void SpawnNextObject(int typeOfSpawner, int index) {
         switch (typeOfSpawner) {
             case LEFT_SIDEWALK_SPAWN_POINT:
-                SpawnLeftSidewalk();
+                //SpawnLeftSidewalk();
                 break;
             case RIGHT_SIDEWALK_SPAWN_POINT:
-                SpawnRightSidewalk();
+                //SpawnRightSidewalk();
                 break;
             case CENTER_SIDEWALK_SPAWN_POINT:
                 SpawnCenterSidewalk(index);

@@ -6,17 +6,29 @@ public class SpawnPoint : MonoBehaviour
 {
     int typeOfSpawner;
     int index = 0;
-    Spawner spawner;
+    SidewalkSpawner spawner;
+    bool initialized = false;
 
-    public void init(int _typeOfSpawn, int _index, Spawner _spawner) {
+    public void init(int _typeOfSpawn, int _index) {
+        initialized = true;
+        spawner = GameObject.Find("MenuSceneManager").GetComponentInChildren<SidewalkSpawner>();
         typeOfSpawner = _typeOfSpawn;
         index = _index;
-        spawner = _spawner;
+    }
+
+    public bool IsInitialized() {
+        return initialized;
     }
 
     private void OnTriggerExit(Collider other) {
-        if (spawner != null) {
-            spawner.SpawnNextObject(typeOfSpawner, index);
+        if (initialized) {
+            if (spawner != null) {
+                spawner.SpawnNextObject(typeOfSpawner, index);
+            } else {
+                Debug.Log("Spawner is null: " + gameObject.transform.position);
+            }
+        } else {
+            Debug.Log("Not initialized!: " + gameObject.transform.position);
         }
     }
 }
