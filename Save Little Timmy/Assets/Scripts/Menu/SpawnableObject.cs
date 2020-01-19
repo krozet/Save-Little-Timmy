@@ -43,8 +43,7 @@ public class SpawnableObject : MonoBehaviour
     public void SetStartPosition(Vector3 _spawnPoint) {
         spawnPoint = _spawnPoint;
         Vector3 startPosition = spawnPoint;
-        startPosition.y += gameObject.GetComponent<Collider>().bounds.size.y;
-        //startPosition.z -= size.z / 2;
+        startPosition += new Vector3(size.x/2f, size.y, size.z/2f);
         transform.position = startPosition;
     }
 
