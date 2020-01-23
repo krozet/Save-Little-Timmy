@@ -81,7 +81,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         leftSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(LEFT_SIDEWALK_SPAWN_POINT, 0);
         rightSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(RIGHT_SIDEWALK_SPAWN_POINT, 0);
         // Create center side walk spawn points
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < sideWalkLength - 2; i++) {
             centerSidewalkSpawnPoints.Add(Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity));
             centerSidewalkSpawnPoints[i].GetComponent<SpawnPoint>().init(CENTER_SIDEWALK_SPAWN_POINT, i);
         }
@@ -217,7 +217,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     public void SpawnNextObject(int typeOfSpawner, int index) {
         switch (typeOfSpawner) {
             case LEFT_SIDEWALK_SPAWN_POINT:
-                //SpawnLeftSidewalk();
+                SpawnLeftSidewalk();
                 break;
             case RIGHT_SIDEWALK_SPAWN_POINT:
                 //SpawnRightSidewalk();
