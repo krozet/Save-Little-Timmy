@@ -76,7 +76,9 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     private void InitializeSpawnPoints() {
         // Create edge side walk spawn points
         leftSidewalkEdgeSpawnPoint = Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity);
+        leftSidewalkEdgeSpawnPoint.transform.parent = transform;
         rightSidewalkEdgeSpawnPoint = Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity);
+        rightSidewalkEdgeSpawnPoint.transform.parent = transform;
 
         leftSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(LEFT_SIDEWALK_SPAWN_POINT, 0);
         rightSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().init(RIGHT_SIDEWALK_SPAWN_POINT, 0);
@@ -84,6 +86,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         for (int i = 0; i < sideWalkLength - 2; i++) {
             centerSidewalkSpawnPoints.Add(Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity));
             centerSidewalkSpawnPoints[i].GetComponent<SpawnPoint>().init(CENTER_SIDEWALK_SPAWN_POINT, i);
+            centerSidewalkSpawnPoints[i].transform.parent = transform;
         }
     }
 
@@ -144,44 +147,45 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
 
     private void SpawnLeftSidewalk() {
         GameObject temp;
-        Quaternion spawnRotation = Quaternion.Euler(transform.rotation.x, -90, transform.rotation.z);
         bool isLargeSidewalk = false;
         int randInt = Random.Range(1, 40);
         if (randInt == 1) {
             if (Random.Range(1, 3) != 1) {
                 // defect small edges
-                temp = Instantiate(smallSidewalkEdgeDefects[Random.Range(0, smallSidewalkEdgeDefects.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, spawnRotation);
+                temp = Instantiate(smallSidewalkEdgeDefects[Random.Range(0, smallSidewalkEdgeDefects.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
             }
             // large defect edge
-            temp = Instantiate(largeSidewalkEdgeDefect, leftSidewalkEdgeSpawnPoint.transform.position, spawnRotation);
+            temp = Instantiate(largeSidewalkEdgeDefect, leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
             isLargeSidewalk = true;
         } else {
             // regular small edges
-            temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, spawnRotation);
+            temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         }
-
-        AdjustSpawner(temp, leftSidewalkEdgeSpawnPoint, isLargeSidewalk);
+        //temp.transform.RotateAround(temp.transform.position, Vector3.up, -90);
+        temp.transform.parent = transform;
+        AdjustSpawner(temp, leftSidewalkEdgeSpawnPoint, isLargeSidewalk, SpawnableObject.ROTATE_HOUSE_LEFT);
     }
 
     private void SpawnRightSidewalk() {
         GameObject temp;
-        Quaternion spawnRotation = Quaternion.Euler(transform.rotation.x, 90, transform.rotation.z);
+        //Quaternion spawnRotation = Quaternion.Euler(transform.rotation.x, 90, transform.rotation.z);
         bool isLargeSidewalk = false;
         int randInt = Random.Range(1, 40);
         if (randInt == 1) {
             if (Random.Range(1, 3) != 1) {
                 // defect small edges
-                temp = Instantiate(smallSidewalkEdgeDefects[Random.Range(0, smallSidewalkEdgeDefects.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, spawnRotation);
+                temp = Instantiate(smallSidewalkEdgeDefects[Random.Range(0, smallSidewalkEdgeDefects.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
             }
             // large defect edge
-            temp = Instantiate(largeSidewalkEdgeDefect, rightSidewalkEdgeSpawnPoint.transform.position, spawnRotation);
+            temp = Instantiate(largeSidewalkEdgeDefect, rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
             isLargeSidewalk = true;
         } else {
             // regular small edges
-            temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, spawnRotation);
+            temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         }
-
-        AdjustSpawner(temp, rightSidewalkEdgeSpawnPoint, isLargeSidewalk);
+        //temp.transform.Rotate(0, 90, 0);
+        temp.transform.parent = transform;
+        AdjustSpawner(temp, rightSidewalkEdgeSpawnPoint, isLargeSidewalk, SpawnableObject.ROTATE_HOUSE_RIGHT);
     }
 
     private void SpawnCenterSidewalk(int index) {
@@ -194,18 +198,22 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
             // small center
             temp = Instantiate(smallSidewalkCenter, centerSidewalkSpawnPoints[index].transform.position, Quaternion.identity);
         }
-
-        AdjustSpawner(temp, centerSidewalkSpawnPoints[index], false);
+        temp.transform.parent = transform;
+        AdjustSpawner(temp, centerSidewalkSpawnPoints[index], false, SpawnableObject.ROTATE_HOUSE_FORWARD);
     }
 
-    private void AdjustSpawner(GameObject sidewalk, GameObject spawnPoint, bool largeSidewalk) {
+    private void AdjustSpawner(GameObject sidewalk, GameObject spawnPoint, bool largeSidewalk, int rotationDirection) {
         // make new sidewalk a SpawnableObject
         SpawnableObject spawnableObject = sidewalk.AddComponent<SpawnableObject>();
         Vector3 position = spawnPoint.transform.position;
         if (largeSidewalk) {
             position.z -= sizeOfSingleSidewalk.z/2f;
         }
-        spawnableObject.init(position, veloicity);
+        Debug.Log("AFTER 1 Obj pos: " + spawnableObject.transform.position + "\tSpawn Pos " + spawnPoint.transform.position);
+
+        spawnableObject.init(position, veloicity, rotationDirection);
+        Debug.Log("AFTER 2 Obj pos: " + spawnableObject.transform.position + "\tSpawn Pos " + spawnPoint.transform.position);
+
         // have spawn point match the size of the spawning obj
         spawnPoint.GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
         // have spawn point match the scaling of the spawning obj
@@ -220,7 +228,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
                 SpawnLeftSidewalk();
                 break;
             case RIGHT_SIDEWALK_SPAWN_POINT:
-                //SpawnRightSidewalk();
+                SpawnRightSidewalk();
                 break;
             case CENTER_SIDEWALK_SPAWN_POINT:
                 SpawnCenterSidewalk(index);

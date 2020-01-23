@@ -1,14 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Spawnable Menu Object
 public class SpawnableObject : MonoBehaviour
 {
+    public const int ROTATE_HOUSE_LEFT = 0;
+    public const int ROTATE_HOUSE_RIGHT = 1;
+    public const int ROTATE_HOUSE_FORWARD = 2;
     Vector3 size;
     Vector3 spawnPoint;
     BoxCollider col;
     Rigidbody rb;
+    Renderer mesh;
     Vector3 velocity = new Vector3(0,0,0);
 
     // Update is called once per frame
@@ -17,10 +22,15 @@ public class SpawnableObject : MonoBehaviour
         transform.localPosition += velocity * Time.deltaTime;
     }
 
-    public void init(Vector3 _spawnPoint, float _velocity) {
+    public void init(Vector3 _spawnPoint, float _velocity, int rotateDirection) {
         col = GetComponent<BoxCollider>();
         if (col == null) {
             col = gameObject.AddComponent<BoxCollider>();
+        }
+
+        mesh = GetComponent<Renderer>();
+        if (mesh == null) {
+            Debug.Log("Fix yo mesh");
         }
 
         rb = GetComponent<Rigidbody>();
@@ -30,10 +40,26 @@ public class SpawnableObject : MonoBehaviour
         rb.useGravity = false;
         rb.isKinematic = true;
 
-        size = col.bounds.size;
+        size = mesh.bounds.size;
 
         SetForwardVelocity(_velocity);
         SetStartPosition(_spawnPoint);
+        SetRotationDirection(rotateDirection);
+    }
+
+    private void SetRotationDirection(int rotateDirection) {
+        switch (rotateDirection) {
+            case ROTATE_HOUSE_LEFT:
+                RotateHouseLeft();
+                break;
+            case ROTATE_HOUSE_RIGHT:
+                RotateHouseRight();
+                break;
+            case ROTATE_HOUSE_FORWARD:
+                break;
+            default:
+                break;
+        }
     }
 
     public Vector3 GetColliderSize() {
@@ -43,7 +69,8 @@ public class SpawnableObject : MonoBehaviour
     public void SetStartPosition(Vector3 _spawnPoint) {
         spawnPoint = _spawnPoint;
         Vector3 startPosition = spawnPoint;
-        startPosition += new Vector3(size.x/2f, size.y, size.z/2f);
+        // moves it to the center of the spawnPoint and removes the old height of the last obj if there was one
+        startPosition += new Vector3(size.x/2f, size.y - spawnPoint.y, size.z/2f);
         transform.position = startPosition;
     }
 
@@ -55,11 +82,15 @@ public class SpawnableObject : MonoBehaviour
     // House right = stage left
     public void RotateHouseRight() {
         transform.rotation = Quaternion.LookRotation(Vector3.right, Vector3.zero);
+        // adjusts for the rotation of the small pieces
+        transform.position += new Vector3(0, 0, -size.z);
     }
 
     // House left = stage right
     public void RotateHouseLeft() {
         transform.rotation = Quaternion.LookRotation(Vector3.left, Vector3.zero);
+        // adjusts for the rotation of the small pieces
+        transform.position += new Vector3(-size.x, 0, 0);
     }
 
 }
