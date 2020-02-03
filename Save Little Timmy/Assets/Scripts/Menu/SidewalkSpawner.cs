@@ -140,6 +140,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         rightSidewalkEdgeSpawnPoint.transform.position = startingPos;
     }
 
+    // Spawns two sidewalks per spawner - the initial sidewalk and the next sidewalk
     private void SpawnInitialSidewalks() {
         GameObject sidewalk;
 
@@ -239,6 +240,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         return temp;
     }
 
+    // Creates and attaches the script to make the sidewalk a SpawnableObject
     private void InitializeSpawnableObject(GameObject sidewalk, GameObject spawnPoint, bool largeSidewalk, int rotationDirection) {
         // make new sidewalk a SpawnableObject
         SpawnableObject spawnableObject = sidewalk.AddComponent<SpawnableObject>();
@@ -246,15 +248,11 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         if (largeSidewalk) {
             position.z -= sizeOfSingleSidewalk.z / 2f;
         }
-        //Debug.Log("AFTER 1 Obj pos: " + spawnableObject.transform.position + "\tSpawn Pos " + spawnPoint.transform.position);
 
         spawnableObject.init(position, veloicity, rotationDirection);
     }
 
     private void AdjustSpawner(SpawnableObject spawnableObject, GameObject spawnPoint) {
-        
-        //Debug.Log("AFTER 2 Obj pos: " + spawnableObject.transform.position + "\tSpawn Pos " + spawnPoint.transform.position);
-
         // have spawn point match the size of the spawning obj
         spawnPoint.GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
         // have spawn point match the scaling of the spawning obj

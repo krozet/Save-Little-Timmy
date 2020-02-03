@@ -70,6 +70,7 @@ public class SpawnableObject : MonoBehaviour
         }
     }
 
+    // Call this to start moving the object
     public void Begin() {
         SetPositionDirectlyBehindObjectAhead();
         IsMoving(true);
