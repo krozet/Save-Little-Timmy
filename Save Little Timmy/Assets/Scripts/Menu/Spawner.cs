@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface Spawner
 {
-    void SpawnNextObject(int typeOfSpawner, int index);
+    GameObject SpawnNextObject(int typeOfSpawner, int index);
     void StartSpawning();
 }

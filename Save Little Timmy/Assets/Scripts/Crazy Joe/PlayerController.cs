@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 2;
+    public bool menu = false;
     public bool debug = false;
 
     private Vector3 moveInput;
@@ -26,35 +27,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Consider Slerping the start and stop
-        //Player movement
-        moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-        moveVelocity = moveInput * moveSpeed;
-        transform.position += moveVelocity * Time.deltaTime;
+        if (!menu) {
+            // Consider Slerping the start and stop
+            //Player movement
+            moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+            moveVelocity = moveInput * moveSpeed;
+            transform.position += moveVelocity * Time.deltaTime;
 
-        //Player rotation towards mouse
-        SetRotationTowardsMouse();
+            //Player rotation towards mouse
+            SetRotationTowardsMouse();
 
-        // Left Click to piss
-        if (Input.GetMouseButton(0)) {
-            crazyJoe.IsPissing(true);
-        }
+            // Left Click to piss
+            if (Input.GetMouseButton(0)) {
+                crazyJoe.IsPissing(true);
+            }
 
-        // Release Left Click to stop pissing
-        if (Input.GetMouseButtonUp(0)) {
-            crazyJoe.IsPissing(false);
-        }
+            // Release Left Click to stop pissing
+            if (Input.GetMouseButtonUp(0)) {
+                crazyJoe.IsPissing(false);
+            }
 
-        // For testing purposes
-        // Refil Piss Meter by 1000
-        if (Input.GetKeyUp(KeyCode.Space)) {
-            crazyJoe.RefillPissMeter(100);
-        }
+            // For testing purposes
+            // Refil Piss Meter by 1000
+            if (Input.GetKeyUp(KeyCode.Space)) {
+                crazyJoe.RefillPissMeter(100);
+            }
 
-        // For testing purposes
-        // Refil Health by 100
-        if (Input.GetKeyUp(KeyCode.H)) {
-            crazyJoe.HealHP(100);
+            // For testing purposes
+            // Refil Health by 100
+            if (Input.GetKeyUp(KeyCode.H)) {
+                crazyJoe.HealHP(100);
+            }
         }
     }
 

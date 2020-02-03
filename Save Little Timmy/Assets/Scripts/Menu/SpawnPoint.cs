@@ -6,7 +6,10 @@ public class SpawnPoint : MonoBehaviour
 {
     int typeOfSpawner;
     int index = 0;
+
     SidewalkSpawner spawner;
+    GameObject nextObject;
+
     bool initialized = false;
     int sentinel = 0;
 
@@ -21,11 +24,20 @@ public class SpawnPoint : MonoBehaviour
         return initialized;
     }
 
+    // This needs to be called on the first time when spawning begins
+    // to set a reference to the first nextObject waiting to move
+    public void SetInitialNextObject(GameObject _nextObject) {
+        nextObject = _nextObject;
+    }
+
     private void OnTriggerExit(Collider other) {
         if (sentinel == 0) {
             if (initialized) {
                 if (spawner != null) {
-                    spawner.SpawnNextObject(typeOfSpawner, index);
+                    SpawnableObject spawnableObject = nextObject.GetComponent<SpawnableObject>();
+                    spawnableObject.Begin();
+
+                    nextObject = spawner.SpawnNextObject(typeOfSpawner, index);
                 } else {
                     Debug.Log("Spawner is null: " + gameObject.transform.position);
                 }

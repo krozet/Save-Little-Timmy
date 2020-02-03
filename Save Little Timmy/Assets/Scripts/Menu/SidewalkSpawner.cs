@@ -38,6 +38,10 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
 
     /*
      * Holds data for the Sidewalk segment to be spawned
+     * Creates a sidewalk and begins moving it
+     * Another sidewalk is spawned at the spawner and waits for
+     * the sidewalk infront of it to move out of the spawner before
+     * it begins moving
      * 
      *                length = 4
      *                _ _ _ _
@@ -137,15 +141,36 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     }
 
     private void SpawnInitialSidewalks() {
-        SpawnNextObject(LEFT_SIDEWALK_SPAWN_POINT, 0);
-        SpawnNextObject(RIGHT_SIDEWALK_SPAWN_POINT, 0);
+        GameObject sidewalk;
+
+        // Create the initial left sidewalk that will begin moving immediately
+        sidewalk = SpawnNextObject(LEFT_SIDEWALK_SPAWN_POINT, 0);
+        sidewalk.GetComponent<SpawnableObject>().IsMoving(true);
+        // Create the next sidewalk that will wait to move till the initial left sidewalk
+        // has left the spawn point
+        sidewalk = SpawnNextObject(LEFT_SIDEWALK_SPAWN_POINT, 0);
+        leftSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().SetInitialNextObject(sidewalk);
+
+        // Create the initial right sidewalk that will begin moving immediately
+        sidewalk = SpawnNextObject(RIGHT_SIDEWALK_SPAWN_POINT, 0);
+        sidewalk.GetComponent<SpawnableObject>().IsMoving(true);
+        // Create the next sidewalk that will wait to move till the initial right sidewalk
+        // has left the spawn point
+        sidewalk = SpawnNextObject(RIGHT_SIDEWALK_SPAWN_POINT, 0);
+        rightSidewalkEdgeSpawnPoint.GetComponent<SpawnPoint>().SetInitialNextObject(sidewalk);
 
         for (int i = 0; i <= centerSidewalkSpawnPoints.Count - 1; i++) {
-            SpawnNextObject(CENTER_SIDEWALK_SPAWN_POINT, i);
+            // Create the initial right sidewalk that will begin moving immediately
+            sidewalk = SpawnNextObject(CENTER_SIDEWALK_SPAWN_POINT, i);
+            sidewalk.GetComponent<SpawnableObject>().IsMoving(true);
+            // Create the next sidewalk that will wait to move till the initial right sidewalk
+            // has left the spawn point
+            sidewalk = SpawnNextObject(CENTER_SIDEWALK_SPAWN_POINT, i);
+            centerSidewalkSpawnPoints[i].GetComponent<SpawnPoint>().SetInitialNextObject(sidewalk);
         }
     }
 
-    private void SpawnLeftSidewalk() {
+    private GameObject SpawnLeftSidewalk() {
         GameObject temp;
         bool isLargeSidewalk = false;
         int randInt = Random.Range(1, 40);
@@ -163,10 +188,14 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         }
         //temp.transform.RotateAround(temp.transform.position, Vector3.up, -90);
         temp.transform.parent = transform;
-        AdjustSpawner(temp, leftSidewalkEdgeSpawnPoint, isLargeSidewalk, SpawnableObject.ROTATE_HOUSE_LEFT);
+
+        InitializeSpawnableObject(temp, leftSidewalkEdgeSpawnPoint, isLargeSidewalk, SpawnableObject.ROTATE_HOUSE_LEFT);
+        AdjustSpawner(temp.GetComponent<SpawnableObject>(), leftSidewalkEdgeSpawnPoint);
+
+        return temp;
     }
 
-    private void SpawnRightSidewalk() {
+    private GameObject SpawnRightSidewalk() {
         GameObject temp;
         //Quaternion spawnRotation = Quaternion.Euler(transform.rotation.x, 90, transform.rotation.z);
         bool isLargeSidewalk = false;
@@ -185,10 +214,14 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         }
         //temp.transform.Rotate(0, 90, 0);
         temp.transform.parent = transform;
-        AdjustSpawner(temp, rightSidewalkEdgeSpawnPoint, isLargeSidewalk, SpawnableObject.ROTATE_HOUSE_RIGHT);
+
+        InitializeSpawnableObject(temp, rightSidewalkEdgeSpawnPoint, isLargeSidewalk, SpawnableObject.ROTATE_HOUSE_RIGHT);
+        AdjustSpawner(temp.GetComponent<SpawnableObject>(), rightSidewalkEdgeSpawnPoint);
+
+        return temp;
     }
 
-    private void SpawnCenterSidewalk(int index) {
+    private GameObject SpawnCenterSidewalk(int index) {
         GameObject temp;
         int randInt = Random.Range(1, 40);
         if (randInt == 1) {
@@ -199,20 +232,28 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
             temp = Instantiate(smallSidewalkCenter, centerSidewalkSpawnPoints[index].transform.position, Quaternion.identity);
         }
         temp.transform.parent = transform;
-        AdjustSpawner(temp, centerSidewalkSpawnPoints[index], false, SpawnableObject.ROTATE_HOUSE_FORWARD);
+
+        InitializeSpawnableObject(temp, centerSidewalkSpawnPoints[index], false, SpawnableObject.ROTATE_HOUSE_FORWARD);
+        AdjustSpawner(temp.GetComponent<SpawnableObject>(), centerSidewalkSpawnPoints[index]);
+
+        return temp;
     }
 
-    private void AdjustSpawner(GameObject sidewalk, GameObject spawnPoint, bool largeSidewalk, int rotationDirection) {
+    private void InitializeSpawnableObject(GameObject sidewalk, GameObject spawnPoint, bool largeSidewalk, int rotationDirection) {
         // make new sidewalk a SpawnableObject
         SpawnableObject spawnableObject = sidewalk.AddComponent<SpawnableObject>();
         Vector3 position = spawnPoint.transform.position;
         if (largeSidewalk) {
-            position.z -= sizeOfSingleSidewalk.z/2f;
+            position.z -= sizeOfSingleSidewalk.z / 2f;
         }
-        Debug.Log("AFTER 1 Obj pos: " + spawnableObject.transform.position + "\tSpawn Pos " + spawnPoint.transform.position);
+        //Debug.Log("AFTER 1 Obj pos: " + spawnableObject.transform.position + "\tSpawn Pos " + spawnPoint.transform.position);
 
         spawnableObject.init(position, veloicity, rotationDirection);
-        Debug.Log("AFTER 2 Obj pos: " + spawnableObject.transform.position + "\tSpawn Pos " + spawnPoint.transform.position);
+    }
+
+    private void AdjustSpawner(SpawnableObject spawnableObject, GameObject spawnPoint) {
+        
+        //Debug.Log("AFTER 2 Obj pos: " + spawnableObject.transform.position + "\tSpawn Pos " + spawnPoint.transform.position);
 
         // have spawn point match the size of the spawning obj
         spawnPoint.GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
@@ -222,20 +263,24 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         spawnPoint.transform.position = new Vector3(spawnPoint.transform.position.x, spawnableObject.transform.position.y, spawnPoint.transform.position.z);
     }
 
-    public void SpawnNextObject(int typeOfSpawner, int index) {
+    public GameObject SpawnNextObject(int typeOfSpawner, int index) {
+        GameObject sidewalk;
+
         switch (typeOfSpawner) {
             case LEFT_SIDEWALK_SPAWN_POINT:
-                SpawnLeftSidewalk();
+                sidewalk = SpawnLeftSidewalk();
                 break;
             case RIGHT_SIDEWALK_SPAWN_POINT:
-                SpawnRightSidewalk();
+                sidewalk = SpawnRightSidewalk();
                 break;
             case CENTER_SIDEWALK_SPAWN_POINT:
-                SpawnCenterSidewalk(index);
+                sidewalk = SpawnCenterSidewalk(index);
                 break;
             default:
+                sidewalk = SpawnCenterSidewalk(index);
                 break;
         }
+        return sidewalk;
     }
 
     public void StartSpawning() {

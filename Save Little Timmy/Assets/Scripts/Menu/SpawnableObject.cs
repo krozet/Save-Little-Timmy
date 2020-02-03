@@ -16,10 +16,14 @@ public class SpawnableObject : MonoBehaviour
     Renderer mesh;
     Vector3 velocity = new Vector3(0,0,0);
 
+    bool isMoving = false;
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.localPosition += velocity * Time.deltaTime;
+        if (isMoving) {
+            transform.localPosition += velocity * Time.deltaTime;
+        }
     }
 
     public void init(Vector3 _spawnPoint, float _velocity, int rotateDirection) {
@@ -47,6 +51,10 @@ public class SpawnableObject : MonoBehaviour
         SetRotationDirection(rotateDirection);
     }
 
+    public void IsMoving(bool _isMoving) {
+        isMoving = _isMoving;
+    }
+
     private void SetRotationDirection(int rotateDirection) {
         switch (rotateDirection) {
             case ROTATE_HOUSE_LEFT:
@@ -62,6 +70,11 @@ public class SpawnableObject : MonoBehaviour
         }
     }
 
+    public void Begin() {
+        SetPositionDirectlyBehindObjectAhead();
+        IsMoving(true);
+    }
+
     public Vector3 GetColliderSize() {
         return col.size;
     }
@@ -72,6 +85,23 @@ public class SpawnableObject : MonoBehaviour
         // moves it to the center of the spawnPoint and removes the old height of the last obj if there was one
         startPosition += new Vector3(size.x/2f, size.y - spawnPoint.y, size.z/2f);
         transform.position = startPosition;
+    }
+
+    public void SetPositionDirectlyBehindObjectAhead() {
+        GameObject objectAhead = FindObjectAhead();
+        if (objectAhead != null) {
+            float distanceBetween = objectAhead.transform.position.z - transform.position.z - size.z;
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + distanceBetween);
+        }
+    }
+
+    private GameObject FindObjectAhead() {
+        RaycastHit objectHit;
+        // Shoot raycast
+        if (Physics.Raycast(transform.position, Vector3.forward, out objectHit, 50)) {
+            return objectHit.collider.gameObject;
+        }
+        return null;
     }
 
     public void SetForwardVelocity(float _velocity) {
