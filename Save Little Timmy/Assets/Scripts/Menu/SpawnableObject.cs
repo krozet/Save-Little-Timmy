@@ -114,7 +114,6 @@ public class SpawnableObject : MonoBehaviour
 
     public void SetForwardVelocity(float _velocity) {
         velocity = new Vector3(0,0,_velocity);
-        //rb.velocity = Vector3.forward * velocity;
     }
 
     // House right = stage left
