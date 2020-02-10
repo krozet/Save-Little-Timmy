@@ -26,7 +26,7 @@ public class SpawnableObject : MonoBehaviour
         }
     }
 
-    public void init(Vector3 _spawnPoint, float _velocity, int rotateDirection) {
+    public void init(Vector3 _spawnPoint, float _velocity, int rotateDirection, float maxHeightOfSidewalk) {
         col = GetComponent<BoxCollider>();
         if (col == null) {
             col = gameObject.AddComponent<BoxCollider>();
@@ -47,7 +47,7 @@ public class SpawnableObject : MonoBehaviour
         size = mesh.bounds.size;
 
         SetForwardVelocity(_velocity);
-        SetStartPosition(_spawnPoint);
+        SetStartPosition(_spawnPoint, maxHeightOfSidewalk);
         SetRotationDirection(rotateDirection);
     }
 
@@ -80,11 +80,11 @@ public class SpawnableObject : MonoBehaviour
         return col.size;
     }
 
-    public void SetStartPosition(Vector3 _spawnPoint) {
+    public void SetStartPosition(Vector3 _spawnPoint, float maxHeightOfSidewalk) {
         spawnPoint = _spawnPoint;
         Vector3 startPosition = spawnPoint;
         // moves it to the center of the spawnPoint and removes the old height of the last obj if there was one
-        startPosition += new Vector3(size.x/2f, size.y - spawnPoint.y, size.z/2f);
+        startPosition += new Vector3(size.x/2f, maxHeightOfSidewalk, size.z/2f);
         transform.position = startPosition;
     }
 
@@ -92,6 +92,9 @@ public class SpawnableObject : MonoBehaviour
         GameObject objectAhead = FindObjectAhead();
         if (objectAhead != null) {
             float distanceBetween = objectAhead.transform.position.z - transform.position.z - size.z;
+            if (distanceBetween < 0) {
+                distanceBetween += size.z;
+            }
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + distanceBetween);
         }
     }
@@ -99,10 +102,14 @@ public class SpawnableObject : MonoBehaviour
     private GameObject FindObjectAhead() {
         RaycastHit objectHit;
         // Shoot raycast
-        if (Physics.Raycast(transform.position, Vector3.forward, out objectHit, 50)) {
+        if (Physics.Raycast(transform.position, Vector3.forward, out objectHit, 500)) {
             return objectHit.collider.gameObject;
         }
         return null;
+    }
+
+    public void SetHeight(float height) {
+        transform.position = new Vector3(transform.position.x, height, transform.position.z);
     }
 
     public void SetForwardVelocity(float _velocity) {

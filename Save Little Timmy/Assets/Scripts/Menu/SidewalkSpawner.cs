@@ -31,10 +31,11 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     private List<GameObject> smallSidewalkCenterDefects;
 
     private bool spawnFirstObjects = false;
-    private float veloicity = 2f;
+    private float veloicity = 1f;
     private Vector3 sizeOfSingleSidewalk;
     private Vector3 sizeOfTotalSidewalk;
     private Vector3 scaleFactor = new Vector3(10, 1, 10);
+    private float maxHeightOfSidewalk = 0f;
 
     /*
      * Holds data for the Sidewalk segment to be spawned
@@ -54,6 +55,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     {
         AddSidewalksToLists();
         IncreaseScaling();
+        FindMaxHeightOfSidewalks();
 
         // we are primarily looking for the length of the whole sidewalk, not so concerned with the width
         sizeOfSingleSidewalk = smallSidewalkCenter.GetComponent<Renderer>().bounds.size;
@@ -109,6 +111,34 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         foreach (GameObject obj in smallSidewalkCenterDefects) {
             obj.transform.localScale = scaleFactor;
         }
+    }
+
+    private void FindMaxHeightOfSidewalks() {
+        float height = 0f;
+        foreach (GameObject obj in smallSidewalkEdges) {
+            height = obj.GetComponent<Renderer>().bounds.size.y;
+            if (height > maxHeightOfSidewalk) {
+                maxHeightOfSidewalk = height;
+            }
+        }
+
+        foreach (GameObject obj in smallSidewalkEdgeDefects) {
+            height = obj.GetComponent<Renderer>().bounds.size.y;
+            if (height > maxHeightOfSidewalk) {
+                maxHeightOfSidewalk = height;
+            }
+        }
+
+        foreach (GameObject obj in smallSidewalkCenterDefects) {
+            height = obj.GetComponent<Renderer>().bounds.size.y;
+            if (height > maxHeightOfSidewalk) {
+                maxHeightOfSidewalk = height;
+            }
+        }
+    }
+
+    public float GetMaxHeight() {
+        return maxHeightOfSidewalk;
     }
 
     private void AddSidewalksToLists() {
@@ -174,6 +204,9 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     private GameObject SpawnLeftSidewalk() {
         GameObject temp;
         bool isLargeSidewalk = false;
+        // Code used to spawn imperfect sidewalks
+        // Not working yet
+        /*
         int randInt = Random.Range(1, 40);
         if (randInt == 1) {
             if (Random.Range(1, 3) != 1) {
@@ -181,13 +214,16 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
                 temp = Instantiate(smallSidewalkEdgeDefects[Random.Range(0, smallSidewalkEdgeDefects.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
             }
             // large defect edge
-            temp = Instantiate(largeSidewalkEdgeDefect, leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
-            isLargeSidewalk = true;
+            //temp = Instantiate(largeSidewalkEdgeDefect, leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
+            //isLargeSidewalk = true;
+            temp = Instantiate(smallSidewalkEdgeDefects[Random.Range(0, smallSidewalkEdgeDefects.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         } else {
             // regular small edges
             temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
-        }
-        //temp.transform.RotateAround(temp.transform.position, Vector3.up, -90);
+         */
+
+        // regular small edges
+        temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], leftSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         temp.transform.parent = transform;
 
         InitializeSpawnableObject(temp, leftSidewalkEdgeSpawnPoint, isLargeSidewalk, SpawnableObject.ROTATE_HOUSE_LEFT);
@@ -198,8 +234,10 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
 
     private GameObject SpawnRightSidewalk() {
         GameObject temp;
-        //Quaternion spawnRotation = Quaternion.Euler(transform.rotation.x, 90, transform.rotation.z);
         bool isLargeSidewalk = false;
+        // Code used to spawn imperfect sidewalks
+        // Not working yet
+        /*
         int randInt = Random.Range(1, 40);
         if (randInt == 1) {
             if (Random.Range(1, 3) != 1) {
@@ -207,13 +245,17 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
                 temp = Instantiate(smallSidewalkEdgeDefects[Random.Range(0, smallSidewalkEdgeDefects.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
             }
             // large defect edge
-            temp = Instantiate(largeSidewalkEdgeDefect, rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
-            isLargeSidewalk = true;
+            //temp = Instantiate(largeSidewalkEdgeDefect, rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
+            //isLargeSidewalk = true;
+            temp = Instantiate(smallSidewalkEdgeDefects[Random.Range(0, smallSidewalkEdgeDefects.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         } else {
             // regular small edges
             temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         }
-        //temp.transform.Rotate(0, 90, 0);
+        */
+
+        // regular small edges
+        temp = Instantiate(smallSidewalkEdges[Random.Range(0, smallSidewalkEdges.Count - 1)], rightSidewalkEdgeSpawnPoint.transform.position, Quaternion.identity);
         temp.transform.parent = transform;
 
         InitializeSpawnableObject(temp, rightSidewalkEdgeSpawnPoint, isLargeSidewalk, SpawnableObject.ROTATE_HOUSE_RIGHT);
@@ -224,6 +266,9 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
 
     private GameObject SpawnCenterSidewalk(int index) {
         GameObject temp;
+        // Code used to spawn imperfect sidewalks
+        // Not working yet
+        /*
         int randInt = Random.Range(1, 40);
         if (randInt == 1) {
             // small defect center
@@ -232,6 +277,10 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
             // small center
             temp = Instantiate(smallSidewalkCenter, centerSidewalkSpawnPoints[index].transform.position, Quaternion.identity);
         }
+        */
+
+        // small center
+        temp = Instantiate(smallSidewalkCenter, centerSidewalkSpawnPoints[index].transform.position, Quaternion.identity);
         temp.transform.parent = transform;
 
         InitializeSpawnableObject(temp, centerSidewalkSpawnPoints[index], false, SpawnableObject.ROTATE_HOUSE_FORWARD);
@@ -249,16 +298,16 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
             position.z -= sizeOfSingleSidewalk.z / 2f;
         }
 
-        spawnableObject.init(position, veloicity, rotationDirection);
+        spawnableObject.init(position, veloicity, rotationDirection, maxHeightOfSidewalk);
     }
 
     private void AdjustSpawner(SpawnableObject spawnableObject, GameObject spawnPoint) {
         // have spawn point match the size of the spawning obj
         spawnPoint.GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
         // have spawn point match the scaling of the spawning obj
-        spawnPoint.transform.localScale = spawnableObject.transform.localScale;
+        spawnPoint.transform.localScale = new Vector3 (spawnableObject.transform.localScale.x, 100, spawnableObject.transform.localScale.z);
         spawnPoint.transform.rotation = spawnableObject.transform.rotation;
-        spawnPoint.transform.position = new Vector3(spawnPoint.transform.position.x, spawnableObject.transform.position.y, spawnPoint.transform.position.z);
+        //spawnPoint.transform.position = new Vector3(spawnPoint.transform.position.x, spawnableObject.transform.position.y, spawnPoint.transform.position.z);
     }
 
     public GameObject SpawnNextObject(int typeOfSpawner, int index) {

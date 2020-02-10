@@ -34,6 +34,9 @@ public class SpawnPoint : MonoBehaviour
         if (sentinel == 0) {
             if (initialized) {
                 if (spawner != null) {
+                    //Debug.Log("Before: " + other.transform.position.y);
+                    //other.gameObject.GetComponent<SpawnableObject>().SetHeight(spawner.GetMaxHeight());
+                    //Debug.Log("After: " + other.transform.position.y);
                     SpawnableObject spawnableObject = nextObject.GetComponent<SpawnableObject>();
                     spawnableObject.Begin();
 
@@ -50,8 +53,10 @@ public class SpawnPoint : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (sentinel == 1) {
-            sentinel = 0;
+        if (other.gameObject.tag != "Ground") {
+            if (sentinel == 1) {
+                sentinel = 0;
+            }
         }
     }
 }
