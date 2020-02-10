@@ -26,7 +26,7 @@ public class SpawnableObject : MonoBehaviour
         }
     }
 
-    public void init(Vector3 _spawnPoint, float _velocity, int rotateDirection, float maxHeightOfSidewalk) {
+    public void init(Vector3 _spawnPoint, float _velocity, int rotateDirection, float maxHeightOfObjects = 0) {
         col = GetComponent<BoxCollider>();
         if (col == null) {
             col = gameObject.AddComponent<BoxCollider>();
@@ -47,7 +47,7 @@ public class SpawnableObject : MonoBehaviour
         size = mesh.bounds.size;
 
         SetForwardVelocity(_velocity);
-        SetStartPosition(_spawnPoint, maxHeightOfSidewalk);
+        SetStartPosition(_spawnPoint, maxHeightOfObjects);
         SetRotationDirection(rotateDirection);
     }
 
@@ -80,25 +80,29 @@ public class SpawnableObject : MonoBehaviour
         return col.size;
     }
 
-    public void SetStartPosition(Vector3 _spawnPoint, float maxHeightOfSidewalk) {
+    public void SetStartPosition(Vector3 _spawnPoint, float maxHeightOfObjects) {
         spawnPoint = _spawnPoint;
         Vector3 startPosition = spawnPoint;
-        // moves it to the center of the spawnPoint and removes the old height of the last obj if there was one
-        startPosition += new Vector3(size.x/2f, maxHeightOfSidewalk, size.z/2f);
+        // moves it to the center of the spawnPoint and sets it to the max height a sidewalk can be
+        startPosition += new Vector3(size.x/2f, maxHeightOfObjects, size.z/2f);
         transform.position = startPosition;
     }
 
+    // adds the distanceBetween the objAhead and the current object so that it will appear directly behind the objAhead
     public void SetPositionDirectlyBehindObjectAhead() {
         GameObject objectAhead = FindObjectAhead();
         if (objectAhead != null) {
             float distanceBetween = objectAhead.transform.position.z - transform.position.z - size.z;
+            // if the distanceBetween is less than 0, then that means the size doesn't not need to be accounted for
             if (distanceBetween < 0) {
                 distanceBetween += size.z;
             }
+            // closes the gap
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + distanceBetween);
         }
     }
 
+    // locates the objAhead, if there is one
     private GameObject FindObjectAhead() {
         RaycastHit objectHit;
         // Shoot raycast
@@ -106,10 +110,6 @@ public class SpawnableObject : MonoBehaviour
             return objectHit.collider.gameObject;
         }
         return null;
-    }
-
-    public void SetHeight(float height) {
-        transform.position = new Vector3(transform.position.x, height, transform.position.z);
     }
 
     public void SetForwardVelocity(float _velocity) {

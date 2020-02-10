@@ -20,6 +20,7 @@ public class SpawnPoint : MonoBehaviour
         index = _index;
     }
 
+    // Used for debuging spawn points
     public bool IsInitialized() {
         return initialized;
     }
@@ -30,16 +31,16 @@ public class SpawnPoint : MonoBehaviour
         nextObject = _nextObject;
     }
 
+    // When an object leaves the spawn point, begin moving nextObject and create a nextObject to be moved
     private void OnTriggerExit(Collider other) {
         if (sentinel == 0) {
             if (initialized) {
                 if (spawner != null) {
-                    //Debug.Log("Before: " + other.transform.position.y);
-                    //other.gameObject.GetComponent<SpawnableObject>().SetHeight(spawner.GetMaxHeight());
-                    //Debug.Log("After: " + other.transform.position.y);
+                    // Starts moving nextObject
                     SpawnableObject spawnableObject = nextObject.GetComponent<SpawnableObject>();
                     spawnableObject.Begin();
 
+                    // Sets the nextObject to move
                     nextObject = spawner.SpawnNextObject(typeOfSpawner, index);
                 } else {
                     Debug.Log("Spawner is null: " + gameObject.transform.position);

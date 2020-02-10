@@ -67,12 +67,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         SetSpawnPointLocations();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // used for debuging sidewalk spawn points
     private void CheckCenterSidewalkInitialization() {
         foreach (GameObject sw in centerSidewalkSpawnPoints) {
             Debug.Log("Is init?: " + sw.GetComponent<SpawnPoint>().IsInitialized());
@@ -96,6 +91,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         }
     }
 
+    // This will increase the side of each individual sidewalk squares
     private void IncreaseScaling() {
         smallSidewalkCenter.transform.localScale = scaleFactor;
         largeSidewalkEdgeDefect.transform.localScale = scaleFactor;
@@ -113,6 +109,8 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         }
     }
 
+    // Finds the max height of all the sidewalk squares
+    // This is used to ensure that all the sidewalk squares are placed at the same height
     private void FindMaxHeightOfSidewalks() {
         float height = 0f;
         foreach (GameObject obj in smallSidewalkEdges) {
@@ -137,10 +135,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         }
     }
 
-    public float GetMaxHeight() {
-        return maxHeightOfSidewalk;
-    }
-
+    // Adds the sidewalk squares to lists so that they can be properly iterated through
     private void AddSidewalksToLists() {
         smallSidewalkEdges = new List<GameObject>();
         smallSidewalkEdges.Add(smallSidewalkEdge);
@@ -156,6 +151,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         smallSidewalkCenterDefects.Add(smallSidewalkCenterDefect2);
     }
 
+    // Ensures that sidewalk spawn points are right next to each other in a line
     private void SetSpawnPointLocations() {
         Vector3 startingPos = transform.position;
         startingPos.x -= (sizeOfTotalSidewalk.x / 2f) + (sizeOfSingleSidewalk.x/2f);
@@ -301,13 +297,13 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         spawnableObject.init(position, veloicity, rotationDirection, maxHeightOfSidewalk);
     }
 
+    // Ensures that the spawn point is of correct dimensions to check for when a sidewalk leave the spawner trigger
     private void AdjustSpawner(SpawnableObject spawnableObject, GameObject spawnPoint) {
         // have spawn point match the size of the spawning obj
         spawnPoint.GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
         // have spawn point match the scaling of the spawning obj
         spawnPoint.transform.localScale = new Vector3 (spawnableObject.transform.localScale.x, 100, spawnableObject.transform.localScale.z);
         spawnPoint.transform.rotation = spawnableObject.transform.rotation;
-        //spawnPoint.transform.position = new Vector3(spawnPoint.transform.position.x, spawnableObject.transform.position.y, spawnPoint.transform.position.z);
     }
 
     public GameObject SpawnNextObject(int typeOfSpawner, int index) {
