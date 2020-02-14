@@ -27,6 +27,14 @@ public class RoadSpawner : MonoBehaviour, Spawner
      * Another Road is spawned at the spawner and waits for
      * the Road infront of it to move out of the spawner before
      * it begins moving
+     * 
+     * Left Side Road
+     *    |
+     *    v
+     * | - - | - - |
+     *          ^
+     *          |
+     *        Right Side Road
      */
 
     // Start is called before the first frame update
@@ -114,7 +122,17 @@ public class RoadSpawner : MonoBehaviour, Spawner
         temp = Instantiate(yellowEdgeRoadWithDivisionLane, rightSideRoadSpawnPoints[index].transform.position, Quaternion.identity);
         temp.transform.parent = transform;
 
-        InitializeSpawnableObject(temp, rightSideRoadSpawnPoints[index], SpawnableObject.ROTATE_HOUSE_FORWARD);
+        switch (index) {
+            case 0:
+                InitializeSpawnableObject(temp, rightSideRoadSpawnPoints[index], SpawnableObject.ROTATE_HALF_TURN);
+                break;
+            case 1:
+                InitializeSpawnableObject(temp, rightSideRoadSpawnPoints[index], SpawnableObject.ROTATE_HOUSE_FORWARD);
+                break;
+            default:
+                break;
+        }
+
         AdjustSpawner(temp.GetComponent<SpawnableObject>(), rightSideRoadSpawnPoints[index]);
 
         return temp;
@@ -126,7 +144,17 @@ public class RoadSpawner : MonoBehaviour, Spawner
         temp = Instantiate(yellowEdgeRoadWithDivisionLane, leftSideRoadSpawnPoints[index].transform.position, Quaternion.identity);
         temp.transform.parent = transform;
 
-        InitializeSpawnableObject(temp, leftSideRoadSpawnPoints[index], SpawnableObject.ROTATE_HALF_TURN);
+        switch (index) {
+            case 0:
+                InitializeSpawnableObject(temp, leftSideRoadSpawnPoints[index], SpawnableObject.ROTATE_HALF_TURN);
+                break;
+            case 1:
+                InitializeSpawnableObject(temp, leftSideRoadSpawnPoints[index], SpawnableObject.ROTATE_HOUSE_FORWARD);
+                break;
+            default:
+                break;
+        }
+
         AdjustSpawner(temp.GetComponent<SpawnableObject>(), leftSideRoadSpawnPoints[index]);
 
         return temp;

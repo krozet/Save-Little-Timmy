@@ -130,8 +130,9 @@ public class SpawnableObject : MonoBehaviour
 
     
     public void RotateHalfTurn() {
-        RotateHouseRight();
-        RotateHouseRight();
+        transform.rotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
+        // adjusts for the rotation of the small pieces
+        transform.position += new Vector3(-size.x, 0, -size.z);
     }
 
     // House right = stage left
