@@ -7,33 +7,39 @@ public class MenuSceneManager : MonoBehaviour
     public GameObject[] objects;
 
     private GameObject sidewalkSpawner;
-    private List<GameObject> instanciatedObjects;
-    private float speed = 10f;
+    private GameObject roadSpawner;
 
     // Start is called before the first frame update
     void Start()
     {
-        instanciatedObjects = new List<GameObject>();
         sidewalkSpawner = GameObject.Find("SidewalkSpawner");
-        sidewalkSpawner.GetComponent<SidewalkSpawner>().StartSpawning();
-        //RandomInstanciation();
+        roadSpawner = GameObject.Find("RoadSpawner");
+
+        SetSpawnerPositions();
+        StartSpawning();
     }
 
-    // Update is called once per frame
+    void SetSpawnerPositions() {
+        SidewalkSpawner sidewalkSpawnerScript = sidewalkSpawner.GetComponent<SidewalkSpawner>();
+        RoadSpawner roadSpawnerScript = roadSpawner.GetComponent<RoadSpawner>();
+
+        Vector3 sidewalkSize = sidewalkSpawnerScript.GetTotalSize();
+        Vector3 roadSize = roadSpawnerScript.GetTotalSize();
+        Vector3 newRoadPos = new Vector3(roadSpawner.transform.position.x + sidewalkSize.x + roadSize.x/2f, roadSpawner.transform.position.y, roadSpawner.transform.position.z);
+
+        float minSidewalkHeight = sidewalkSpawnerScript.GetMinHeight();
+
+        roadSpawnerScript.SetMaxHeight(minSidewalkHeight);
+        roadSpawner.transform.position = newRoadPos;
+    }
+
+    void StartSpawning() {
+        sidewalkSpawner.GetComponent<SidewalkSpawner>().StartSpawning();
+        roadSpawner.GetComponent<RoadSpawner>().StartSpawning();
+    }
+
     void Update()
     {
-        /*foreach (GameObject obj in instanciatedObjects) {
-            obj.GetComponent<Rigidbody>().velocity = obj.transform.TransformDirection(Vector3.forward * speed);
-        }*/
+        
     }
-
-    /*public void RandomInstanciation() {
-        int randomIndex = (int)Random.Range(0, objects.Length - 1f);
-        GameObject temp = Instantiate(objects[1],
-                                            sidewalkSpawner.transform.position,
-                                            Quaternion.identity);
-        //temp.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
-        temp.GetComponent<SpawnableObject>().init(sidewalkSpawner.transform.position, speed);
-        instanciatedObjects.Add(temp);
-    }*/
 }

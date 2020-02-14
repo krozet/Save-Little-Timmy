@@ -30,12 +30,12 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     private List<GameObject> smallSidewalkEdgeDefects;
     private List<GameObject> smallSidewalkCenterDefects;
 
-    private bool spawnFirstObjects = false;
     private float veloicity = 1f;
     private Vector3 sizeOfSingleSidewalk;
     private Vector3 sizeOfTotalSidewalk;
     private Vector3 scaleFactor = new Vector3(10, 1, 10);
     private float maxHeightOfSidewalk = 0f;
+    private float minHeightOfSidewalk = 100000f;
 
     /*
      * Holds data for the Sidewalk segment to be spawned
@@ -55,7 +55,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     {
         AddSidewalksToLists();
         IncreaseScaling();
-        FindMaxHeightOfSidewalks();
+        FindMinAndMaxHeightOfSidewalks();
 
         // we are primarily looking for the length of the whole sidewalk, not so concerned with the width
         sizeOfSingleSidewalk = smallSidewalkCenter.GetComponent<Renderer>().bounds.size;
@@ -74,7 +74,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
         }
     }
 
-    private void InitializeSpawnPoints() {
+    public void InitializeSpawnPoints() {
         // Create edge side walk spawn points
         leftSidewalkEdgeSpawnPoint = Instantiate(spawnPointPrefab, Vector3.zero, Quaternion.identity);
         leftSidewalkEdgeSpawnPoint.transform.parent = transform;
@@ -92,7 +92,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     }
 
     // This will increase the side of each individual sidewalk squares
-    private void IncreaseScaling() {
+    public void IncreaseScaling() {
         smallSidewalkCenter.transform.localScale = scaleFactor;
         largeSidewalkEdgeDefect.transform.localScale = scaleFactor;
 
@@ -111,12 +111,16 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
 
     // Finds the max height of all the sidewalk squares
     // This is used to ensure that all the sidewalk squares are placed at the same height
-    private void FindMaxHeightOfSidewalks() {
+    private void FindMinAndMaxHeightOfSidewalks() {
         float height = 0f;
         foreach (GameObject obj in smallSidewalkEdges) {
             height = obj.GetComponent<Renderer>().bounds.size.y;
             if (height > maxHeightOfSidewalk) {
                 maxHeightOfSidewalk = height;
+            }
+
+            if (height < minHeightOfSidewalk) {
+                minHeightOfSidewalk = height;
             }
         }
 
@@ -125,12 +129,20 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
             if (height > maxHeightOfSidewalk) {
                 maxHeightOfSidewalk = height;
             }
+
+            if (height < minHeightOfSidewalk) {
+                minHeightOfSidewalk = height;
+            }
         }
 
         foreach (GameObject obj in smallSidewalkCenterDefects) {
             height = obj.GetComponent<Renderer>().bounds.size.y;
             if (height > maxHeightOfSidewalk) {
                 maxHeightOfSidewalk = height;
+            }
+
+            if (height < minHeightOfSidewalk) {
+                minHeightOfSidewalk = height;
             }
         }
     }
@@ -152,7 +164,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     }
 
     // Ensures that sidewalk spawn points are right next to each other in a line
-    private void SetSpawnPointLocations() {
+    public void SetSpawnPointLocations() {
         Vector3 startingPos = transform.position;
         startingPos.x -= (sizeOfTotalSidewalk.x / 2f) + (sizeOfSingleSidewalk.x/2f);
         leftSidewalkEdgeSpawnPoint.transform.position = startingPos;
@@ -167,7 +179,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     }
 
     // Spawns two sidewalks per spawner - the initial sidewalk and the next sidewalk
-    private void SpawnInitialSidewalks() {
+    public void SpawnInitialObjects() {
         GameObject sidewalk;
 
         // Create the initial left sidewalk that will begin moving immediately
@@ -298,7 +310,7 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     }
 
     // Ensures that the spawn point is of correct dimensions to check for when a sidewalk leave the spawner trigger
-    private void AdjustSpawner(SpawnableObject spawnableObject, GameObject spawnPoint) {
+    public void AdjustSpawner(SpawnableObject spawnableObject, GameObject spawnPoint) {
         // have spawn point match the size of the spawning obj
         spawnPoint.GetComponent<BoxCollider>().size = spawnableObject.GetColliderSize();
         // have spawn point match the scaling of the spawning obj
@@ -327,6 +339,14 @@ public class SidewalkSpawner : MonoBehaviour, Spawner
     }
 
     public void StartSpawning() {
-        SpawnInitialSidewalks();
+        SpawnInitialObjects();
+    }
+
+    public Vector3 GetTotalSize() {
+        return sizeOfTotalSidewalk;
+    }
+
+    public float GetMinHeight() {
+        return minHeightOfSidewalk;
     }
 }

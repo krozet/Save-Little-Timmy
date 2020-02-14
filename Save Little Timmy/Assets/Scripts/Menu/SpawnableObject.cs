@@ -9,6 +9,7 @@ public class SpawnableObject : MonoBehaviour
     public const int ROTATE_HOUSE_LEFT = 0;
     public const int ROTATE_HOUSE_RIGHT = 1;
     public const int ROTATE_HOUSE_FORWARD = 2;
+    public const int ROTATE_HALF_TURN = 3;
     Vector3 size;
     Vector3 spawnPoint;
     BoxCollider col;
@@ -26,7 +27,7 @@ public class SpawnableObject : MonoBehaviour
         }
     }
 
-    public void init(Vector3 _spawnPoint, float _velocity, int rotateDirection, float maxHeightOfObjects = 0) {
+    public void init(Vector3 _spawnPoint, float _velocity, int rotateDirection, float maxHeightOfObjects = 0f) {
         col = GetComponent<BoxCollider>();
         if (col == null) {
             col = gameObject.AddComponent<BoxCollider>();
@@ -34,7 +35,10 @@ public class SpawnableObject : MonoBehaviour
 
         mesh = GetComponent<Renderer>();
         if (mesh == null) {
-            Debug.Log("Fix yo mesh");
+            mesh = GetComponentInChildren<Renderer>();
+            if (mesh == null) {
+                Debug.Log("Fix yo mesh");
+            }
         }
 
         rb = GetComponent<Rigidbody>();
@@ -65,6 +69,9 @@ public class SpawnableObject : MonoBehaviour
                 break;
             case ROTATE_HOUSE_FORWARD:
                 break;
+            case ROTATE_HALF_TURN:
+                RotateHalfTurn();
+                break;
             default:
                 break;
         }
@@ -83,6 +90,11 @@ public class SpawnableObject : MonoBehaviour
     public void SetStartPosition(Vector3 _spawnPoint, float maxHeightOfObjects) {
         spawnPoint = _spawnPoint;
         Vector3 startPosition = spawnPoint;
+
+        if (maxHeightOfObjects <= 0f) {
+            maxHeightOfObjects = size.y;
+        }
+        Debug.Log("maxHeight: " + maxHeightOfObjects + " size: " + size);
         // moves it to the center of the spawnPoint and sets it to the max height a sidewalk can be
         startPosition += new Vector3(size.x/2f, maxHeightOfObjects, size.z/2f);
         transform.position = startPosition;
@@ -114,6 +126,12 @@ public class SpawnableObject : MonoBehaviour
 
     public void SetForwardVelocity(float _velocity) {
         velocity = new Vector3(0,0,_velocity);
+    }
+
+    
+    public void RotateHalfTurn() {
+        RotateHouseRight();
+        RotateHouseRight();
     }
 
     // House right = stage left
