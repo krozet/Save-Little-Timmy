@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1413816588330371848}
-  - component: {fileID: -5716593768325274650}
+  - component: {fileID: 4535068221773167262}
+  - component: {fileID: 1480351986390071419}
+  - component: {fileID: 2020264334050089390}
   m_Layer: 0
   m_Name: Penis
   m_TagString: Penis
@@ -31,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5716593768325274650
+--- !u!114 &4535068221773167262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,8 +42,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1413816588330371851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ed1b4ec94ff5d741889325311064193, type: 3}
+  m_Script: {fileID: 11500000, guid: b65f98c6dc512854caae0275706f8cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pissEffects:
-  - {fileID: 4102108984755891051, guid: 286f078be4ab6ff439cf1311b73712ec, type: 3}
+  pissEmitter: {fileID: 0}
+  debug: 1
+--- !u!114 &1480351986390071419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413816588330371851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abb44ae648afd4408376cf57078cade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solver: {fileID: 0}
+--- !u!114 &2020264334050089390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413816588330371851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281a35a48de3235449747d1eb68e9d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

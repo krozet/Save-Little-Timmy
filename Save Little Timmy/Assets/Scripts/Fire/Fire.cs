@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class Fire : MonoBehaviour, PissOnable
 {
     public Transform fire;
+    public GameObject smoke;
 
     float scale = 1f;
     ParticleSystem fireParticleSystem;
     Transform[] particleEffects;
     bool setToDestroy = false;
     float initialSizeMultiplier;
+    float health;
+    float maxHealth = 50f;
     Vector3 initialLocalScale;
 
     // Start is called before the first frame update
@@ -26,6 +29,7 @@ public class Fire : MonoBehaviour
         initialSizeMultiplier = fireParticleSystem.main.startSizeMultiplier;
         initialLocalScale = transform.localScale;
 
+        health = maxHealth;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -37,29 +41,28 @@ public class Fire : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        Debug.Log("OnCollisionEnter");
     }
 
     void OnParticleCollision(GameObject other) {
         if (other.CompareTag("Piss")) {
-            PissOnFire();
+            PissOnFire(other.GetComponent<Piss>().GetPissDamage());
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //PissOnFire();
     }
 
-    void PissOnFire() {
-        if (scale <= 0f) {
+    void PissOnFire(float pissDamage) {
+        if (health <= 0f) {
             // Particle Effect has been reduced to a size of 0
             // So destroy it
             DestroyFireParticleEffect();
         } else {
             // Decrease particle effect size
-            scale -= 0.01f;
+            health -= pissDamage;
+            scale = health/maxHealth;
             AdjustSizeOfFire();
         }
     }
@@ -90,5 +93,17 @@ public class Fire : MonoBehaviour
             Destroy(gameObject, timeToWaitBeforeDestroy);
             setToDestroy = true;
         }
+    }
+    public float GetFireDamage() {
+        return 1f;
+    }
+
+    public void HandlePiss()
+    {
+        
+    }
+
+    public GameObject GetPissedOnParticleEffect() {
+        return smoke;
     }
 }

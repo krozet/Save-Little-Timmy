@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class CrazyJoe : MonoBehaviour
 {
-    SpawnPiss spawnPiss;
-    PlayerController playerController;
-    float currentPissMeter;
-    float maxPissMeter = 1000;
-    // This will be converted to damage per second
-    float pissDamage = 0.1f;
-
+    Penis penis;
+    // Create empty Audio Manager object
+    AudioManager audioManager;
     bool isPissing = false;
 
-    // Start is called before the first frame update
+    float currentPissMeter;
+    float maxPissMeter = 100f;
+    float pissDamage = 1f;
+    float health;
+    float maxHealth = 100f;
+
     void Start()
     {
+        // Stores the AudioManager script
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+
         currentPissMeter = maxPissMeter;
-        playerController = GetComponent<PlayerController>();
-        Transform penis = transform.Find("Penis");
-        spawnPiss = new SpawnPiss();
-        spawnPiss.init(playerController);
+        penis = GetComponentInChildren<Penis>();
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -28,6 +30,8 @@ public class CrazyJoe : MonoBehaviour
     {
         if (isPissing) {
             Piss();
+        } else {
+            penis.IsPissing(false, GetPissDamage());
         }
     }
 
@@ -39,20 +43,59 @@ public class CrazyJoe : MonoBehaviour
 
             WaterBottle waterBottle = other.gameObject.GetComponent<WaterBottle>();
 
-            // You now have a reference to the water bottle script on the object you collided with (waterBottle)
-            // Figure out how to call the public method on waterBottle that will give you the fuelAmount
-            // Then store that value in a variable here (float fuelAmount = ...)
-            // Pass that variable to the RefillPissMeter method that I already created
+            //prevents user from picking up bottles if full
+            if (currentPissMeter < maxPissMeter) {
+                waterBottle.Pickup();
 
-            // If you are stuck, look at line 85. It's a clue to half of the answer, but SpawnPissEffect() is a void method...
+                float fuelAmount = waterBottle.GetPissFuelAmount();
+                RefillPissMeter(fuelAmount);
+            }
+        }
+    }
 
-            // float fuelAmount = ...
-            // RefillPissMeter(fuelAmount);
+    private void OnCollisionEnter(Collision collision) {
+        // Checks if collision was with fire
+        if (collision.gameObject.tag == "Fire") {
+            Debug.Log("Crazy Joe is on FIRE");
+            Fire fire = collision.gameObject.GetComponent<Fire>();
+            // Plays crazy joe fire winced at crazy joe location
+            audioManager.AMPlayOneShotAttached(AudioManager.CRAZYJOE_FIRE_WINCE_INDEX, AudioManager.CRAZYJOE_FIRE_WINCE_PATH, gameObject);
+            TakeDamage(fire.GetFireDamage());
+        }
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        // Checks if collision was with fire
+        if (collision.gameObject.tag == "Fire") {
+
+            TakeDamage(1);
+            Debug.Log("Crazy Joe health: " + health);
+
+        }
+    }
+
+    public void TakeDamage(float damage) {
+        if (health > 0) {
+            health -= damage;
+            if (health <= 0) {
+                // You have died
+                Debug.Log("YOU ARE DEAD");
+            }
+        } else {
+            // You are still dead
+            Debug.Log("YOU ARE STILL DEAD - Click 'H' to refill HP");
+        }
+    }
+
+    public void HealHP(float amount) {
+        health += amount;
+        if (health > maxHealth) {
+            health = maxHealth;
         }
     }
 
     public float GetPissDamage() {
-        return pissDamage / Time.deltaTime;
+        return pissDamage;
     }
 
     // This method takes in a piss fuel amount and updates CrazyJoe's current piss meter
@@ -77,18 +120,24 @@ public class CrazyJoe : MonoBehaviour
     // then decrease the meter and spawn piss particle effects
     private void Piss() {
         if (currentPissMeter > 0) {
-            currentPissMeter -= GetPissDamage();
+            //currentPissMeter -= GetPissDamage();
 
             if (currentPissMeter < 0) {
                 currentPissMeter = 0;
             }
 
-            spawnPiss.SpawnPissEffect();
+            if(penis != null) {
+                penis.IsPissing(true, GetPissDamage());
+            } else {
+                Debug.Log("Can't find your penis...");
+            }
 
-            Debug.Log("Current Piss Meter = " + currentPissMeter + " / " + maxPissMeter);
+            //Debug.Log("Current Piss Meter = " + currentPissMeter + " / " + maxPissMeter);
         } else {
-            Debug.Log("You pissed away all your piss");
+            penis.IsPissing(false, GetPissDamage());
+            //Debug.Log("You pissed away all your piss - Press 'Space' to refill piss");
         }
 
     }
+   
 }

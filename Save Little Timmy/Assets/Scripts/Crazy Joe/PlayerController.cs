@@ -10,14 +10,17 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveInput;
     private Vector3 moveVelocity;
     private Vector3 direction;
+    private Vector3 mousePosition;
     private Camera mainCamera;
     private CrazyJoe crazyJoe;
+    private Transform penis;
 
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = FindObjectOfType<Camera>();
         crazyJoe = GetComponent<CrazyJoe>();
+        penis = crazyJoe.GetComponentInChildren<Penis>().transform;
     }
 
     // Update is called once per frame
@@ -45,27 +48,52 @@ public class PlayerController : MonoBehaviour
         // For testing purposes
         // Refil Piss Meter by 1000
         if (Input.GetKeyUp(KeyCode.Space)) {
-            crazyJoe.RefillPissMeter(1000);
+            crazyJoe.RefillPissMeter(100);
+        }
+
+        // For testing purposes
+        // Refil Health by 100
+        if (Input.GetKeyUp(KeyCode.H)) {
+            crazyJoe.HealHP(100);
         }
     }
 
     private void SetRotationTowardsMouse() {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane crazyJoePlace = new Plane(Vector3.up, crazyJoe.transform.position);
+        RaycastHit hit;
         float rayLength;
 
-        if (groundPlane.Raycast(cameraRay, out rayLength)) {
-            Vector3 pointToLookAt = cameraRay.GetPoint(rayLength);
-            direction = new Vector3(pointToLookAt.x, transform.position.y, pointToLookAt.z);
-            transform.LookAt(direction);
+        // Searches for an intersection with a walkable surface
+        /*if (Physics.Raycast(cameraRay, out hit)) {
+            Transform walkableSurface = hit.transform.Find("WalkOnable");
+            if (walkableSurface != null) {
+                mousePosition = cameraRay.GetPoint(hit.distance);
+                direction = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);
+                transform.LookAt(direction);
+                penis.localEulerAngles = transform.localEulerAngles;
+            } 
+        } else */
 
-            if (debug) {
-                Debug.DrawLine(cameraRay.origin, pointToLookAt, Color.red);
-            }
+        // A ray passes through a plane at Crazy Joe's feet
+        if (crazyJoePlace.Raycast(cameraRay, out rayLength)) {
+            mousePosition = cameraRay.GetPoint(rayLength);
+            direction = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);
+            transform.LookAt(direction);
+            penis.localEulerAngles = transform.localEulerAngles;
+        }
+
+        // Draw a line from the camera to the mouse
+        if (debug) {
+            Debug.DrawLine(cameraRay.origin, mousePosition, Color.red);
         }
     }
 
     public Vector3 GetLookAtDirection() {
         return direction;
+    }
+
+    public Vector3 GetMousePosition() {
+        return mousePosition;
     }
 }

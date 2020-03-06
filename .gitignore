@@ -1,8 +1,6 @@
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
-[Bb]uild/
-[Bb]uilds/
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
@@ -38,3 +36,11 @@ sysinfo.txt
 # Ignore Imported Assets
 Save Little Timmy/Assets/Imported Assets/*
 !Save Little Timmy/Assets/Imported Assets/.gitignore
+
+# FMOD
+Save Little Timmy/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
+Save Little Timmy/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset.meta
+Save Little Timmy/FMOD Project Files/Save Little Timmy/.cache/
+Save Little Timmy/FMOD Project Files/Save Little Timmy/.user/
+Save Little Timmy/fmod.log
+Save Little Timmy/fmod_editor.log
