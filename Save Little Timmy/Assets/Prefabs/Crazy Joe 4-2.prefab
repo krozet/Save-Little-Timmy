@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a86997e65553aa4aba42c3651593cf6, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   moveSpeed: 2.88
   debug: 0
 --- !u!136 &2064576724649425406
@@ -61,10 +61,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1703294
-  m_Height: 1.665793
+  m_Radius: 0.23960337
+  m_Height: 2.5301862
   m_Direction: 1
-  m_Center: {x: 0, y: 0.80784786, z: -0.1472011}
+  m_Center: {x: -0.0032987297, y: 0.9101231, z: -0.14720109}
 --- !u!54 &2064576724649425407
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ddffc1298774ae44a5c77485ca0d1d0, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &266774158195227937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: be816489b0e08bb46a862579056058b8,
         type: 3}
       propertyPath: m_Controller
-      value:
+      value: 
       objectReference: {fileID: 9100000, guid: 4b0294f7588641a4dba6bf552827c780, type: 2}
     - target: {fileID: -4216859302048453862, guid: be816489b0e08bb46a862579056058b8,
         type: 3}
@@ -163,22 +163,22 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: be816489b0e08bb46a862579056058b8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: be816489b0e08bb46a862579056058b8,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: be816489b0e08bb46a862579056058b8,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -1668009555293334716, guid: be816489b0e08bb46a862579056058b8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: ff3f12279e0f11f4ab1d735ae671b75a, type: 2}
     - target: {fileID: -927199367670048503, guid: be816489b0e08bb46a862579056058b8,
         type: 3}
