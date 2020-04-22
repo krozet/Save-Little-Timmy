@@ -15,9 +15,7 @@ public class FollowPlayer : MonoBehaviour
     [Header("Distance from Crazy Joe")]
     public Vector3 AdjustableCameraOffset;
     [Header("Rotation")]
-    public float roll;
-    public float pitch;
-    public float yaw;
+    public Quaternion rotation;
 
 
     // Start is called before the first frame update
@@ -29,9 +27,7 @@ public class FollowPlayer : MonoBehaviour
         
         cameraOffset = transform.position - crazyJoe.position;
 
-        roll = transform.rotation.z;
-        pitch = transform.rotation.y;
-        yaw = transform.rotation.x;
+        rotation = transform.rotation;
     }
 
     // LateUpdate is called after Update
@@ -40,8 +36,6 @@ public class FollowPlayer : MonoBehaviour
         Vector3 newPos = crazyJoe.position + cameraOffset + AdjustableCameraOffset;
 
         transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
-        //Quaternion rotation = Quaternion.Euler(roll + transform.rotation.x, pitch + transform.rotation.y, yaw + transform.rotation.z);
-        //Quaternion rotation = Quaternion.Euler(roll, pitch, yaw);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, SmoothFactor);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.8f);
     }
 }
