@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 2;
+    private float currentSpeed = 0f;
+    private float speedSmoothVelocity = 0f;
+    private float speedSmoothTime = 0.1f;
+    private float rotationSpeed = 0.1f;
+    private float gravity = 3f;
     public bool debug = false;
 
     private Vector3 moveInput;
@@ -14,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private CrazyJoe crazyJoe;
     private Transform penis;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +27,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = FindObjectOfType<Camera>();
         crazyJoe = GetComponent<CrazyJoe>();
         penis = crazyJoe.GetComponentInChildren<Penis>().transform;
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -28,9 +35,11 @@ public class PlayerController : MonoBehaviour
     {
         // Consider Slerping the start and stop
         //Player movement
-        moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        /*moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
         moveVelocity = moveInput * moveSpeed;
-        transform.position += moveVelocity * Time.deltaTime;
+        transform.position += moveVelocity * Time.deltaTime;*/
+
+        Move();
 
         //Player rotation towards mouse
         SetRotationTowardsMouse();
@@ -55,6 +64,69 @@ public class PlayerController : MonoBehaviour
         // Refil Health by 100
         if (Input.GetKeyUp(KeyCode.H)) {
             crazyJoe.HealHP(100);
+        }
+
+        // For testing purposes
+        // Fire animation
+        if (Input.GetKeyUp(KeyCode.F)) {
+            animator.SetTrigger("fire");
+        }
+    }
+
+    private void Move() {
+        Vector3 movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        Vector3 forward = mainCamera.transform.forward;
+        Vector3 right = mainCamera.transform.right;
+
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 desiredMoveDirection = (forward * movementInput.z + right * movementInput.x).normalized;
+
+        float targetSpeed = moveSpeed * movementInput.magnitude;
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+
+        transform.position += desiredMoveDirection * currentSpeed * Time.deltaTime;
+        SetDirectionalAnimations();
+        animator.SetFloat("velocity", currentSpeed);
+    }
+
+    private void SetDirectionalAnimations() {
+        switch(Input.GetAxisRaw("Horizontal")) {
+            case -1:
+                if (!animator.GetBool("right")) {
+                    animator.SetBool("left", true);
+                }
+                break;
+            case 1:
+                if (!animator.GetBool("left")) {
+                    animator.SetBool("right", true);
+                }
+                break;
+            default:
+                animator.SetBool("right", false);
+                animator.SetBool("left", false);
+                break;
+        }
+
+        switch (Input.GetAxisRaw("Vertical")) {
+            case -1:
+                if (!animator.GetBool("forward")) {
+                    animator.SetBool("backward", true);
+                }
+                break;
+            case 1:
+                if (!animator.GetBool("backward")) {
+                    animator.SetBool("forward", true);
+                }
+                break;
+            default:
+                animator.SetBool("backward", false);
+                animator.SetBool("forward", false);
+                break;
         }
     }
 
