@@ -32,10 +32,11 @@ public class PlayerController : MonoBehaviour
         penis = crazyJoe.GetComponentInChildren<Penis>().transform;
         animator = GetComponentInChildren<Animator>();
 
+        currentMovementDirection = AnimationValue.W;
         SetCurrentLookDirection();
     }
 
-    void runTestValues(int x, int y) {
+    void RunTestValues(int x, int y) {
         Debug.Log("Ran these values, movement = " + x + " and look = " + y + " gets a value of = " + GetMovementAnimationValue(x,y));
     }
 
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void SetCurrentMovementDirection() {
-        switch(Input.GetAxisRaw("Horizontal")) {
+        switch (Input.GetAxisRaw("Horizontal")) {
             //left
             case -1:
                 // up/left
@@ -169,6 +170,7 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+        //AnimationValue.PrintPlayerMovementDirection(currentMovementDirection);
     }
 
     private void SetRotationTowardsMouse() {
@@ -206,7 +208,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // determines the direction the player is mostly facing
     private void SetCurrentLookDirection() {
+        // try using mouse/plane intersection rotation?
         float degree = transform.rotation.eulerAngles.y;
         float midDegree = 22.5f;
 
@@ -229,6 +233,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // sets the degree based on where the player is moving and what directiong they are looking
     private void SetAnimationBlendValue() {
         int movementAnimationValue = GetMovementAnimationValue(currentMovementDirection, currentLookDirection);
         float degree = transform.rotation.eulerAngles.y;
@@ -246,11 +251,13 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("degrees", adjustedDegree);
 
-        Debug.Log("degree = " + degree +
+        //AnimationValue.PrintPlayerMovementAnimation(movementAnimationValue);
+        /*Debug.Log("movementAnimationvalue = " + movementAnimationValue + " degree = " + degree +
             " offset = " + offset +
-            " adjustedDegree = " + adjustedDegree);
+            " adjustedDegree = " + adjustedDegree);*/
     }
 
+    // finds the AnimationValue.(Player movement animation)
     public int GetMovementAnimationValue(int animationMovementDirection, int animationLookDirection) {
         int distance = 0;
         for (int i = animationMovementDirection; i != animationLookDirection; i++) {
@@ -259,6 +266,7 @@ public class PlayerController : MonoBehaviour
             }
             distance++;
         }
+
         return distance;
     }
 

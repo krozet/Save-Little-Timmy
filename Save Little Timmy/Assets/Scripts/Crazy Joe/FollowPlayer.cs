@@ -17,7 +17,6 @@ public class FollowPlayer : MonoBehaviour
     [Header("Rotation")]
     public Quaternion rotation;
 
-
     // Start is called before the first frame update
     void Start()
     {
