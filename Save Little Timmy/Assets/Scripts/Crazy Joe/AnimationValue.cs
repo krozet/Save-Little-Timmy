@@ -100,4 +100,139 @@ public static class AnimationValue
                 break;
         }
     }
+
+    public static void PrintPlayerLookDirection(int value) {
+        switch (value) {
+            case 1:
+                Debug.Log("Player Look Direction = deg0");
+                break;
+            case 2:
+                Debug.Log("Player Look Direction = deg45");
+                break;
+            case 3:
+                Debug.Log("Player Look Direction = deg90");
+                break;
+            case 4:
+                Debug.Log("Player Look Direction = deg135");
+                break;
+            case 5:
+                Debug.Log("Player Look Direction = deg180");
+                break;
+            case 6:
+                Debug.Log("Player Look Direction = deg225");
+                break;
+            case 7:
+                Debug.Log("Player Look Direction = deg270");
+                break;
+            case 8:
+                Debug.Log("Player Look Direction = deg315");
+                break;
+            default:
+                Debug.Log("Player Look set Incorrectly");
+                break;
+        }
+    }
+
+    public static void PrintAllAnimationValues(int playerLookDirection, int playerMovementDirection, int playerMovementAnimation) {
+        string pld = "";
+        string pmd = "";
+        string pma = "";
+
+        switch (playerLookDirection) {
+            case 1:
+                pld = "Player Look Direction = deg0";
+                break;
+            case 2:
+                pld = "Player Look Direction = deg45";
+                break;
+            case 3:
+                pld = "Player Look Direction = deg90";
+                break;
+            case 4:
+                pld = "Player Look Direction = deg135";
+                break;
+            case 5:
+                pld = "Player Look Direction = deg180";
+                break;
+            case 6:
+                pld = "Player Look Direction = deg225";
+                break;
+            case 7:
+                pld = "Player Look Direction = deg270";
+                break;
+            case 8:
+                pld = "Player Look Direction = deg315";
+                break;
+            default:
+                pld = "Player Look Direction set incorrectly";
+                break;
+        }
+
+        switch (playerMovementDirection) {
+            case 0:
+                pmd = "\nPlayer Movement Direction = IDLE";
+                break;
+            case 1:
+                pmd = "\nPlayer Movement Direction = W";
+                break;
+            case 2:
+                pmd = "\nPlayer Movement Direction = WD";
+                break;
+            case 3:
+                pmd = "\nPlayer Movement Direction = D";
+                break;
+            case 4:
+                pmd = "\nPlayer Movement Direction = SD";
+                break;
+            case 5:
+                pmd = "\nPlayer Movement Direction = S";
+                break;
+            case 6:
+                pmd = "\nPlayer Movement Direction = AS";
+                break;
+            case 7:
+                pmd = "\nPlayer Movement Direction = A";
+                break;
+            case 8:
+                pmd = "\nPlayer Movement Direction = AW";
+                break;
+            default:
+                pmd = "\nPlayer Movment Direction set incorrectly";
+                break;
+        }
+
+        switch (playerMovementAnimation) {
+            case 0:
+                pma = "\nPlayer Movement Animation = RUN_FORWARD";
+                break;
+            case 1:
+                pma = "\nPlayer Movement Animation = FORWARD_STRAFE_RIGHT";
+                break;
+            case 2:
+                pma = "\nPlayer Movement Animation = STRAFE_RIGHT";
+                break;
+            case 3:
+                pma = "\nPlayer Movement Animation = BACKWARD_STRAFE_RIGHT";
+                break;
+            case 4:
+                pma = "\nPlayer Movement Animation = BACKWARD";
+                break;
+            case 5:
+                pma = "\nPlayer Movement Animation = BACKWARD_STRAFE_LEFT";
+                break;
+            case 6:
+                pma = "\nPlayer Movement Animation = STRAFE_LEFT";
+                break;
+            case 7:
+                pma = "\nPlayer Movement Animation = FORWARD_STRAFE_LEFT";
+                break;
+            default:
+                pma = "\nPlayer Movement Animation set incorrectly";
+                break;
+        }
+
+        Debug.Log("\n------------------------\nFull Animation Value Log:\n" + 
+            pld + pmd + pma +
+            "\n------------------------");
+    }
 }
