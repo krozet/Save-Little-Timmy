@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
                 isMovingVertical = false;
                 break;
         }
-        AnimationValue.PrintPlayerMovementDirection(currentMovementDirection);
+        //AnimationValue.PrintPlayerMovementDirection(currentMovementDirection);
     }
 
     private void SetRotationTowardsMouse() {
@@ -282,15 +282,13 @@ public class PlayerController : MonoBehaviour
         float degree = transform.rotation.eulerAngles.y;
         // use this to properly offset the look direction from the movement direction
         float offset = movementAnimationValue * 45f;
-        float adjustedDegree = degree + offset + cameraRotationOffset;
-        // if the degree is now negative, readjust to fit 0-360 scale
-        if (adjustedDegree < 0) {
+        float adjustedDegree = degree + offset - cameraRotationOffset;
+        
+        while(adjustedDegree < 0) {
             adjustedDegree += 360;
         }
 
-        if (adjustedDegree > 360) {
-            adjustedDegree -= 360;
-        }
+        adjustedDegree = adjustedDegree % 360;
 
         animator.SetFloat("degrees", adjustedDegree);
 
@@ -299,9 +297,11 @@ public class PlayerController : MonoBehaviour
         //currentDegree = degreeSlerp;
 
         //AnimationValue.PrintPlayerMovementAnimation(movementAnimationValue);
-        /*Debug.Log("movementAnimationvalue = " + movementAnimationValue + " degree = " + degree +
-            " offset = " + offset +
-            " adjustedDegree = " + adjustedDegree);*/
+        /*Debug.Log(
+            "movementAnimationvalue = " + movementAnimationValue + 
+            " \tdegree = " + degree +
+            " \toffset = " + offset +
+            " \tadjustedDegree = " + adjustedDegree);*/
     }
 
     // finds the AnimationValue.(Player movement animation)
