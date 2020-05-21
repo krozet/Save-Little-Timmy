@@ -5,6 +5,7 @@ using UnityEngine;
 public static class AnimationValue
 {
     // Player movement direction
+    public const int IDLE = 0;
     public const int W = 1;
     public const int WD = 2;
     public const int D = 3;
@@ -67,6 +68,9 @@ public static class AnimationValue
 
     public static void PrintPlayerMovementDirection(int value) {
         switch (value) {
+            case 0:
+                Debug.Log("Player Movement Direction = IDLE");
+                break;
             case 1:
                 Debug.Log("Player Movement Direction = W");
                 break;

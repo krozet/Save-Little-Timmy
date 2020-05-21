@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public int currentLookDirection = AnimationValue.deg0;
     public int currentMovementDirection = AnimationValue.W;
+    private float currentDegree;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         penis = crazyJoe.GetComponentInChildren<Penis>().transform;
         animator = GetComponentInChildren<Animator>();
 
+        currentDegree = transform.rotation.eulerAngles.y;
         currentMovementDirection = AnimationValue.W;
         SetCurrentLookDirection();
     }
@@ -113,64 +115,77 @@ public class PlayerController : MonoBehaviour
     }
 
     private void SetCurrentMovementDirection() {
+        bool isMovingHorizontal = false;
+        bool isMovingVertical = false;
+        if (currentSpeed <= 0.3f) {
+            currentMovementDirection = AnimationValue.IDLE;
+        } else {
+            Debug.Log("Current speed = " + currentSpeed);
+        }
         switch (Input.GetAxisRaw("Horizontal")) {
             //left
             case -1:
+                isMovingHorizontal = true;
                 // up/left
                 if (currentMovementDirection == AnimationValue.W ) {
                     currentMovementDirection = AnimationValue.AW;
                 // down/left
                 } else if (currentMovementDirection == AnimationValue.S) {
                     currentMovementDirection = AnimationValue.AS;
-                } else {
+                } else if (isMovingVertical == false) {
                     currentMovementDirection = AnimationValue.A;
                 }
                 break;
             // right
             case 1:
+                isMovingHorizontal = true;
                 // up/right
                 if (currentMovementDirection == AnimationValue.W) {
                     currentMovementDirection = AnimationValue.WD;
                     // down/right
                 } else if (currentMovementDirection == AnimationValue.S) {
                     currentMovementDirection = AnimationValue.SD;
-                } else {
+                } else if (isMovingVertical == false) {
                     currentMovementDirection = AnimationValue.D;
                 }
                 break;
             default:
+                isMovingHorizontal = false;
                 break;
         }
 
         switch (Input.GetAxisRaw("Vertical")) {
             // down
             case -1:
+                isMovingVertical = true;
                 // down/left
                 if (currentMovementDirection == AnimationValue.A) {
                     currentMovementDirection = AnimationValue.AS;
                     // down/right
                 } else if (currentMovementDirection == AnimationValue.D) {
                     currentMovementDirection = AnimationValue.SD;
-                } else {
+                } else if (isMovingHorizontal == false) {
                     currentMovementDirection = AnimationValue.S;
                 }
                 break;
             // up
             case 1:
+                isMovingVertical = true;
                 // up/left
                 if (currentMovementDirection == AnimationValue.A) {
                     currentMovementDirection = AnimationValue.AW;
                     // up/right
                 } else if (currentMovementDirection == AnimationValue.D) {
                     currentMovementDirection = AnimationValue.WD;
-                } else {
+                } else if (isMovingHorizontal == false) {
                     currentMovementDirection = AnimationValue.W;
                 }
                 break;
             default:
+                isMovingVertical = false;
                 break;
         }
-        //AnimationValue.PrintPlayerMovementDirection(currentMovementDirection);
+        AnimationValue.PrintPlayerMovementDirection(currentMovementDirection);
     }
 
     private void SetRotationTowardsMouse() {
@@ -208,21 +223,48 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*// determines the direction the player is mostly facing
+    private void SetCurrentLookDirection() {
+        // try using mouse/plane intersection rotation?
+        float degree = transform.rotation.eulerAngles.y;
+        float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
+        float midDegree = 22.5f;
+
+        if ((degree >= 0 + cameraRotationOffset) && degree < 0 + cameraRotationOffset + midDegree || (degree >= 360 + cameraRotationOffset - midDegree && degree <= 360 + cameraRotationOffset)) {
+            currentLookDirection = AnimationValue.deg0;
+        } else if (degree >= 45 + cameraRotationOffset - midDegree && degree < 90 + cameraRotationOffset - midDegree) {
+            currentLookDirection = AnimationValue.deg45;
+        } else if (degree >= 90 + cameraRotationOffset - midDegree && degree < 135 + cameraRotationOffset - midDegree) {
+            currentLookDirection = AnimationValue.deg90;
+        } else if (degree >= 135 + cameraRotationOffset - midDegree && degree < 180 + cameraRotationOffset - midDegree) {
+            currentLookDirection = AnimationValue.deg135;
+        } else if (degree >= 180 + cameraRotationOffset - midDegree && degree < 225 + cameraRotationOffset - midDegree) {
+            currentLookDirection = AnimationValue.deg180;
+        } else if (degree >= 225 + cameraRotationOffset - midDegree && degree < 270 + cameraRotationOffset - midDegree) {
+            currentLookDirection = AnimationValue.deg225;
+        } else if (degree >= 270 + cameraRotationOffset - midDegree && degree < 315 + cameraRotationOffset - midDegree) {
+            currentLookDirection = AnimationValue.deg270;
+        } else {
+            currentLookDirection = AnimationValue.deg315;
+        }
+    }*/
+
     // determines the direction the player is mostly facing
     private void SetCurrentLookDirection() {
         // try using mouse/plane intersection rotation?
         float degree = transform.rotation.eulerAngles.y;
+        float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
         float midDegree = 22.5f;
 
-        if ((degree >= 0 && degree < 0 + midDegree) || (degree >= 360 - midDegree && degree <=360)) {
+        if ((degree >= 0 && degree < 0 + midDegree) || (degree >= 360 - midDegree && degree <= 360)) {
             currentLookDirection = AnimationValue.deg0;
-        } else if (degree >= 45 - midDegree && degree < 90 - midDegree) {
+        } else if (degree >= 45 - midDegree && degree < 90- midDegree) {
             currentLookDirection = AnimationValue.deg45;
-        } else if (degree >= 90 - midDegree && degree < 135 - midDegree) {
+        } else if (degree >= 90 - midDegree && degree < 135- midDegree) {
             currentLookDirection = AnimationValue.deg90;
-        } else if (degree >= 135 - midDegree && degree < 180 - midDegree) {
+        } else if (degree >= 135 - midDegree && degree < 180- midDegree) {
             currentLookDirection = AnimationValue.deg135;
-        } else if (degree >= 180 - midDegree && degree < 225 - midDegree) {
+        } else if (degree >= 180 - midDegree && degree < 225- midDegree) {
             currentLookDirection = AnimationValue.deg180;
         } else if (degree >= 225 - midDegree && degree < 270 - midDegree) {
             currentLookDirection = AnimationValue.deg225;
@@ -236,10 +278,11 @@ public class PlayerController : MonoBehaviour
     // sets the degree based on where the player is moving and what directiong they are looking
     private void SetAnimationBlendValue() {
         int movementAnimationValue = GetMovementAnimationValue(currentMovementDirection, currentLookDirection);
+        float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
         float degree = transform.rotation.eulerAngles.y;
         // use this to properly offset the look direction from the movement direction
         float offset = movementAnimationValue * 45f;
-        float adjustedDegree = degree + offset;
+        float adjustedDegree = degree + offset + cameraRotationOffset;
         // if the degree is now negative, readjust to fit 0-360 scale
         if (adjustedDegree < 0) {
             adjustedDegree += 360;
@@ -250,6 +293,10 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetFloat("degrees", adjustedDegree);
+
+        //float degreeSlerp = Mathf.Lerp(currentDegree, adjustedDegree, 1f);
+        //animator.SetFloat("degrees", degreeSlerp);
+        //currentDegree = degreeSlerp;
 
         //AnimationValue.PrintPlayerMovementAnimation(movementAnimationValue);
         /*Debug.Log("movementAnimationvalue = " + movementAnimationValue + " degree = " + degree +
