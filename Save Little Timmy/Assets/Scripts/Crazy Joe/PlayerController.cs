@@ -255,20 +255,20 @@ public class PlayerController : MonoBehaviour
         float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
         float midDegree = 22.5f;
 
-        if ((GetDegreeBetween0and360(degree, cameraRotationOffset, false) >= 0 && GetDegreeBetween0and360(degree, cameraRotationOffset, false) < 0 + midDegree)
-            || (GetDegreeBetween0and360(degree, cameraRotationOffset, false) >= 360 - midDegree && GetDegreeBetween0and360(degree, cameraRotationOffset, false) <= 360)) {
+        if ((GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) >= 0 && GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) < 0 + midDegree)
+            || (GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) >= 360 - midDegree && GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) <= 360)) {
             currentLookDirection = AnimationValue.deg0;
-        } else if (GetDegreeBetween0and360(degree, cameraRotationOffset, false) >= 45 - midDegree && GetDegreeBetween0and360(degree, cameraRotationOffset, false) < 90 - midDegree) {
+        } else if (GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) >= 45 - midDegree && GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) < 90 - midDegree) {
             currentLookDirection = AnimationValue.deg45;
-        } else if (GetDegreeBetween0and360(degree, cameraRotationOffset, false) >= 90 - midDegree && GetDegreeBetween0and360(degree, cameraRotationOffset, false) < 135 - midDegree) {
+        } else if (GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) >= 90 - midDegree && GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) < 135 - midDegree) {
             currentLookDirection = AnimationValue.deg90;
-        } else if (GetDegreeBetween0and360(degree, cameraRotationOffset, false) >= 135 - midDegree && GetDegreeBetween0and360(degree, cameraRotationOffset, false) < 180 - midDegree) {
+        } else if (GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) >= 135 - midDegree && GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) < 180 - midDegree) {
             currentLookDirection = AnimationValue.deg135;
-        } else if (GetDegreeBetween0and360(degree, cameraRotationOffset, false) >= 180 - midDegree && GetDegreeBetween0and360(degree, cameraRotationOffset, false) < 225 - midDegree) {
+        } else if (GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) >= 180 - midDegree && GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) < 225 - midDegree) {
             currentLookDirection = AnimationValue.deg180;
-        } else if (GetDegreeBetween0and360(degree, cameraRotationOffset, false) >= 225 - midDegree && GetDegreeBetween0and360(degree, cameraRotationOffset, false) < 270 - midDegree) {
+        } else if (GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) >= 225 - midDegree && GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) < 270 - midDegree) {
             currentLookDirection = AnimationValue.deg225;
-        } else if (GetDegreeBetween0and360(degree, cameraRotationOffset, false) >= 270 - midDegree && GetDegreeBetween0and360(degree, cameraRotationOffset, false) < 315 - midDegree) {
+        } else if (GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) >= 270 - midDegree && GetDegreeAndOffsetBetween0and360(degree, cameraRotationOffset, false) < 315 - midDegree) {
             currentLookDirection = AnimationValue.deg270;
         } else {
             currentLookDirection = AnimationValue.deg315;
@@ -277,23 +277,27 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Center of Degree = " + GetDegreeBetween0and360((currentLookDirection * 45), cameraRotationOffset, false));
     }
 
-    private float GetDegree(float degree, float offset, float midDegree, bool addition) {
+    private float GetDegreeAndOffsetAndMidDegree(float degree, float offset, float midDegree, bool addition) {
         if (addition) {
             degree += midDegree;
         } else {
             degree -= midDegree;
         }
 
-        return GetDegreeBetween0and360(degree, offset, false);
+        return GetDegreeAndOffsetBetween0and360(degree, offset, false);
     }
 
-    private float GetDegreeBetween0and360(float degree, float offset, bool addition) {
+    private float GetDegreeAndOffsetBetween0and360(float degree, float offset, bool addition) {
         if(addition) {
             degree += offset;
         } else {
             degree -= offset;
         }
-        
+
+        return GetDegreeBetween0and360(degree);
+    }
+
+    public float GetDegreeBetween0and360(float degree) {
         while (degree < 0) {
             degree += 360;
         }
@@ -308,31 +312,31 @@ public class PlayerController : MonoBehaviour
         float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
         float degree = transform.rotation.eulerAngles.y;
         // use this to properly offset the look direction from the movement direction
-        float offset = Mathf.Lerp(currentMovementAnimationValue * 45f, movementAnimationValue * 45f, 1f);
+        float offset = Mathf.Lerp(currentMovementAnimationValue * 45f, movementAnimationValue * 45f, 0.5f);
         float adjustedDegree = degree + offset - cameraRotationOffset;
-        
-        while(adjustedDegree < 0) {
-            adjustedDegree += 360;
-        }
+        float degreeAndCameraOffset = GetDegreeBetween0and360(degree - cameraRotationOffset);
 
-        adjustedDegree = adjustedDegree % 360;
+        adjustedDegree = GetDegreeBetween0and360(adjustedDegree);
+
+        //Debug.Log("degree + cameraRotationOffset = " + degreeAndCameraOffset);
+        //Debug.Log("adjustedDegree = " + adjustedDegree);
 
         animator.SetFloat("degrees", adjustedDegree);
         currentMovementAnimationValue = movementAnimationValue;
 
+        AnimationValue.PrintAllAnimationValues(currentLookDirection, currentMovementDirection, movementAnimationValue);
+
         //float degreeSlerp = Mathf.Lerp(currentDegree, adjustedDegree, 1f);
         //animator.SetFloat("degrees", degreeSlerp);
         //currentDegree = degreeSlerp;
-
-        AnimationValue.PrintAllAnimationValues(currentLookDirection, currentMovementDirection, movementAnimationValue);
 
         /*Debug.Log(
             "movementAnimationvalue = " + movementAnimationValue + 
             " \tdegree = " + degree +
             " \toffset = " + offset +
             " \tadjustedDegree = " + adjustedDegree);*/
-        //Debug.Log("adjustedDegree = " + adjustedDegree);
     }
+
 
     // finds the AnimationValue.(Player movement animation)
     public int GetMovementAnimationValue(int animationMovementDirection, int animationLookDirection) {
