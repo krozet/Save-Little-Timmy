@@ -10,10 +10,10 @@ using DungeonArchitect.Builders.Grid;
 /// This is done by hooking into the build events of DA and adding 
 /// volumes right after the layout is built, but before the theme engine executes
 /// </summary>
-public class VolumeSpawnExampleListener : DungeonEventListener {
+public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEventListener {
 
     // DungeonArchitect.Graphs.Graph is a theme graph asset stored in disk
-    public Graph bossRoomTheme;
+    public Graph endRoomTheme;
     public Graph spawnRoomTheme;
 
     public Graph[] roomThemes;
@@ -58,7 +58,7 @@ public class VolumeSpawnExampleListener : DungeonEventListener {
             }
             else if (cell == finalBossCell)
             {
-                DecorateRoom(dungeon, gridModel, cell, bossRoomTheme);
+                DecorateRoom(dungeon, gridModel, cell, endRoomTheme);
             }
             else
             {
