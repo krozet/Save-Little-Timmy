@@ -43,6 +43,14 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
         Cell spawnCell, finalBossCell;
         FindStartEndRooms(gridModel, out spawnCell, out finalBossCell);
 
+        /*
+         Make a loop, iterate through all cells and place them into an array based on size using bounds (maybe using their cell id to reference them?)
+         size goes from smallest to largest
+         come up for size rules for themes based on relative size to one another
+         uniform distribution? bathroom, kitchen, office, dining room, bedroom, living room?
+         then DecorateRoom based on size and give it the appropriate theme
+         */
+
         // Start decorating the rooms with random themes (except start / end rooms which have their own decorations)
         foreach (var cell in gridModel.Cells)
         {
