@@ -11,11 +11,12 @@ using DungeonArchitect.Builders.Grid;
 /// volumes right after the layout is built, but before the theme engine executes
 /// </summary>
 public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEventListener {
-
     // DungeonArchitect.Graphs.Graph is a theme graph asset stored in disk
     public Graph endRoomTheme;
     public Graph spawnRoomTheme;
 
+    // bathroom, office, kitchen, bedroom, dining room, living room
+    [Tooltip("Room size, smallest to largest")]
     public Graph[] roomThemes;
 
     [SerializeField]
@@ -26,7 +27,11 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
     /// Supply the reference of the theme override volume prefab here
     /// </summary>
     public Volume themeVolumeTemplate;
-    
+
+    // cell Id, cell square foot
+    private List<int> cellIdList;
+    private List<int> cellAreaList;
+
     /// <summary>
     /// Called after the layout is built in memory, but before the markers are emitted
     /// We would like to spawn volumes here that encompass the rooms, so each room has a different theme applied to it
@@ -43,11 +48,13 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
         Cell spawnCell, finalBossCell;
         FindStartEndRooms(gridModel, out spawnCell, out finalBossCell);
 
+        SortCellIdList(gridModel);
+
+
         /*
-         Make a loop, iterate through all cells and place them into an array based on size using bounds (maybe using their cell id to reference them?)
-         size goes from smallest to largest
          come up for size rules for themes based on relative size to one another
-         uniform distribution? bathroom, kitchen, office, dining room, bedroom, living room?
+         uniform distribution? 
+         
          then DecorateRoom based on size and give it the appropriate theme
          */
 
@@ -71,6 +78,38 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
             else
             {
                 DecorateRoom(dungeon, gridModel, cell, GetRandomTheme());
+            }
+        }
+    }
+
+    private void SortCellIdList(GridDungeonModel gridModel) {
+        cellIdList = new List<int>();
+        cellAreaList = new List<int>();
+
+        // determines size of cells, and stores it in the dictionary
+        foreach (var cell in gridModel.Cells) {
+            int area = cell.Bounds.Size.x * cell.Bounds.Size.z;
+            cellIdList.Add(cell.Id);
+            cellAreaList.Add(area);
+            //Debug.Log("cell id = " + cell.Id + " cell square foot = " + area);
+        }
+
+        int tempArea;
+        int tempId;
+        // sort dictionary based on size
+        for (int j = 0; j <= cellAreaList.Count - 2; j++) {
+            for (int i = 0; i <= cellAreaList.Count - 2; i++) {
+                if (cellAreaList[i] > cellAreaList[i + 1]) {
+                    // sort the area list
+                    tempArea = cellAreaList[i + 1];
+                    cellAreaList[i + 1] = cellAreaList[i];
+                    cellAreaList[i] = tempArea;
+
+                    // sort the id list
+                    tempId = cellIdList[i + 1];
+                    cellIdList[i + 1] = cellIdList[i];
+                    cellIdList[i] = tempId;
+                }
             }
         }
     }
