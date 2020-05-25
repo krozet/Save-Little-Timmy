@@ -12,11 +12,12 @@ using DungeonArchitect.Builders.Grid;
 /// </summary>
 public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEventListener {
     // DungeonArchitect.Graphs.Graph is a theme graph asset stored in disk
+    // not currently implemented - see OnPostDungeonLayoutBuild()
     public Graph endRoomTheme;
     public Graph spawnRoomTheme;
 
     // bathroom, office, kitchen, bedroom, dining room, living room
-    [Tooltip("Room size, smallest to largest")]
+    [Tooltip("Room size - smallest to largest")]
     public Graph[] roomThemes;
 
     [SerializeField]
@@ -28,9 +29,12 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
     /// </summary>
     public Volume themeVolumeTemplate;
 
-    // cell Id, cell square foot
+    // cell Id, cell area
     private List<int> cellIdList;
     private List<int> cellAreaList;
+
+    // cellId, roomTheme index
+    private Dictionary<int,int> cellIdToThemeDictionary;
 
     /// <summary>
     /// Called after the layout is built in memory, but before the markers are emitted
@@ -50,16 +54,18 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
 
         SortCellIdList(gridModel);
 
+        CalculateTotalNumberOfThemes(gridModel);
 
-        /*
-         come up for size rules for themes based on relative size to one another
-         uniform distribution? 
-         
-         then DecorateRoom based on size and give it the appropriate theme
-         */
+        // cellId, roomTheme index
+        foreach(KeyValuePair<int,int> cell in cellIdToThemeDictionary) {
+            DecorateRoom(dungeon, gridModel, gridModel.GetCell(cell.Key), roomThemes[cell.Value]);
+        }
 
+        // figure out how to handle spawning start and end rooms
+
+        /// Initial/legacy code
         // Start decorating the rooms with random themes (except start / end rooms which have their own decorations)
-        foreach (var cell in gridModel.Cells)
+        /*foreach (var cell in gridModel.Cells)
         {
             if (cell.CellType != CellType.Room)
             {
@@ -78,6 +84,34 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
             else
             {
                 DecorateRoom(dungeon, gridModel, cell, GetRandomTheme());
+            }
+        }*/
+    }
+
+    public override void OnDungeonDestroyed(Dungeon dungeon) {
+        DestroyManagedVolumes();
+    }
+
+    // specific to uniform distribution
+    private void CalculateTotalNumberOfThemes(GridDungeonModel gridModel) {
+        // find the total number of rooms in the grid
+        int numberOfRooms = 0;
+        foreach (var cell in gridModel.Cells) {
+            if (cell.CellType != CellType.Room) {
+                continue;
+            }
+            numberOfRooms++;
+        }
+
+        // create a dictionary with the cellId and theme to be selected
+        cellIdToThemeDictionary = new Dictionary<int, int>();
+        int numberOfRoomsPerTheme = (int)Mathf.Ceil(numberOfRooms / roomThemes.Length);
+        int cellIdCounter = 0;
+        for(int i = 0; i < roomThemes.Length; i++) {
+            for (int j = 0; j < numberOfRoomsPerTheme; j++) {
+                if (cellIdCounter < cellIdList.Count) {
+                    cellIdToThemeDictionary.Add(cellIdList[cellIdCounter++], i);
+                }
             }
         }
     }
@@ -112,10 +146,6 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
                 }
             }
         }
-    }
-
-    public override void OnDungeonDestroyed(Dungeon dungeon) {
-        DestroyManagedVolumes();
     }
     
     void DecorateRoom(Dungeon dungeon, GridDungeonModel gridModel, Cell cell, Graph theme)
