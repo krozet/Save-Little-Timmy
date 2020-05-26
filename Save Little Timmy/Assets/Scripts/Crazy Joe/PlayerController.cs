@@ -62,8 +62,6 @@ public class PlayerController : MonoBehaviour
 
         SetAnimationBlendValue();
 
-
-
         // Left Click to piss
         if (Input.GetMouseButton(0)) {
             crazyJoe.IsPissing(true);

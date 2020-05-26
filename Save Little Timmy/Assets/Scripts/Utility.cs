@@ -18,6 +18,8 @@ public static class Utility
         public static int BLOOD_PARTICLE_MAX = 30;
     }
 
+    // revisit this later
+    // move out of Utility and make own class
     public static class Logger {
 
         public static void D<T>(string[] logs, List<T> values, bool longLog = false) {

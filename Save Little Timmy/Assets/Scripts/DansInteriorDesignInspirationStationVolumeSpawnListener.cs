@@ -4,6 +4,7 @@ using DungeonArchitect;
 using DungeonArchitect.Graphs;
 using DungeonArchitect.Utils;
 using DungeonArchitect.Builders.Grid;
+using System;
 
 /// <summary>
 /// This example spawns various theme override volumes around rooms 
@@ -103,21 +104,17 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
             numberOfRooms++;
         }
 
-        int counter = 0;
         // create a dictionary with the cellId and theme to be selected
         cellIdToThemeDictionary = new Dictionary<int, int>();
-        int numberOfRoomsPerTheme = (int)Mathf.Ceil(numberOfRooms / roomThemes.Length);
+        int numberOfRoomsPerTheme = (int)Math.Ceiling((decimal)numberOfRooms / (decimal)roomThemes.Length);
         int cellIdCounter = 0;
         for(int i = 0; i < roomThemes.Length; i++) {
             for (int j = 0; j < numberOfRoomsPerTheme; j++) {
                 if (cellIdCounter < cellIdList.Count) {
                     cellIdToThemeDictionary.Add(cellIdList[cellIdCounter++], i);
-                    counter++;
                 }
             }
         }
-        Debug.Log("num times callIdToThemeDictionary was added = " + counter);
-        Debug.Log("numberOfRooms = " + numberOfRooms + " cellIdList count = " + cellIdList.Count);
     }
 
     private void SortCellIdList(GridDungeonModel gridModel) {
@@ -130,7 +127,6 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
                 int area = cell.Bounds.Size.x * cell.Bounds.Size.z;
                 cellIdList.Add(cell.Id);
                 cellAreaList.Add(area);
-                //Debug.Log("cell id = " + cell.Id + " cell square foot = " + area);
             }
         }
 
@@ -185,7 +181,7 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
             return null;
         }
         // Pick a random theme from the supplied theme list
-        return roomThemes[Random.Range(0, roomThemes.Length)];
+        return roomThemes[UnityEngine.Random.Range(0, roomThemes.Length)];
     }
 
     void FindStartEndRooms(GridDungeonModel gridModel, out Cell spawnCell, out Cell finalBossCell)
