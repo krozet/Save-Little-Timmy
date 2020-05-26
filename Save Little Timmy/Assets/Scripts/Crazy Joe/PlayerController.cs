@@ -33,15 +33,6 @@ public class PlayerController : MonoBehaviour
         penis = crazyJoe.GetComponentInChildren<Penis>().transform;
         animator = GetComponentInChildren<Animator>();
 
-        LogMaster logMaster = new LogMaster();
-        logMaster.Append("here", 1);
-        logMaster.Append("heresdf", 12);
-        logMaster.Append("hereqweqweqw", 123);
-        logMaster.PrintLongLog();
-        logMaster.Clear();
-        logMaster.Append("The End.");
-        logMaster.PrintLongLog();
-
         currentMovementAnimationValue = AnimationValue.RUN_FORWARD;
         currentMovementDirection = AnimationValue.W;
         SetCurrentLookDirection();

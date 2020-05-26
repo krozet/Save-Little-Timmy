@@ -2,9 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ LogMaster Class is used for a quick way to log items.
+
+    First way is to simply call QuickLog and give it a string and a value.
+    Second way is to make an instance of LogMaster, then Append messages and finally call PrintLongLog.
+    
+    You will have to adjust how many lines you can view at once in the editor console
+    (click the three dots in the console windown on the right, select Log Entry,
+    and click on the number displayed in the log 'Total number of Lines: x').
+     */
 public class LogMaster
 {
     string longLog = "";
+    string separator = "-------------------------\n";
+    // includes top and bottom separators, as well as 'Total number of Lines: x'
     int numberOfLines = 3;
 
     public LogMaster() {
@@ -22,10 +34,10 @@ public class LogMaster
     }
 
     public void PrintLongLog() {
-        Debug.Log("-------------------------\n" + 
+        Debug.Log(separator + 
             "Total number of Lines: " + numberOfLines + "\n" +
             longLog +
-            "-------------------------\n");
+            separator);
     }
 
     public void Clear() {
