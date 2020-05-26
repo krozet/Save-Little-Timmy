@@ -17,4 +17,30 @@ public static class Utility
         public static int BLOOD_PARTICLE_INDEX = 1;
         public static int BLOOD_PARTICLE_MAX = 30;
     }
+
+    public static class Logger {
+
+        public static void D<T>(string[] logs, List<T> values, bool longLog = false) {
+            string message = "";
+            if (longLog) {
+                for (int i = 0; i < logs.Length; i++) {
+                    if (i < values.Count) {
+                        message += logs[i] + " = " + values[i].ToString() + "\n";
+                    } else {
+                        message += logs[i] + "\n";
+                    }
+                }
+                Debug.Log(message);
+            } else {
+                // each log gets its own debug.log
+                for (int i = 0; i < logs.Length; i++) {
+                    if (i < values.Count) {
+                        Debug.Log(logs[i] + " = " + values[i]);
+                    } else {
+                        Debug.Log(logs[i]);
+                    }
+                }
+            }
+        }
+    }
 }

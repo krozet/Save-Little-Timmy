@@ -103,6 +103,7 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
             numberOfRooms++;
         }
 
+        int counter = 0;
         // create a dictionary with the cellId and theme to be selected
         cellIdToThemeDictionary = new Dictionary<int, int>();
         int numberOfRoomsPerTheme = (int)Mathf.Ceil(numberOfRooms / roomThemes.Length);
@@ -111,9 +112,12 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
             for (int j = 0; j < numberOfRoomsPerTheme; j++) {
                 if (cellIdCounter < cellIdList.Count) {
                     cellIdToThemeDictionary.Add(cellIdList[cellIdCounter++], i);
+                    counter++;
                 }
             }
         }
+        Debug.Log("num times callIdToThemeDictionary was added = " + counter);
+        Debug.Log("numberOfRooms = " + numberOfRooms + " cellIdList count = " + cellIdList.Count);
     }
 
     private void SortCellIdList(GridDungeonModel gridModel) {
@@ -122,10 +126,12 @@ public class DansInteriorDesignInspirationStationVolumeSpawnListener : DungeonEv
 
         // determines size of cells, and stores it in the dictionary
         foreach (var cell in gridModel.Cells) {
-            int area = cell.Bounds.Size.x * cell.Bounds.Size.z;
-            cellIdList.Add(cell.Id);
-            cellAreaList.Add(area);
-            //Debug.Log("cell id = " + cell.Id + " cell square foot = " + area);
+            if (cell.CellType == CellType.Room) {
+                int area = cell.Bounds.Size.x * cell.Bounds.Size.z;
+                cellIdList.Add(cell.Id);
+                cellAreaList.Add(area);
+                //Debug.Log("cell id = " + cell.Id + " cell square foot = " + area);
+            }
         }
 
         int tempArea;
