@@ -306,21 +306,23 @@ public class PlayerController : MonoBehaviour
     // sets the degree based on where the player is moving and what directiong they are looking
     private void SetAnimationBlendValue() {
         int movementAnimationValue = GetMovementAnimationValue(currentMovementDirection, currentLookDirection);
+        LogMaster.QuickLog("movementAnimationValue", movementAnimationValue);
         // account for the camera's rotation
         float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
         float degree = transform.rotation.eulerAngles.y;
         // use this to properly offset the look direction from the movement direction
-        float offset = Mathf.Lerp(currentMovementAnimationValue * 45f, movementAnimationValue * 45f, 0.5f);
-        float adjustedDegree = degree + offset - cameraRotationOffset;
-        float degreeAndCameraOffset = GetDegreeBetween0and360(degree - cameraRotationOffset);
+        //float offset = Mathf.Lerp(currentMovementAnimationValue * 45f, movementAnimationValue * 45f, 0.5f);
+        currentMovementAnimationValue = movementAnimationValue;
+        float offset = currentMovementAnimationValue * 45f;
+
+        // make the offset your base point of referrence
+        // take difference between your currentLookDirection and where you are looking at 0-360 around you
+        // add that difference to your offset to determine what animation should be currently blended
+        float adjustedDegree = (degree - cameraRotationOffset) + offset - ((currentLookDirection - 1) * 45f);
 
         adjustedDegree = GetDegreeBetween0and360(adjustedDegree);
 
-        //Debug.Log("degree + cameraRotationOffset = " + degreeAndCameraOffset);
-        //Debug.Log("adjustedDegree = " + adjustedDegree);
-
         animator.SetFloat("degrees", adjustedDegree);
-        currentMovementAnimationValue = movementAnimationValue;
 
         //AnimationValue.PrintAllAnimationValues(currentLookDirection, currentMovementDirection, movementAnimationValue);
 
@@ -338,12 +340,9 @@ public class PlayerController : MonoBehaviour
 
     // finds the AnimationValue.(Player movement animation)
     public int GetMovementAnimationValue(int animationMovementDirection, int animationLookDirection) {
-        int distance = 0;
-        for (int i = animationMovementDirection; i != animationLookDirection; i++) {
-            if (i % 8 == 0) {
-                i = 0;
-            }
-            distance++;
+        int distance = animationMovementDirection - animationLookDirection;
+        if (distance < 0) {
+            distance += 8;
         }
 
         return distance;
