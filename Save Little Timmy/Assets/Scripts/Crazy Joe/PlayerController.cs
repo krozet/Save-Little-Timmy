@@ -290,7 +290,6 @@ public class PlayerController : MonoBehaviour
         float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
         float degree = transform.rotation.eulerAngles.y;
         // use this to properly offset the look direction from the movement direction
-        //float offset = Mathf.Lerp(currentMovementAnimationValue * 45f, movementAnimationValue * 45f, 0.5f);
         currentMovementAnimationValue = movementAnimationValue;
         float offset = currentMovementAnimationValue * 45f;
 
@@ -301,22 +300,19 @@ public class PlayerController : MonoBehaviour
 
         adjustedDegree = GetDegreeBetween0and360(adjustedDegree);
 
-        //animator.SetFloat("degrees", adjustedDegree);
-
-        //AnimationValue.PrintAllAnimationValues(currentLookDirection, currentMovementDirection, movementAnimationValue);
-
-        //animator.SetFloat("degrees", degreeSlerp);
-        //currentDegree = degreeSlerp;
-
-        /*Debug.Log(
-            "movementAnimationvalue = " + movementAnimationValue + 
-            " \tdegree = " + degree +
-            " \toffset = " + offset +
-            " \tadjustedDegree = " + adjustedDegree);*/
-
         return adjustedDegree;
     }
 
+    // consider using layered blend trees
+        //forward blend tree
+            // left/forward/right
+        //left blend tree
+            // forward/left/down
+        //down blend tree
+            // left/down/right
+        // right blend tree
+            // down/right/forward
+        // ranging from -90 to 90?
     private void SetAnimation() {
         logMaster.Append("Before currentDegree", currentDegree);
         currentDegree = Mathf.Lerp(currentDegree, GetAnimationBlendValue(), 0.05f);
