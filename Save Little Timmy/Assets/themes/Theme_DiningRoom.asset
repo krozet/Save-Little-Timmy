@@ -3207,7 +3207,7 @@ MonoBehaviour:
   indexCounter:
     index: 0
   topZIndex:
-    index: 3
+    index: 5
   nodes:
   - {fileID: 3296989916037295591}
   - {fileID: 7366436478977797841}
@@ -3651,7 +3651,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 495
+  zIndex: 627
   inputPins:
   - {fileID: -6412742970286563447}
   outputPins:
@@ -4481,7 +4481,7 @@ MonoBehaviour:
   indexCounter:
     index: 55
   topZIndex:
-    index: 626
+    index: 627
   nodes:
   - {fileID: -1267140403577458434}
   - {fileID: -4165982960273571563}
@@ -6335,7 +6335,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 1
-  zIndex: 3
+  zIndex: 5
   inputPins: []
   outputPins: []
   graph: {fileID: -2491330752411827036}
@@ -8019,7 +8019,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 2
+  zIndex: 4
   inputPins: []
   outputPins: []
   graph: {fileID: -2491330752411827036}
