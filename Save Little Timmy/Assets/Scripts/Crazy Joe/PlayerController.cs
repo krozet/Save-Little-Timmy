@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private float speedSmoothTime = 0.1f;
     private float rotationSpeed = 0.1f;
     private float gravity = 3f;
+    private float currentDegree = 0f;
     public bool debug = false;
 
     private Vector3 moveInput;
@@ -25,9 +26,13 @@ public class PlayerController : MonoBehaviour
     public int currentMovementDirection = AnimationValue.W;
     private int currentMovementAnimationValue;
 
+    LogMaster logMaster;
+
     // Start is called before the first frame update
     void Start()
     {
+        logMaster = new LogMaster();
+
         mainCamera = FindObjectOfType<Camera>();
         crazyJoe = GetComponent<CrazyJoe>();
         penis = crazyJoe.GetComponentInChildren<Penis>().transform;
@@ -60,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
         SetCurrentMovementDirection();
 
-        SetAnimationBlendValue();
+        SetAnimation();
 
         // Left Click to piss
         if (Input.GetMouseButton(0)) {
@@ -181,6 +186,9 @@ public class PlayerController : MonoBehaviour
                 isMovingVertical = false;
                 break;
         }
+
+        animator.SetBool("isMovingHorizontal", isMovingHorizontal);
+        animator.SetBool("isMovingVertical", isMovingVertical);
     }
 
     private void SetRotationTowardsMouse() {
@@ -217,34 +225,6 @@ public class PlayerController : MonoBehaviour
             Debug.DrawLine(cameraRay.origin, mousePosition, Color.red);
         }
     }
-    
-    /*// determines the direction the player is mostly facing
-    private void SetCurrentLookDirection() {
-        // try using mouse/plane intersection rotation?
-        float degree = transform.rotation.eulerAngles.y;
-        float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
-        float midDegree = 22.5f;
-
-        // subtract camRotOff from 0
-
-        if ((degree >= 0 && degree < 0 + midDegree) || (degree >= 360 - midDegree && degree <= 360)) {
-            currentLookDirection = AnimationValue.deg0;
-        } else if (degree >= 45 - midDegree && degree < 90 - midDegree) {
-            currentLookDirection = AnimationValue.deg45;
-        } else if (degree >= 90 - midDegree && degree < 135 - midDegree) {
-            currentLookDirection = AnimationValue.deg90;
-        } else if (degree >= 135 - midDegree && degree < 180 - midDegree) {
-            currentLookDirection = AnimationValue.deg135;
-        } else if (degree >= 180 - midDegree && degree < 225 - midDegree) {
-            currentLookDirection = AnimationValue.deg180;
-        } else if (degree >= 225 - midDegree && degree < 270 - midDegree) {
-            currentLookDirection = AnimationValue.deg225;
-        } else if (degree >= 270 - midDegree && degree < 315 - midDegree) {
-            currentLookDirection = AnimationValue.deg270;
-        } else {
-            currentLookDirection = AnimationValue.deg315;
-        }
-    }*/
 
     // determines the direction the player is mostly facing
     private void SetCurrentLookDirection() {
@@ -304,46 +284,49 @@ public class PlayerController : MonoBehaviour
     }
 
     // sets the degree based on where the player is moving and what directiong they are looking
-    private void SetAnimationBlendValue() {
+    private float GetAnimationBlendValue() {
         int movementAnimationValue = GetMovementAnimationValue(currentMovementDirection, currentLookDirection);
         // account for the camera's rotation
         float cameraRotationOffset = mainCamera.transform.rotation.eulerAngles.y;
         float degree = transform.rotation.eulerAngles.y;
         // use this to properly offset the look direction from the movement direction
-        float offset = Mathf.Lerp(currentMovementAnimationValue * 45f, movementAnimationValue * 45f, 0.5f);
-        float adjustedDegree = degree + offset - cameraRotationOffset;
-        float degreeAndCameraOffset = GetDegreeBetween0and360(degree - cameraRotationOffset);
+        currentMovementAnimationValue = movementAnimationValue;
+        float offset = currentMovementAnimationValue * 45f;
+
+        // make the offset your base point of referrence
+        // take difference between your currentLookDirection and where you are looking at 0-360 around you
+        // add that difference to your offset to determine what animation should be currently blended
+        float adjustedDegree = (degree - cameraRotationOffset) + offset - ((currentLookDirection - 1) * 45f);
 
         adjustedDegree = GetDegreeBetween0and360(adjustedDegree);
 
-        //Debug.Log("degree + cameraRotationOffset = " + degreeAndCameraOffset);
-        //Debug.Log("adjustedDegree = " + adjustedDegree);
+        return adjustedDegree;
+    }
 
-        animator.SetFloat("degrees", adjustedDegree);
-        currentMovementAnimationValue = movementAnimationValue;
-
-        //AnimationValue.PrintAllAnimationValues(currentLookDirection, currentMovementDirection, movementAnimationValue);
-
-        //float degreeSlerp = Mathf.Lerp(currentDegree, adjustedDegree, 1f);
-        //animator.SetFloat("degrees", degreeSlerp);
-        //currentDegree = degreeSlerp;
-
-        /*Debug.Log(
-            "movementAnimationvalue = " + movementAnimationValue + 
-            " \tdegree = " + degree +
-            " \toffset = " + offset +
-            " \tadjustedDegree = " + adjustedDegree);*/
+    // consider using layered blend trees
+        //forward blend tree
+            // left/forward/right
+        //left blend tree
+            // forward/left/down
+        //down blend tree
+            // left/down/right
+        // right blend tree
+            // down/right/forward
+        // ranging from -90 to 90?
+    private void SetAnimation() {
+        logMaster.Append("Before currentDegree", currentDegree);
+        currentDegree = Mathf.Lerp(currentDegree, GetAnimationBlendValue(), 0.05f);
+        logMaster.Append("After currentDegree", currentDegree);
+        animator.SetFloat("degrees", currentDegree);
+        logMaster.PrintLongLog();
     }
 
 
     // finds the AnimationValue.(Player movement animation)
     public int GetMovementAnimationValue(int animationMovementDirection, int animationLookDirection) {
-        int distance = 0;
-        for (int i = animationMovementDirection; i != animationLookDirection; i++) {
-            if (i % 8 == 0) {
-                i = 0;
-            }
-            distance++;
+        int distance = animationMovementDirection - animationLookDirection;
+        if (distance < 0) {
+            distance += 8;
         }
 
         return distance;

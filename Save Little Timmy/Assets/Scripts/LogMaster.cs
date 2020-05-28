@@ -33,11 +33,15 @@ public class LogMaster
         numberOfLines++;
     }
 
-    public void PrintLongLog() {
+    public void PrintLongLog(bool dontClear = false) {
         Debug.Log(separator + 
             "Total number of Lines: " + numberOfLines + "\n" +
             longLog +
             separator);
+
+        if (!dontClear) {
+            Clear();
+        }
     }
 
     public void Clear() {
