@@ -392,7 +392,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 1
-  zIndex: 3
+  zIndex: 5
   inputPins: []
   outputPins: []
   graph: {fileID: 8537580756573706146}
@@ -402,7 +402,7 @@ MonoBehaviour:
   constraintEvaluationMode: 0
   exclusionRuleSearchRadius: 2
   exclusionRuleMarkersToRemove:
-  - sink
+  - rug
 --- !u!114 &-7606548727448336358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -805,7 +805,7 @@ MonoBehaviour:
   indexCounter:
     index: 0
   topZIndex:
-    index: 2
+    index: 6
   nodes:
   - {fileID: -1569931560656937992}
   - {fileID: -1323434359277545624}
@@ -850,15 +850,15 @@ MonoBehaviour:
   caption: Game Object Node
   bounds:
     serializedVersion: 2
-    x: 1111.993
-    y: 133.45044
+    x: 1112.993
+    y: 134.45044
     width: 120
     height: 120
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 483
+  zIndex: 537
   inputPins:
   - {fileID: 3026970785720196791}
   outputPins:
@@ -882,7 +882,7 @@ MonoBehaviour:
     e32: 0
     e33: 1
   consumeOnAttach: 1
-  attachmentProbability: 0.25
+  attachmentProbability: 0.5
   IsStatic: 1
   affectsNavigation: 1
   selectionRuleEnabled: 0
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 1
-  zIndex: 11
+  zIndex: 13
   inputPins: []
   outputPins: []
   graph: {fileID: 4930817020002128185}
@@ -2482,8 +2482,8 @@ MonoBehaviour:
   canBeDeleted: 0
   canBeSelected: 1
   canBeMoved: 1
-  selected: 0
-  zIndex: 0
+  selected: 1
+  zIndex: 6
   inputPins: []
   outputPins: []
   graph: {fileID: -6797822269780905933}
@@ -2492,7 +2492,9 @@ MonoBehaviour:
   constraints: []
   constraintEvaluationMode: 0
   exclusionRuleSearchRadius: 0.1
-  exclusionRuleMarkersToRemove: []
+  exclusionRuleMarkersToRemove:
+  - rug
+  - toilet
 --- !u!114 &-1487363979637497822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2508,7 +2510,7 @@ MonoBehaviour:
   indexCounter:
     index: 0
   topZIndex:
-    index: 6
+    index: 7
   nodes:
   - {fileID: 524481840000634609}
   - {fileID: 7896930031864314497}
@@ -2570,7 +2572,7 @@ MonoBehaviour:
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 1
+  selected: 0
   zIndex: 2
   inputPins: []
   outputPins: []
@@ -3160,7 +3162,7 @@ MonoBehaviour:
   indexCounter:
     index: 37
   topZIndex:
-    index: 519
+    index: 539
   nodes:
   - {fileID: 1875769328502168302}
   - {fileID: -9000756579328024131}
@@ -3296,7 +3298,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 1
-  zIndex: 6
+  zIndex: 7
   inputPins: []
   outputPins: []
   graph: {fileID: -1487363979637497822}
@@ -4084,7 +4086,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 519
+  zIndex: 521
   inputPins:
   - {fileID: 4311181045061076720}
   outputPins:
@@ -4375,7 +4377,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 333
+  zIndex: 535
   inputPins:
   - {fileID: 2662123890682949135}
   outputPins:
@@ -4399,7 +4401,7 @@ MonoBehaviour:
     e32: 0
     e33: 1
   consumeOnAttach: 1
-  attachmentProbability: 0.3
+  attachmentProbability: 0.5
   IsStatic: 1
   affectsNavigation: 1
   selectionRuleEnabled: 0
@@ -4425,15 +4427,15 @@ MonoBehaviour:
   caption: Game Object Node
   bounds:
     serializedVersion: 2
-    x: 816.0041
-    y: 131.3886
+    x: 815.0041
+    y: 133.3886
     width: 120
     height: 120
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 0
-  zIndex: 253
+  selected: 1
+  zIndex: 539
   inputPins:
   - {fileID: 807783919208969643}
   outputPins:
@@ -4457,7 +4459,7 @@ MonoBehaviour:
     e32: 0
     e33: 1
   consumeOnAttach: 1
-  attachmentProbability: 0.1
+  attachmentProbability: 0.6
   IsStatic: 1
   affectsNavigation: 1
   selectionRuleEnabled: 0
@@ -4753,7 +4755,7 @@ MonoBehaviour:
   indexCounter:
     index: 0
   topZIndex:
-    index: 11
+    index: 13
   nodes:
   - {fileID: -3283642469424785677}
   - {fileID: 8575388147374826707}
@@ -5509,14 +5511,14 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 132
+  zIndex: 526
   inputPins:
   - {fileID: 4742026427840242716}
   outputPins:
   - {fileID: -9178631879881887231}
   graph: {fileID: 11400000}
   offset:
-    e00: 1
+    e00: 0.75
     e01: 0
     e02: 0
     e03: 0
@@ -5533,7 +5535,7 @@ MonoBehaviour:
     e32: 0
     e33: 1
   consumeOnAttach: 1
-  attachmentProbability: 0.45
+  attachmentProbability: 0.5
   IsStatic: 1
   affectsNavigation: 1
   selectionRuleEnabled: 0
@@ -5645,7 +5647,7 @@ MonoBehaviour:
   indexCounter:
     index: 0
   topZIndex:
-    index: 3
+    index: 5
   nodes:
   - {fileID: -7888115414132814002}
   - {fileID: 3376669740252293747}
@@ -5675,7 +5677,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 9
+  zIndex: 12
   inputPins: []
   outputPins: []
   graph: {fileID: 4930817020002128185}
