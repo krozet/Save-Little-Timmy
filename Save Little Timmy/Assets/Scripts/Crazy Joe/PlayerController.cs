@@ -309,6 +309,12 @@ public class PlayerController : MonoBehaviour
         AnimationValue.PrintPlayerMovementAnimation(currentMovementAnimationValue);
         //AnimationValue.PrintAllAnimationValues(currentLookDirection, currentMovementDirection, currentMovementAnimationValue);
 
+        //TODO
+        //make method that takes the "adjust - lookDirOffset and makes sure that when currenetLookDirection == deg0, it handles when it goes into the 340~ - 360 range
+        //then link the animation controller
+        //set Animator.playerMovementAnimation value equal to currentMovementAnimationValue
+        //set degrees equal to "adjusted - lookDirOffset
+
         return adjustedDegree;
     }
 
