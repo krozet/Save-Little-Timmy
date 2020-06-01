@@ -292,13 +292,22 @@ public class PlayerController : MonoBehaviour
         // use this to properly offset the look direction from the movement direction
         currentMovementAnimationValue = movementAnimationValue;
         float offset = currentMovementAnimationValue * 45f;
+        float lookDirOffset = ((currentLookDirection - 1) * 45f);
 
         // make the offset your base point of referrence
         // take difference between your currentLookDirection and where you are looking at 0-360 around you
         // add that difference to your offset to determine what animation should be currently blended
-        float adjustedDegree = (degree - cameraRotationOffset) + offset - ((currentLookDirection - 1) * 45f);
+        //float adjustedDegree = (degree - cameraRotationOffset) + offset - ((currentLookDirection - 1) * 45f);
+        float adjustedDegree = (degree - cameraRotationOffset);
 
         adjustedDegree = GetDegreeBetween0and360(adjustedDegree);
+        logMaster.Append("adjustedDegree", adjustedDegree);
+        logMaster.Append("lookDirOffset", lookDirOffset);
+        logMaster.Append("adjusted - lookDirOffset", (adjustedDegree - lookDirOffset));
+
+        logMaster.PrintLongLog();
+        AnimationValue.PrintPlayerMovementAnimation(currentMovementAnimationValue);
+        //AnimationValue.PrintAllAnimationValues(currentLookDirection, currentMovementDirection, currentMovementAnimationValue);
 
         return adjustedDegree;
     }
@@ -314,11 +323,11 @@ public class PlayerController : MonoBehaviour
             // down/right/forward
         // ranging from -90 to 90?
     private void SetAnimation() {
-        logMaster.Append("Before currentDegree", currentDegree);
+        //logMaster.Append("Before currentDegree", currentDegree);
         currentDegree = Mathf.Lerp(currentDegree, GetAnimationBlendValue(), 0.05f);
-        logMaster.Append("After currentDegree", currentDegree);
+        //logMaster.Append("After currentDegree", currentDegree);
         animator.SetFloat("degrees", currentDegree);
-        logMaster.PrintLongLog();
+        //logMaster.PrintLongLog();
     }
 
 
