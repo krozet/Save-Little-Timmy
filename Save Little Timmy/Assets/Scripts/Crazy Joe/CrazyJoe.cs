@@ -51,6 +51,13 @@ public class CrazyJoe : MonoBehaviour
                 RefillPissMeter(fuelAmount);
             }
         }
+
+        if (other.CompareTag("FogOfWar"))
+        {
+            Debug.Log("Crazy Joe is coliding with FogOfWarPlane");
+
+
+        }
     }
 
     private void OnCollisionEnter(Collision collision) {

@@ -20,7 +20,7 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AdjustableCameraOffset = Vector3.zero;
+       // AdjustableCameraOffset = Vector3.zero;
         startingCameraOffset = new Vector3(4.0f, 8.6f, -5.7f);
         transform.position = crazyJoe.position + startingCameraOffset;
         
