@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FogOfWarPlane
-  m_Shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 26a9fa69fc0d2d24dbe2b106c7337671, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -60,6 +60,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FogMaxRadius: 0.29
+    - _FogRadius: 10
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -73,5 +75,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 0.8666667}
+    - _Color: {r: 0, g: 0, b: 0, a: 0.6745098}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Player1_Pos: {r: 0, g: 0, b: 0, a: 1}
+    - _Player2_Pos: {r: 0, g: 0, b: 0, a: 1}
+    - _Player3_Pos: {r: 0, g: 0, b: 0, a: 1}

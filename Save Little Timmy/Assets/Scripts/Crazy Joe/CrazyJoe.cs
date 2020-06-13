@@ -55,8 +55,6 @@ public class CrazyJoe : MonoBehaviour
         if (other.CompareTag("FogOfWar"))
         {
             Debug.Log("Crazy Joe is coliding with FogOfWarPlane");
-
-
         }
     }
 
