@@ -14,6 +14,7 @@ public class CrazyJoe : MonoBehaviour
     float pissDamage = 1f;
     float health;
     float maxHealth = 100f;
+//    Fow fow;
 
     void Start()
     {
@@ -23,6 +24,11 @@ public class CrazyJoe : MonoBehaviour
         currentPissMeter = maxPissMeter;
         penis = GetComponentInChildren<Penis>();
         health = maxHealth;
+
+//        fow = GameObject.FindGameObjectWithTag("FogOfWar").GetComponent<Fow>();
+//        byte[] emptyMaskBuffer = new byte[0];
+//        fow.InitMap(20,20,emptyMaskBuffer);
+//        fow.StartFow(this.transform);
     }
 
     // Update is called once per frame

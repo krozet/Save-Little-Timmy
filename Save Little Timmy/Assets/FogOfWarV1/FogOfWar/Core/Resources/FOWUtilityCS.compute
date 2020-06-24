@@ -1,0 +1,53 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel COPYCOLOR_2D
+#pragma kernel COPYCOLOR_3D
+
+
+//	struct Color{
+//		float r;
+//		float g;
+//		float b;
+//		float a;
+//	};
+
+float _gamma;
+float _saturate;
+float _brightness;
+Texture2D<float4> _SourceTex2D;
+SamplerState sampler_SourceTex2D;
+
+RWStructuredBuffer<float4> _Dest;
+int _source_width;
+int _source_height;
+
+float GrayColor(float3 input){
+	return input.r * 0.299  + input.g * 0.587  + input.b * 0.114;
+}
+[numthreads(8,8,1)]
+void COPYCOLOR_2D (uint3 id : SV_DispatchThreadID)
+{
+	int x = id.x;
+	int y = id.y;
+	int index = y *_source_width + x;
+	int2 uv = id.xy;
+	float2 fuv = float2((float)uv.x/(float)_source_width,(float)uv.y/(float)_source_height);
+	float4 sourceCol = _SourceTex2D.SampleLevel(sampler_SourceTex2D,fuv,0);
+	sourceCol.rgb = pow(sourceCol.rgb, _gamma);
+	sourceCol.rgb = lerp(GrayColor(sourceCol.rgb),sourceCol.rgb,_saturate);
+	sourceCol.rgb *= _brightness;
+	_Dest[index] = sourceCol;
+}
+Texture3D<float4> _SourceTex3D;
+SamplerState sampler_SourceTex3D;
+int _source_depth;
+[numthreads(8,8,8)]
+void COPYCOLOR_3D (uint3 id : SV_DispatchThreadID)
+{
+	int x = id.x;
+	int y = id.y;
+	int z = id.z;
+	int index = z * _source_width * _source_height +  y *_source_width + x;
+	int3 uv = id.xyz;
+	float3 fuv = float3((float)uv.x/(float)_source_width,(float)uv.y/(float)_source_height,(float)uv.z/(float)_source_depth);
+	_Dest[index] = _SourceTex3D.SampleLevel(sampler_SourceTex3D,fuv,0);
+}

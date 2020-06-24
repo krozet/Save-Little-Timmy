@@ -1,0 +1,41 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CS_ClearBuffer
+#pragma kernel CS_WriteBuffer
+#pragma kernel CS_ExposeData
+
+int _source_width;
+int _source_height;
+uniform RWBuffer<int> _Dest: register(u1);
+[numthreads(8,8,1)]
+void CS_ClearBuffer (uint3 id : SV_DispatchThreadID)
+{
+	int x = id.x;
+	int y = id.y;
+	int index = y *_source_width + x;
+	_Dest[index] = 0;
+}
+int _ob_pos_x;
+int _ob_pos_y;
+int _ob_mask_radius;
+[numthreads(8,8,1)]
+void CS_WriteBuffer (uint3 id : SV_DispatchThreadID)
+{
+	int x = id.x;
+	int y = id.y;
+	int index = y *_source_width + x;
+	if( length(int2(x,y) - int2(_ob_pos_x,_ob_pos_y)) < _ob_mask_radius){
+		_Dest[index] = 1;
+	}
+}
+
+// R chanel , 1 ： in Shadow , 0 is visable (shadow map)
+Texture2D _bluredFogMap;
+SamplerState sampler_bluredFogMap;
+uniform RWBuffer<float> _FogPixelBuffer : register(u2);
+[numthreads(8,8,1)]
+void CS_ExposeData (uint3 id : SV_DispatchThreadID){
+	int index = (id.y)*_source_width + id.x;
+	float2 uv = float2((float)id.x / (float)_source_width, (float)id.y / (float)_source_height);
+	float R = _bluredFogMap.SampleLevel(sampler_bluredFogMap,uv,0).r;
+	_FogPixelBuffer[index] = R;
+}
